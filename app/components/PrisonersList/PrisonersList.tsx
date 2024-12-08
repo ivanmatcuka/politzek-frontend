@@ -1,4 +1,5 @@
 import { Grid } from '@mui/material';
+import Link from 'next/link';
 import { FC } from 'react';
 
 import { Prisoners } from '../../../apollo/hooks/usePrisoners';
@@ -9,9 +10,9 @@ import { LetterIcon } from '../icons/LetterIcon/LetterIcon';
 type PrisonersListProps = {
   prisoners: Prisoners;
 };
-export const PrisonersList: FC<PrisonersListProps> = ({ prisoners }) =>
-  prisoners.map(({ node: prisoner }, index) => {
-    return (
+export const PrisonersList: FC<PrisonersListProps> = ({ prisoners }) => (
+  <Grid container rowSpacing={8.5} justifyContent="center">
+    {prisoners.map(({ node: prisoner }, index) => (
       <Grid
         item
         xs={12}
@@ -30,17 +31,18 @@ export const PrisonersList: FC<PrisonersListProps> = ({ prisoners }) =>
           freedomdate={prisoner.release_date}
           primaryAction={
             prisoner.can_write && (
-              <a href={`/prisoner/${prisoner.slug}`} key={prisoner.id}>
+              <Link href={`/prisoner/${prisoner.slug}`} key={prisoner.id}>
                 <Button endIcon={<LetterIcon />}>написать</Button>
-              </a>
+              </Link>
             )
           }
           secondaryAction={
-            <a href={`/prisoner/${prisoner.slug}`} key={prisoner.id}>
+            <Link href={`/prisoner/${prisoner.slug}`} key={prisoner.id}>
               <Button variant="outline">подробнее</Button>
-            </a>
+            </Link>
           }
         />
       </Grid>
-    );
-  });
+    ))}
+  </Grid>
+);

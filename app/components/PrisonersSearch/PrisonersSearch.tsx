@@ -1,6 +1,6 @@
 'use client';
 
-import { Grid, styled } from '@mui/material';
+import { Box, Grid, styled } from '@mui/material';
 import Image from 'next/image';
 import { FC, ReactNode, useEffect, useMemo, useState } from 'react';
 
@@ -81,158 +81,153 @@ export const PrisonersSearch: FC<PrisonersSearchProps> = ({
   }, [prisoners, loading, pagination]);
 
   return (
-    <Grid
-      container
+    <Box
+      display="flex"
+      flexDirection="column"
       maxWidth={1200}
       margin="auto"
       alignItems="start"
       position="relative"
       gap={7.25}
     >
-      <Grid item textAlign="left" zIndex={200}>
-        <Heading variant="h1" color="brand.red">
-          Список
+      <Heading variant="h1" color="brand.red" textAlign="left">
+        Список
+        <br />
+        преследуемых
+      </Heading>
+
+      <Grid container width="100%">
+        <Grid item flexBasis={{ xs: 'auto', lg: 500 }}>
+          <Image
+            height={320}
+            width={500}
+            alt="photos"
+            src="/photos.png"
+            style={{ maxWidth: '100%', height: 'auto' }}
+          />
+        </Grid>
+        <Grid item flexBasis={{ xs: 'auto', lg: 'calc(100% - 500px)' }}>
+          <Typography variant="subtitle1" color="brand.black" component="p">
+            В этом списке собраны истории тех, кого российское государство
+            преследует из-за войны в Украине. Не все они признаны
+            политзаключёнными. Среди преследуемых есть люди с разными
+            политическими взглядами, совершившие разные поступки. Большинство из
+            них подвергаются давлению, жестокому обращению и пыткам,
+            принуждаются к признанию вины и не получают нормальной юридической
+            помощи, а правозащитники не могут получить доступа к документам их
+            уголовных дел.
+          </Typography>
           <br />
-          преследуемых
-        </Heading>
+          <Typography variant="subtitle1" color="brand.black" component="p">
+            Если бы не российский политический режим и война, все они были бы на
+            свободе. В этом списке важно каждое имя. Однажды все эти уголовные
+            дела будут прекращены или пересмотрены. Сейчас нужно сделать так,
+            чтобы ни одно имя не потерялось. Чтобы мир знал о каждом из них.
+          </Typography>
+        </Grid>
+        <Grid item flexBasis="100%" mt={9.25} mb={1}>
+          <SearchField
+            value={name}
+            startAdornment={<SearchIcon />}
+            placeholder="Поиск по ФИО"
+            onChange={(e) => setName(e.target.value)}
+          />
+        </Grid>
+        <Grid item mr={1} mt={1}>
+          <FilterSlider
+            label="Возраст"
+            value={[age[0], age[1]]}
+            min={0}
+            max={99}
+            onChange={(_, value) =>
+              Array.isArray(value) && setAge([value[0], value[1]])
+            }
+          />
+        </Grid>
+        <Grid item mr={1} mt={1}>
+          <FilterCheckbox
+            label="регион"
+            value={region}
+            options={getRegions().map(({ fullname }) => ({
+              id: fullname,
+              value: fullname,
+            }))}
+            onChange={(value) => setRegion(String(value))}
+          />
+        </Grid>
+        <Grid item mr={1} mt={1}>
+          <FilterCheckbox
+            label="пол"
+            value={sex}
+            options={[
+              { id: 'мужской', value: 'мужской' },
+              { id: 'женский', value: 'женский' },
+            ]}
+            onChange={(value) => setSex(String(value))}
+          />
+        </Grid>
+        <Grid item mr={1} mt={1}>
+          <FilterCheckbox
+            label="можно написать"
+            value={canWrite}
+            options={[{ id: 'да', value: 'да' }]}
+            onChange={(value) => {
+              if (value !== 'да') return;
+              setCanWrite('да');
+            }}
+          />
+        </Grid>
+        <Grid item mr={1} mt={1}>
+          <FilterCheckbox
+            label="интересы"
+            value={mailInterests}
+            options={interestsArray.map((interest) => ({
+              id: interest,
+              value: interest,
+            }))}
+            onChange={(value) => {
+              if (!Array.isArray(value)) return;
+              value &&
+                setMailInterests(value.map((interest) => String(interest)));
+            }}
+            multiple
+          />
+        </Grid>
+        <Grid item mt={1}>
+          <Button
+            variant="outline"
+            onClick={() => {
+              setAge([0, 99]);
+              setRegion('');
+              setSex('');
+              setName('');
+              setCanWrite(undefined);
+              setMailInterests([]);
+            }}
+          >
+            очистить
+          </Button>
+        </Grid>
+        <Grid item flexBasis="100%" textAlign="center" mt={1} mb={4}>
+          <Typography variant="subtitle1">
+            {loading
+              ? 'Загрузка...'
+              : `Найдено: ${
+                  (prisoners?.length ?? 0) >= 300
+                    ? `${prisoners?.length}+`
+                    : `${prisoners?.length}`
+                }`}
+          </Typography>
+        </Grid>
+        {prisoners && (
+          <Box mt={10}>
+            <PrisonersList prisoners={cachedPrisoners} />
+          </Box>
+        )}
       </Grid>
 
-      <Grid width={'100%'} item>
-        <Grid container width="100%">
-          <Grid item flexBasis={{ xs: 'auto', lg: 500 }}>
-            <Image
-              height={320}
-              width={500}
-              alt="photos"
-              src="/photos.png"
-              style={{ maxWidth: '100%', height: 'auto' }}
-            />
-          </Grid>
-          <Grid item flexBasis={{ xs: 'auto', lg: 'calc(100% - 500px)' }}>
-            <Typography variant="subtitle1" color="brand.black" component="p">
-              В этом списке собраны истории тех, кого российское государство
-              преследует из-за войны в Украине. Не все они признаны
-              политзаключёнными. Среди преследуемых есть люди с разными
-              политическими взглядами, совершившие разные поступки. Большинство
-              из них подвергаются давлению, жестокому обращению и пыткам,
-              принуждаются к признанию вины и не получают нормальной юридической
-              помощи, а правозащитники не могут получить доступа к документам их
-              уголовных дел.
-            </Typography>
-            <br />
-            <Typography variant="subtitle1" color="brand.black" component="p">
-              Если бы не российский политический режим и война, все они были бы
-              на свободе. В этом списке важно каждое имя. Однажды все эти
-              уголовные дела будут прекращены или пересмотрены. Сейчас нужно
-              сделать так, чтобы ни одно имя не потерялось. Чтобы мир знал о
-              каждом из них.
-            </Typography>
-          </Grid>
-          <Grid item flexBasis="100%" mt={9.25} mb={1}>
-            <SearchField
-              value={name}
-              startAdornment={<SearchIcon />}
-              placeholder="Поиск по ФИО"
-              onChange={(e) => setName(e.target.value)}
-            />
-          </Grid>
-          <Grid item mr={1} mt={1}>
-            <FilterSlider
-              label="Возраст"
-              value={[age[0], age[1]]}
-              min={0}
-              max={99}
-              onChange={(_, value) =>
-                Array.isArray(value) && setAge([value[0], value[1]])
-              }
-            />
-          </Grid>
-          <Grid item mr={1} mt={1}>
-            <FilterCheckbox
-              label="регион"
-              value={region}
-              options={getRegions().map(({ fullname }) => ({
-                id: fullname,
-                value: fullname,
-              }))}
-              onChange={(value) => setRegion(String(value))}
-            />
-          </Grid>
-          <Grid item mr={1} mt={1}>
-            <FilterCheckbox
-              label="пол"
-              value={sex}
-              options={[
-                { id: 'мужской', value: 'мужской' },
-                { id: 'женский', value: 'женский' },
-              ]}
-              onChange={(value) => setSex(String(value))}
-            />
-          </Grid>
-          <Grid item mr={1} mt={1}>
-            <FilterCheckbox
-              label="можно написать"
-              value={canWrite}
-              options={[{ id: 'да', value: 'да' }]}
-              onChange={(value) => {
-                if (value !== 'да') return;
-                setCanWrite('да');
-              }}
-            />
-          </Grid>
-          <Grid item mr={1} mt={1}>
-            <FilterCheckbox
-              label="интересы"
-              value={mailInterests}
-              options={interestsArray.map((interest) => ({
-                id: interest,
-                value: interest,
-              }))}
-              onChange={(value) => {
-                if (!Array.isArray(value)) return;
-                value &&
-                  setMailInterests(value.map((interest) => String(interest)));
-              }}
-              multiple
-            />
-          </Grid>
-          <Grid item mt={1}>
-            <Button
-              variant="outline"
-              onClick={() => {
-                setAge([0, 99]);
-                setRegion('');
-                setSex('');
-                setName('');
-                setCanWrite(undefined);
-                setMailInterests([]);
-              }}
-            >
-              очистить
-            </Button>
-          </Grid>
-          <Grid item flexBasis="100%" textAlign="center" mt={1} mb={4}>
-            <Typography variant="subtitle1">
-              {loading
-                ? 'Загрузка...'
-                : `Найдено: ${
-                    (prisoners?.length ?? 0) >= 300
-                      ? `${prisoners?.length}+`
-                      : `${prisoners?.length}`
-                  }`}
-            </Typography>
-          </Grid>
-          {prisoners && (
-            <Grid item flex={1} mt={10} flexBasis="100%" maxWidth="100%">
-              <Grid container rowSpacing={8.5} justifyContent="center">
-                <PrisonersList prisoners={cachedPrisoners} />
-              </Grid>
-            </Grid>
-          )}
-        </Grid>
-      </Grid>
       {hasMore && (
-        <Grid m="auto" item>
+        <Box m="auto">
           {overrideCta ?? (
             <Button
               disabled={loading}
@@ -242,8 +237,8 @@ export const PrisonersSearch: FC<PrisonersSearchProps> = ({
               {loading ? 'загрузка...' : ' показать ещё'}
             </Button>
           )}
-        </Grid>
+        </Box>
       )}
-    </Grid>
+    </Box>
   );
 };
