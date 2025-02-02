@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://politzek.org
+
+# Sitemaps
+Sitemap: https://politzek.org/sitemap.xml

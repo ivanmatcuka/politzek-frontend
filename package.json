@@ -11,7 +11,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN",
-    "codegen": "NODE_TLS_REJECT_UNAUTHORIZED=0 graphql-codegen --config codegen.ts"
+    "codegen": "NODE_TLS_REJECT_UNAUTHORIZED=0 graphql-codegen --config codegen.ts",
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
     "@apollo/client": "^3.8.0-rc.2",
@@ -69,6 +70,7 @@
     "eslint-plugin-storybook": "^0.6.15",
     "graphql-codegen-apollo-next-ssr": "^1.7.4",
     "husky": "^8.0.0",
+    "next-sitemap": "^4.2.3",
     "prettier": "3.0.3",
     "storybook": "^7.5.3",
     "ts-node": "^10.9.2",
