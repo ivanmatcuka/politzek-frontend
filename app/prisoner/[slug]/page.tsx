@@ -156,9 +156,12 @@ export default async function PrisonerPage({
                 <Typography variant="p3">Следующий суд: –</Typography>
               </Grid>
               <Grid item my={4}>
-                <DescriptionLayout variant="p2">
-                  {prisoner?.description}
-                </DescriptionLayout>
+                <DescriptionLayout
+                  variant="p2"
+                  dangerouslySetInnerHTML={{
+                    __html: prisoner?.description ?? '',
+                  }}
+                />
               </Grid>
               {!!prisoner?.interests && (
                 <Grid item>
