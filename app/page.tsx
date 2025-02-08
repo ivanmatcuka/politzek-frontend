@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 moment.locale('ru_RU');
 
+import { PersonCard } from '@/components/organisms/PersonCard/PersonCard';
 import { getPrisonerPicture } from '@/helpers/getPrisonerPicture';
 import { makeClient } from '@/helpers/makeClient';
 
@@ -15,6 +16,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import { PrisonersSearch } from './components/PrisonersSearch/PrisonersSearch';
 import { Container } from './Container';
 import styles from './page.module.css';
+import { getBirthDays } from './service';
 
 import {
   PrisonersDocument,
@@ -26,6 +28,7 @@ import { Typography } from '../components/typography/Typography/Typography';
 
 export default async function Home() {
   const prisoners = await getPrisoners();
+  const birthdays = await getBirthDays(moment().format('YYYY-MM-DD'));
 
   // const birthdays = useMemo(() => {
   //   if (!data?.prisoners) return [];
@@ -405,7 +408,7 @@ export default async function Home() {
           </Grid>
         </Grid>
       </Grid>
-      {/* <Grid
+      <Grid
         item
         className={styles.whom}
         id="whom"
@@ -420,7 +423,6 @@ export default async function Home() {
           margin="auto"
           flexDirection="column"
           alignItems="start"
-          position="relative"
           gap={7.25}
         >
           <Grid item textAlign="left" zIndex={200}>
@@ -438,29 +440,29 @@ export default async function Home() {
                   Скоро день рождения: можно поздравить
                 </Typography>
               </Grid>
-              <Grid item>
-                <Grid container gap={1.5} rowGap={4.5} flexWrap="nowrap">
-                  {birthdays.map(({ node: prisoner }) => (
-                    <Grid item key={prisoner.id}>
-                      <PersonCard
-                        id={prisoner.id}
-                        size="l"
-                        photoUrl={getPrisonerPicture(
-                          prisoner.featuredImage?.node.mediaItemUrl,
-                          prisoner.prisonerData?.sex,
-                        )}
-                        name={prisoner.prisonerData?.name ?? ''}
-                        subtitle={moment(
-                          prisoner.prisonerData?.birthdate ?? '',
-                        ).format('DD MMMM')}
-                      />
-                    </Grid>
+              <Grid item width="100%" height={{ xs: 291, lg: 392 }}>
+                <Carousel
+                  settings={{
+                    autoplay: false,
+                    dots: true,
+                    draggable: false,
+                  }}
+                >
+                  {birthdays.map((birthday, index) => (
+                    <PersonCard
+                      key={index}
+                      id={birthday.id}
+                      size="l"
+                      photoUrl={getPrisonerPicture(birthday.photo)}
+                      name={birthday.name}
+                      subtitle={moment(birthday.date_of_birth).format('D MMMM')}
+                    />
                   ))}
-                </Grid>
+                </Carousel>
               </Grid>
             </>
           )}
-          <Grid item>
+          {/* <Grid item>
             <Grid container gap={1.5} rowGap={4.5}>
               {!!releases.length && (
                 <>
@@ -492,9 +494,9 @@ export default async function Home() {
                 </>
               )}
             </Grid>
-          </Grid>
+          </Grid> */}
         </Grid>
-      </Grid> */}
+      </Grid>
 
       <Grid container>
         <Grid

@@ -10,37 +10,35 @@ type PrisonersListProps = {
   prisoners: Prisoners;
 };
 export const PrisonersList: FC<PrisonersListProps> = ({ prisoners }) =>
-  prisoners.map(({ node: prisoner }, index) => {
-    return (
-      <Grid
-        item
-        xs={12}
-        lg={4}
-        key={index}
-        display="flex"
-        justifyContent="center"
-      >
-        <CardPZ
-          status={prisoner.status}
-          articles={prisoner.articles}
-          body={prisoner.description}
-          name={prisoner.name}
-          sex={prisoner.gender}
-          pictureUrl={prisoner.photo ?? ''}
-          freedomdate={prisoner.release_date}
-          primaryAction={
-            prisoner.can_write && (
-              <a href={`/prisoner/${prisoner.slug}`} key={prisoner.id}>
-                <Button endIcon={<LetterIcon />}>написать</Button>
-              </a>
-            )
-          }
-          secondaryAction={
+  prisoners.map(({ node: prisoner }, index) => (
+    <Grid
+      item
+      xs={12}
+      lg={4}
+      key={index}
+      display="flex"
+      justifyContent="center"
+    >
+      <CardPZ
+        status={prisoner.status}
+        articles={prisoner.articles}
+        body={prisoner.description}
+        name={prisoner.name}
+        sex={prisoner.gender}
+        pictureUrl={prisoner.photo ?? ''}
+        freedomdate={prisoner.release_date}
+        primaryAction={
+          prisoner.can_write && (
             <a href={`/prisoner/${prisoner.slug}`} key={prisoner.id}>
-              <Button variant="outline">подробнее</Button>
+              <Button endIcon={<LetterIcon />}>написать</Button>
             </a>
-          }
-        />
-      </Grid>
-    );
-  });
+          )
+        }
+        secondaryAction={
+          <a href={`/prisoner/${prisoner.slug}`} key={prisoner.id}>
+            <Button variant="outline">подробнее</Button>
+          </a>
+        }
+      />
+    </Grid>
+  ));
