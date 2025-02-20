@@ -170,21 +170,11 @@ export default async function PrisonerPage({
                   </Typography>
                 </Grid>
               )}
-              <Grid mt={10} item>
-                <Grid
-                  container
-                  columnGap={2}
-                  rowGap={4}
-                  alignItems="center"
-                  flexDirection={{ xs: 'column', lg: 'row' }}
-                >
-                  {prisoner?.can_write && <LetterDialog prisoner={prisoner} />}
-                  <Grid item>
-                    <a href="https://t.me/avtozakinfo_bot" target="_blank">
-                      <Button variant="outline">Сообщить о неточности</Button>
-                    </a>
-                  </Grid>
-                </Grid>
+              <Grid mt={10} item display="flex" gap={2}>
+                {prisoner?.can_write && <LetterDialog prisoner={prisoner} />}
+                <a href="https://t.me/avtozakinfo_bot" target="_blank">
+                  <Button variant="outline">Сообщить о неточности</Button>
+                </a>
               </Grid>
             </Grid>
           </DrawingFrame>

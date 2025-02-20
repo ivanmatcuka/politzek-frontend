@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import moment from 'moment';
 import 'moment/locale/ru';
 import Image from 'next/image';
@@ -14,7 +14,6 @@ import { Carousel } from './components/Carousel/Carousel';
 import { CarouselImage } from './components/CarouselImage/CarouselImage';
 import Dashboard from './components/Dashboard/Dashboard';
 import { PrisonersSearch } from './components/PrisonersSearch/PrisonersSearch';
-import { Container } from './Container';
 import styles from './page.module.css';
 import { getBirthDays } from './service';
 
@@ -24,37 +23,10 @@ import {
 } from '../apollo/hooks/usePrisoners';
 import { Button } from '../components/atoms/Button/Button';
 import { Typography } from '../components/typography/Typography/Typography';
-// import { PersonCard } from '../components/organisms/PersonCard/PersonCard';
 
 export default async function Home() {
   const prisoners = await getPrisoners();
   const birthdays = await getBirthDays(moment().format('YYYY-MM-DD'));
-
-  // const birthdays = useMemo(() => {
-  //   if (!data?.prisoners) return [];
-
-  //   return [...data.prisoners.edges]
-  //     .filter((a) => {
-  //       const now = moment();
-  //       const aBirthdayThisYear = moment(a.node.prisonerData?.birthdate).year(
-  //         now.year(),
-  //       );
-
-  //       return now.diff(aBirthdayThisYear) >= 0;
-  //     })
-  //     .sort((a, b) => {
-  //       const now = moment();
-  //       const aBirthdayThisYear = moment(a.node.prisonerData?.birthdate).year(
-  //         now.year(),
-  //       );
-  //       const bBirthdayThisYear = moment(b.node.prisonerData?.birthdate).year(
-  //         now.year(),
-  //       );
-
-  //       return aBirthdayThisYear.diff(now) - bBirthdayThisYear.diff(now);
-  //     })
-  //     .slice(0, 3);
-  // }, [data?.prisoners]);
 
   // const releases = useMemo(() => {
   //   if (!data?.prisoners) return [];
@@ -77,119 +49,117 @@ export default async function Home() {
   // }, [data?.prisoners]);
 
   return (
-    <Grid container style={{ overflowX: 'clip' }}>
-      <Container />
+    <Box
+      width="100%"
+      boxSizing="border-box"
+      pt={{ xs: 0, sm: 0, lg: 0 }}
+      sx={{ overflowX: 'clip' }}
+    >
+      {/* Header */}
       <Grid
-        item
-        width="100%"
-        padding={{ xs: 1, sm: 2, lg: 10.75 }}
-        pt={{ xs: 0, sm: 0, lg: 0 }}
+        container
+        maxWidth={1200}
+        margin="auto"
+        justifyContent={{ xs: 'center', lg: 'space-between' }}
       >
-        <Grid
-          container
-          maxWidth={1200}
-          margin="auto"
-          justifyContent={{ xs: 'center', lg: 'space-between' }}
-        >
-          <Grid item flex={1} xs={12} lg={6}>
-            <Grid container mb={{ xs: 3, lg: 11 }}>
-              {/* XS photo */}
-              <Grid
-                item
-                className={styles.frame}
-                xs={12}
-                position="relative"
-                justifyContent="center"
-                display={{ xs: 'flex', lg: 'none' }}
-                mt={3}
-              >
-                <Image
-                  alt="photo"
-                  src="/photo.png"
-                  width={572}
-                  height={331}
-                  className={styles.frame__photo}
-                />
-              </Grid>
+        <Grid item flex={1} xs={12} lg={6}>
+          <Grid container mb={{ xs: 3, lg: 11 }}>
+            {/* XS photo */}
+            <Grid
+              item
+              className={styles.frame}
+              xs={12}
+              position="relative"
+              justifyContent="center"
+              display={{ xs: 'flex', lg: 'none' }}
+              mt={3}
+            >
+              <Image
+                alt="photo"
+                src="/photo.png"
+                width={572}
+                height={331}
+                className={styles.frame__photo}
+              />
+            </Grid>
 
-              <Grid item mt={{ xs: 3, lg: 11.75 }} mb={{ xs: 1.5, lg: 4.5 }}>
-                <Typography variant="h1" color="brand.red">
-                  Если б не было войны
-                </Typography>
-              </Grid>
-              <Grid
-                item
-                width="100%"
-                pl={{ xs: 0, lg: '101px' }}
-                pr={{ xs: 0, lg: 4 }}
+            <Grid item mt={{ xs: 3, lg: 11.75 }} mb={{ xs: 1.5, lg: 4.5 }}>
+              <Typography variant="h1" color="brand.red">
+                Если б не было войны
+              </Typography>
+            </Grid>
+            <Grid
+              item
+              width="100%"
+              pl={{ xs: 0, lg: '101px' }}
+              pr={{ xs: 0, lg: 4 }}
+            >
+              <Typography
+                variant="subtitle1"
+                textAlign="left"
+                lineHeight="32.74px"
+                margin="auto"
               >
-                <Typography
-                  variant="subtitle1"
-                  textAlign="left"
-                  lineHeight="32.74px"
-                  margin="auto"
+                Здесь собрана информация о тех, кого российское государство
+                преследует из-за войны в Украине
+              </Typography>
+            </Grid>
+
+            <Grid item mt={{ xs: 3, lg: 11.75 }}>
+              <Grid container alignItems="start">
+                <Grid item display={{ xs: 'none', lg: 'block' }}>
+                  <video
+                    src="/cat-walking.webm"
+                    autoPlay
+                    height={118}
+                    width={190}
+                    loop
+                  />
+                </Grid>
+                <Grid
+                  item
+                  flexBasis={{ xs: '140px', lg: 'auto' }}
+                  display={{ xs: 'block', lg: 'none' }}
                 >
-                  Здесь собрана информация о тех, кого российское государство
-                  преследует из-за войны в Украине
-                </Typography>
-              </Grid>
-
-              <Grid item mt={{ xs: 3, lg: 11.75 }}>
-                <Grid container alignItems="start">
-                  <Grid item display={{ xs: 'none', lg: 'block' }}>
-                    <video
-                      src="/cat-walking.webm"
-                      autoPlay
-                      height={118}
-                      width={190}
-                      loop
-                    />
-                  </Grid>
-                  <Grid
-                    item
-                    flexBasis={{ xs: '140px', lg: 'auto' }}
-                    display={{ xs: 'block', lg: 'none' }}
-                  >
-                    <video
-                      src="/cat-walking.webm"
-                      autoPlay
-                      height={87}
-                      width={140}
-                      loop
-                    />
-                  </Grid>
-                  <Grid
-                    item
-                    pl={1.5}
-                    flexBasis={{ xs: 'calc(100% - 140px)', lg: 'auto' }}
-                  >
-                    <Link href="/prisoners">
-                      <Button>Узнать их истории</Button>
-                    </Link>
-                  </Grid>
+                  <video
+                    src="/cat-walking.webm"
+                    autoPlay
+                    height={87}
+                    width={140}
+                    loop
+                  />
+                </Grid>
+                <Grid
+                  item
+                  pl={1.5}
+                  flexBasis={{ xs: 'calc(100% - 140px)', lg: 'auto' }}
+                >
+                  <Link href="/prisoners">
+                    <Button>Узнать их истории</Button>
+                  </Link>
                 </Grid>
               </Grid>
             </Grid>
           </Grid>
+        </Grid>
 
-          {/* LG photo */}
-          <Grid
-            item
-            className={styles.frame}
-            lg={6}
-            display={{ xs: 'none', lg: 'flex' }}
-            position="relative"
-            justifyContent="center"
-            mt="-130px"
-          >
-            <Image
-              alt="photo"
-              src="/photo.png"
-              width={600}
-              height={381}
-              className={styles.frame__photo}
-            />
-          </Grid>
+        {/* LG photo */}
+        <Grid
+          item
+          className={styles.frame}
+          lg={6}
+          display={{ xs: 'none', lg: 'flex' }}
+          position="relative"
+          justifyContent="center"
+          mt="-130px"
+        >
+          <Image
+            alt="photo"
+            src="/photo.png"
+            width={600}
+            height={381}
+            className={styles.frame__photo}
+          />
         </Grid>
       </Grid>
 
@@ -267,6 +237,8 @@ export default async function Home() {
           </Grid>
         </Grid>
       </Grid>
+
+      {/* Numbers section */}
       <Grid
         item
         className={styles.numbers}
@@ -277,6 +249,8 @@ export default async function Home() {
       >
         <Dashboard />
       </Grid>
+
+      {/* Why section */}
       <Grid
         item
         className={styles.why}
@@ -345,6 +319,8 @@ export default async function Home() {
           </Grid>
         </Grid>
       </Grid>
+
+      {/* What section */}
       <Grid
         item
         className={styles.what}
@@ -408,6 +384,8 @@ export default async function Home() {
           </Grid>
         </Grid>
       </Grid>
+
+      {/* Whom section */}
       <Grid
         item
         className={styles.whom}
@@ -440,7 +418,7 @@ export default async function Home() {
                   Скоро день рождения: можно поздравить
                 </Typography>
               </Grid>
-              <Grid item width="100%" height={{ xs: 291, lg: 392 }}>
+              <Grid item width="100%" height={416}>
                 <Carousel
                   settings={{
                     autoplay: false,
@@ -451,7 +429,7 @@ export default async function Home() {
                   {birthdays.map((birthday, index) => (
                     <PersonCard
                       key={index}
-                      id={birthday.id}
+                      id={birthday.slug}
                       size="l"
                       photoUrl={getPrisonerPicture(birthday.photo)}
                       name={birthday.name}
@@ -498,6 +476,7 @@ export default async function Home() {
         </Grid>
       </Grid>
 
+      {/* List section */}
       <Grid container>
         <Grid
           item
@@ -516,7 +495,7 @@ export default async function Home() {
           />
         </Grid>
       </Grid>
-    </Grid>
+    </Box>
   );
 }
 

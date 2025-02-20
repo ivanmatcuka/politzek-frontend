@@ -7,11 +7,12 @@ import { Button } from '../../../components/atoms/Button/Button';
 import { Typography } from '../../../components/typography/Typography/Typography';
 
 const PersonCardContainer = styled('div')<{ photoUrl: string }>(
-  ({ photoUrl }) => ({
+  ({ photoUrl, theme }) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    margin: theme.spacing(1.5),
 
     position: 'relative',
     overflow: 'hidden',

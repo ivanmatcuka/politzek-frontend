@@ -6,6 +6,7 @@ type BirthdaysResponse = {
     name: 'string';
     photo: 'string';
     date_of_birth: 'string';
+    slug: 'string';
   }[];
   targetDate: string;
   weekLater: string;
@@ -30,7 +31,9 @@ export const getBirthDays = async (
       throw new Error('Failed to submit form');
     }
 
-    return (await response.json()).data;
+    const { data } = await response.json();
+
+    return data;
   } catch (error) {
     return [];
   }
