@@ -418,20 +418,14 @@ export default async function Home() {
                   Скоро день рождения: можно поздравить
                 </Typography>
               </Grid>
-              <Grid item width="100%" height={416}>
-                <Carousel
-                  settings={{
-                    autoplay: false,
-                    dots: true,
-                    draggable: false,
-                  }}
-                >
+              <Grid item width="100%" height={{ xs: 832, lg: 416 }}>
+                <Carousel>
                   {birthdays.map((birthday, index) => (
                     <PersonCard
                       key={index}
                       id={birthday.slug}
                       size="l"
-                      photoUrl={getPrisonerPicture(birthday.photo)}
+                      mediaItemUrl={birthday.photo}
                       name={birthday.name}
                       subtitle={moment(birthday.date_of_birth).format('D MMMM')}
                     />

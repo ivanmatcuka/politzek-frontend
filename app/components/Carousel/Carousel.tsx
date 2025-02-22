@@ -11,14 +11,13 @@ const Container = styled('div')({
   right: 0,
 });
 const defaultSettings: Settings = {
+  swipeToSlide: true,
   arrows: false,
   dots: false,
   infinite: true,
-  slidesToShow: 1,
-  slidesToScroll: 1,
   autoplay: true,
   speed: 1000,
-  autoplaySpeed: 1000,
+  autoplaySpeed: 5000,
   cssEase: 'linear',
   variableWidth: true,
 };

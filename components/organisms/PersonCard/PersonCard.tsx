@@ -3,11 +3,23 @@
 import { styled } from '@mui/material';
 import { FC, PropsWithChildren } from 'react';
 
-import { Button } from '../../../components/atoms/Button/Button';
-import { Typography } from '../../../components/typography/Typography/Typography';
+import { Button } from '@/components/atoms/Button/Button';
+import { Typography } from '@/components/typography/Typography/Typography';
+import { getPrisonerPicture } from '@/helpers/getPrisonerPicture';
 
-const PersonCardContainer = styled('div')<{ photoUrl: string }>(
-  ({ photoUrl, theme }) => ({
+const PersonCardContainer = styled('div')<{
+  photoUrl: string;
+  hasPicture: boolean;
+}>(({ photoUrl, hasPicture, theme }) => {
+  const background = hasPicture
+    ? `linear-gradient(0deg, rgba(7, 71, 59, 0.30) 0%, rgba(7, 71, 59, 0.30) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0.00) 56.67%, rgba(0, 0, 0, 0.60) 100%), url(${photoUrl}) no-repeat`
+    : `url(${photoUrl}) no-repeat`;
+
+  const hoverBackground = hasPicture
+    ? `linear-gradient(0deg, rgba(7, 71, 59, 0.50) 0%, rgba(7, 71, 59, 0.50) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.60) 100%), url(${photoUrl}) no-repeat`
+    : `url(${photoUrl}) no-repeat`;
+
+  return {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -17,25 +29,31 @@ const PersonCardContainer = styled('div')<{ photoUrl: string }>(
     position: 'relative',
     overflow: 'hidden',
 
-    background: `linear-gradient(0deg, rgba(7, 71, 59, 0.30) 0%, rgba(7, 71, 59, 0.30) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0.00) 56.67%, rgba(0, 0, 0, 0.60) 100%), url(${photoUrl}) no-repeat`,
+    background,
     backgroundPosition: 'center',
     backgroundSize: 'cover',
+
+    backgroundColor: hasPicture ? 'transparent' : theme.palette.brand.green,
+    backgroundBlendMode: hasPicture ? 'normal' : 'overlay',
 
     h2: {
       textTransform: 'uppercase',
     },
 
     '&:hover': {
-      background: `linear-gradient(0deg, rgba(7, 71, 59, 0.50) 0%, rgba(7, 71, 59, 0.50) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.60) 100%), url(${photoUrl}) no-repeat`,
+      background: hoverBackground,
       backgroundPosition: 'center',
       backgroundSize: 'cover',
+
+      backgroundColor: hasPicture ? 'transparent' : theme.palette.brand.green,
+      backgroundBlendMode: hasPicture ? 'normal' : 'overlay',
 
       '.button': {
         opacity: 1,
       },
     },
-  }),
-);
+  };
+});
 
 const PersonCardContent = styled('div')({
   position: 'absolute',
@@ -53,7 +71,7 @@ const ButtonContainer = styled('div')({
 type PersonCardProps = {
   id: string;
   size: 'l' | 'm';
-  photoUrl: string;
+  mediaItemUrl: string;
   name: string;
   subtitle: string;
 };
@@ -61,10 +79,12 @@ type PersonCardProps = {
 export const PersonCard: FC<PropsWithChildren<PersonCardProps>> = ({
   id,
   size,
-  photoUrl,
+  mediaItemUrl,
   name,
   subtitle,
 }) => {
+  const photoUrl = getPrisonerPicture(mediaItemUrl);
+
   return (
     <PersonCardContainer
       sx={{
@@ -72,6 +92,7 @@ export const PersonCard: FC<PropsWithChildren<PersonCardProps>> = ({
         height: size === 'l' ? 392 : 291,
       }}
       photoUrl={photoUrl}
+      hasPicture={!!mediaItemUrl}
     >
       <ButtonContainer className="button">
         <a href={`/prisoner/${id}`}>

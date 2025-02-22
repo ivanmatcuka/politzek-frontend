@@ -18,7 +18,7 @@ export const PersonCardBig: Story = {
   args: {
     id: 'id',
     size: 'l',
-    photoUrl:
+    mediaItemUrl:
       'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
     name: 'Габышев Александр',
     subtitle: '18 сентября',
@@ -29,7 +29,7 @@ export const PersonCardSmall: Story = {
   args: {
     id: 'id',
     size: 'm',
-    photoUrl:
+    mediaItemUrl:
       'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
     name: 'Габышев Александр',
     subtitle: '18 сентября',
