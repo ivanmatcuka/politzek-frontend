@@ -418,7 +418,7 @@ export default async function Home() {
                   Скоро день рождения: можно поздравить
                 </Typography>
               </Grid>
-              <Grid item width="100%" height={{ xs: 832, lg: 416 }}>
+              <Grid item width="100%" height={416}>
                 <Carousel>
                   {birthdays.map((birthday, index) => (
                     <PersonCard
