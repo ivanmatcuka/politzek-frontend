@@ -403,7 +403,7 @@ export default async function Home() {
                 </Typography>
               </Grid>
               <Grid item width="100%">
-                <Carousel settings={{ dots: true }}>
+                <Carousel settings={{ dots: true, infinite: false }}>
                   {birthdays.map((birthday, index) => (
                     <PersonCard
                       key={index}

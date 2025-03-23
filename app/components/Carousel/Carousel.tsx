@@ -14,8 +14,8 @@ const defaultSettings: Settings = {
   swipeToSlide: true,
   arrows: false,
   dots: false,
-  infinite: false,
-  autoplay: false,
+  infinite: true,
+  autoplay: true,
   speed: 1000,
   autoplaySpeed: 5000,
   cssEase: 'linear',
@@ -27,7 +27,6 @@ export const Carousel: FC<PropsWithChildren & { settings?: Settings }> = ({
   children,
   settings = {},
 }) => {
-  const [isReady, setIsReady] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const sliderRef = useRef<Slider | null>(null);
   const merged = { ...defaultSettings, ...settings };
@@ -61,9 +60,8 @@ export const Carousel: FC<PropsWithChildren & { settings?: Settings }> = ({
       ref={sliderRef}
       appendDots={appendDots}
       beforeChange={(_, next) => setCurrentSlide(next)}
-      onInit={() => setIsReady(true)}
     >
-      {isReady && children}
+      {children}
     </Slider>
   );
 };
