@@ -1,5 +1,6 @@
 'use client';
 
+import { styled } from '@mui/material';
 import {
   FC,
   PropsWithChildren,
@@ -10,6 +11,17 @@ import {
   useState,
 } from 'react';
 import Slider, { Settings } from 'react-slick';
+
+type SliderListProps = {
+  translateOffset: number;
+};
+const SliderList = styled('ul')<SliderListProps>(({ translateOffset }) => ({
+  display: 'flex',
+  padding: 0,
+  transform: `translateX(${translateOffset}px)`,
+  transition: 'transform 0.3s ease',
+  listStyle: 'none',
+}));
 
 const defaultSettings: Settings = {
   swipeToSlide: true,
@@ -39,25 +51,14 @@ export const Carousel: FC<PropsWithChildren & { settings?: Settings }> = ({
       const width = screenWidth / 2;
       const translate = Math.min(0, width - offset);
 
-      return (
-        <ul
-          style={{
-            position: 'static',
-            display: 'flex',
-            flexWrap: 'nowrap',
-            transform: `translateX(${translate}px)`,
-            transition: 'transform 0.3s ease',
-          }}
-        >
-          {dots}
-        </ul>
-      );
+      return <SliderList translateOffset={translate}>{dots}</SliderList>;
     },
     [currentSlide, screenWidth],
   );
 
   useEffect(() => {
-    const handleResize = () => setScreenWidth(window.innerWidth);
+    const handleResize = () =>
+      setScreenWidth(sliderRef.current?.innerSlider?.list?.clientWidth ?? 0);
     window.addEventListener('resize', handleResize);
     handleResize();
 
