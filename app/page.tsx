@@ -201,7 +201,7 @@ export default async function Home() {
             </Typography>
           </Grid>
           <Grid item width="100%" mt={7} zIndex={200}>
-            <Carousel settings={{ dots: true, autoplay: false }}>
+            <Carousel settings={{ dots: true }}>
               {prisoners?.edges
                 .filter(({ node: prisoner }) => !!prisoner.photo)
                 .map(({ node: prisoner }) => (
@@ -403,7 +403,9 @@ export default async function Home() {
                 </Typography>
               </Grid>
               <Grid item width="100%">
-                <Carousel settings={{ dots: true, infinite: false }}>
+                <Carousel
+                  settings={{ dots: true, infinite: false, autoplay: false }}
+                >
                   {birthdays.map((birthday, index) => (
                     <PersonCard
                       key={index}

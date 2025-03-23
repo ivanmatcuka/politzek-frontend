@@ -31,7 +31,7 @@ const defaultSettings: Settings = {
   dots: false,
   infinite: true,
   autoplay: true,
-  speed: 1000,
+  speed: 300,
   autoplaySpeed: 5000,
   cssEase: 'linear',
   variableWidth: true,
