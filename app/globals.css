@@ -77,6 +77,9 @@ p {
 .slick-list {
   overflow: visible !important;
 }
+.slick-dots li {
+  margin: 0 !important;
+}
 .slick-dots li button::before {
   color: #fff !important;
 }
