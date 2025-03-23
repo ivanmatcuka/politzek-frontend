@@ -73,6 +73,13 @@ p {
   }
 }
 
+/* @TODO */
 .slick-list {
   overflow: visible !important;
+}
+.slick-dots li button::before {
+  color: #fff !important;
+}
+.slick-dots {
+  position: static !important;
 }
