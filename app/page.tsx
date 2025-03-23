@@ -402,7 +402,7 @@ export default async function Home() {
                   Скоро день рождения: можно поздравить
                 </Typography>
               </Grid>
-              <Grid item width="100%">
+              <Grid item width="100%" height={335}>
                 <Carousel
                   settings={{ dots: true, infinite: false, autoplay: false }}
                 >

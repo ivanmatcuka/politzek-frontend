@@ -12,7 +12,7 @@ import {
 } from 'react';
 import Slider, { Settings } from 'react-slick';
 
-const DOT_WIDTH = 30;
+const DOT_WIDTH = 20;
 
 type SliderListProps = {
   translateOffset: number;
