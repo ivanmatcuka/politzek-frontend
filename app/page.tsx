@@ -25,28 +25,10 @@ import { Button } from '../components/atoms/Button/Button';
 import { Typography } from '../components/typography/Typography/Typography';
 
 export default async function Home() {
+  const today = moment().format('YYYY-MM-DD');
+
   const prisoners = await getPrisoners();
-  const birthdays = await getBirthDays(moment().format('YYYY-MM-DD'));
-
-  // const releases = useMemo(() => {
-  //   if (!data?.prisoners) return [];
-
-  //   return [...data.prisoners.edges]
-  //     .filter((a) => {
-  //       const now = moment();
-  //       const releaseThisYear = moment(a.node.prisonerData?.freedomdate);
-
-  //       return releaseThisYear.diff(now) >= 0;
-  //     })
-  //     .sort((a, b) => {
-  //       const now = moment();
-  //       const aRelease = moment(a.node.prisonerData?.freedomdate);
-  //       const bRelease = moment(b.node.prisonerData?.freedomdate);
-
-  //       return aRelease.diff(now) - bRelease.diff(now);
-  //     })
-  //     .slice(0, 3);
-  // }, [data?.prisoners]);
+  const birthdays = await getBirthDays(today);
 
   return (
     <Box
@@ -114,6 +96,7 @@ export default async function Home() {
                     height={118}
                     width={190}
                     loop
+                    style={{ mixBlendMode: 'multiply' }}
                   />
                 </Grid>
                 <Grid
@@ -127,6 +110,7 @@ export default async function Home() {
                     height={87}
                     width={140}
                     loop
+                    style={{ mixBlendMode: 'multiply' }}
                   />
                 </Grid>
                 <Grid
@@ -216,8 +200,8 @@ export default async function Home() {
               больше.
             </Typography>
           </Grid>
-          <Grid item height={150} width="100%" mt={7} zIndex={200}>
-            <Carousel>
+          <Grid item width="100%" mt={7} zIndex={200}>
+            <Carousel settings={{ dots: true }}>
               {prisoners?.edges
                 .filter(({ node: prisoner }) => !!prisoner.photo)
                 .map(({ node: prisoner }) => (
@@ -418,13 +402,13 @@ export default async function Home() {
                   Скоро день рождения: можно поздравить
                 </Typography>
               </Grid>
-              <Grid item width="100%" height={416}>
-                <Carousel>
+              <Grid item width="100%">
+                <Carousel settings={{ dots: true }}>
                   {birthdays.map((birthday, index) => (
                     <PersonCard
                       key={index}
                       id={birthday.slug}
-                      size="l"
+                      size="m"
                       mediaItemUrl={birthday.photo}
                       name={birthday.name}
                       subtitle={moment(birthday.date_of_birth).format('D MMMM')}

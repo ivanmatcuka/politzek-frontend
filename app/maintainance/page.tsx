@@ -50,6 +50,7 @@ export default function Maintainance() {
                       height={118}
                       width={190}
                       loop
+                      style={{ mixBlendMode: 'multiply' }}
                     />
                   </Grid>
                   <Grid
@@ -63,6 +64,7 @@ export default function Maintainance() {
                       height={87}
                       width={140}
                       loop
+                      style={{ mixBlendMode: 'multiply' }}
                     />
                   </Grid>
                   <Grid
