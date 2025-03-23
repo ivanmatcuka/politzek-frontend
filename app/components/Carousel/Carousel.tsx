@@ -5,6 +5,7 @@ import {
   PropsWithChildren,
   ReactNode,
   useCallback,
+  useEffect,
   useRef,
   useState,
 } from 'react';
@@ -28,13 +29,14 @@ export const Carousel: FC<PropsWithChildren & { settings?: Settings }> = ({
   settings = {},
 }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [screenWidth, setScreenWidth] = useState(0);
   const sliderRef = useRef<Slider | null>(null);
   const merged = { ...defaultSettings, ...settings };
 
   const appendDots = useCallback(
     (dots: ReactNode) => {
       const offset = (currentSlide + 1) * 30;
-      const width = (window.screen.width ?? 0) / 2;
+      const width = screenWidth / 2;
       const translate = Math.min(0, width - offset);
 
       return (
@@ -51,8 +53,16 @@ export const Carousel: FC<PropsWithChildren & { settings?: Settings }> = ({
         </ul>
       );
     },
-    [currentSlide],
+    [currentSlide, screenWidth],
   );
+
+  useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <Slider
