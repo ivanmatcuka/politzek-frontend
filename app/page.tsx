@@ -201,7 +201,7 @@ export default async function Home() {
             </Typography>
           </Grid>
           <Grid item width="100%" mt={7} zIndex={200}>
-            <Carousel settings={{ dots: true }}>
+            <Carousel settings={{ dots: true, autoplay: false }}>
               {prisoners?.edges
                 .filter(({ node: prisoner }) => !!prisoner.photo)
                 .map(({ node: prisoner }) => (

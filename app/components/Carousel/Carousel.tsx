@@ -12,6 +12,8 @@ import {
 } from 'react';
 import Slider, { Settings } from 'react-slick';
 
+const DOT_WIDTH = 30;
+
 type SliderListProps = {
   translateOffset: number;
 };
@@ -47,9 +49,9 @@ export const Carousel: FC<PropsWithChildren & { settings?: Settings }> = ({
 
   const appendDots = useCallback(
     (dots: ReactNode) => {
-      const offset = (currentSlide + 1) * 30;
+      const offset = (currentSlide + 1) * DOT_WIDTH;
       const width = screenWidth / 2;
-      const translate = Math.min(0, width - offset);
+      const translate = Math.min(0, width - offset + DOT_WIDTH / 2);
 
       return <SliderList translateOffset={translate}>{dots}</SliderList>;
     },
