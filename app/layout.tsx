@@ -25,7 +25,7 @@ export async function generateMetadata() {
     openGraph: {
       title,
       description,
-      images: '/images/logo.png',
+      images: '/images/logo.svg',
     },
   };
 }
