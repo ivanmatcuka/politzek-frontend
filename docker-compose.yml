@@ -5,13 +5,3 @@ services:
       dockerfile: Dockerfile
     ports:
       - 3000:3000
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.nextjs.rule=Host(`your-domain.com`)"
-      - "traefik.http.services.nextjs.loadbalancer.server.port=3000"
-    networks:
-      - traefik_network
-
-networks:
-  traefik_network:
-    external: true
