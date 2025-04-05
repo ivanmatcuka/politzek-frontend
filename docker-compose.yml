@@ -1,7 +1,5 @@
-version: '3'
-
 services:
-  app:
+  politzek:
     build:
       context: .
       dockerfile: Dockerfile
@@ -11,19 +9,6 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.nextjs.rule=Host(`your-domain.com`)"
       - "traefik.http.services.nextjs.loadbalancer.server.port=3000"
-    networks:
-      - traefik_network
-
-  traefik:
-    image: traefik:v2.5
-    command:
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:80"
-    ports:
-      - 80:80
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
       - traefik_network
 
