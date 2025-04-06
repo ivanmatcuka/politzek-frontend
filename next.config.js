@@ -16,6 +16,7 @@ const nextConfig = {
     styledComponents: true,
   },
   experimental: { scrollRestoration: true },
+  output: 'standalone',
 };
 
 module.exports = nextConfig;
