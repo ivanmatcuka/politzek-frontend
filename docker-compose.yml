@@ -1,7 +1,14 @@
+networks:
+  proxy-network:
+    external: true
+
 services:
   politzek:
+    container_name: politzek
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - 3000:3000
+    networks:
+      - proxy-network
