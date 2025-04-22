@@ -37,7 +37,7 @@ export default function Dashboard() {
     <Grid container maxWidth={1200} margin="auto">
       <Grid item mb={4.5} flex="1 0 100%">
         <Heading variant="h1" color="brand.red">
-          Антивоенное дело в цифрах
+          Политические репрессии в цифрах
         </Heading>
       </Grid>
       <Grid item width={392}>
