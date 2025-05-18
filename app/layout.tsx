@@ -5,6 +5,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 
+import { Banner } from './components/Banner/Banner';
 import { Footer } from './components/Footer/Footer';
 import { Header } from './components/Header/Header';
 import './globals.css';
@@ -37,6 +38,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <ApolloWrapper>
           <AppRouterCacheProvider options={{ key: 'css' }}>
             <ThemeRegistry>
+              <Banner />
               <Header />
               {process.env.MAINTAINANCE !== 'true' ? (
                 children

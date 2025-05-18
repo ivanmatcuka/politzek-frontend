@@ -22,7 +22,7 @@ const Container = styled('div')<{ variant: ButtonProps['variant'] }>(({
       : ['red', 'red20', 'red40'];
 
   return {
-    display: 'inline',
+    display: 'inline-block',
 
     position: 'relative',
 
@@ -47,7 +47,7 @@ const Container = styled('div')<{ variant: ButtonProps['variant'] }>(({
       content: '""',
 
       position: 'absolute',
-      inset: '-16px 0 0 0',
+      inset: '-8px 0 0 0',
       zIndex: 100,
 
       transform: 'rotate(1.8deg)',
@@ -114,7 +114,10 @@ const OutlineMUIButton = styled(StyledMUIButton)(({ theme }) => ({
 
 type ButtonProps = {
   variant?: 'red' | 'default' | 'outline';
-} & Pick<MUIButtonProps, 'onClick' | 'endIcon' | 'disabled' | 'component'>;
+} & Pick<
+  MUIButtonProps,
+  'onClick' | 'endIcon' | 'disabled' | 'component' | 'href'
+>;
 export const Button: FC<PropsWithChildren<ButtonProps>> = ({
   variant = 'default',
   children,
