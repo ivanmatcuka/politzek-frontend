@@ -17,8 +17,8 @@ import ThemeRegistry from '../theming/ThemeRegistry';
 const inter = Inter({ subsets: ['latin'] });
 
 export async function generateMetadata() {
-  const title = 'Если б не было войны';
-  const description = 'Платформа для помощи политзаключенным в России';
+  const title = 'politzek.org - площадка помощи политзаключенным в России';
+  const description = 'Площадка помощи политзаключенным в России';
 
   return {
     title,
