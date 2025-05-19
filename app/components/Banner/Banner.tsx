@@ -39,7 +39,7 @@ export const Banner = () => {
             width={207}
             height={157}
           />
-          <Button variant="red" component={Link} href="#footer">
+          <Button variant="red" component={Link} href="/donate">
             Поддержать
           </Button>
         </Box>

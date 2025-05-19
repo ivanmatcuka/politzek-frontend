@@ -21,9 +21,9 @@ export const Header = () => (
         <Grid item flex={1} xs={12} lg={6}>
           <Grid container>
             <Grid item mr={1.5} flexBasis="191px">
-              <a href="/">
+              <Link href="/">
                 <Logo />
-              </a>
+              </Link>
             </Grid>
             <Grid item flexBasis="calc(100% - 203px)">
               <Menu
