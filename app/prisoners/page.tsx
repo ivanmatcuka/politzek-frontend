@@ -3,6 +3,7 @@ import moment from 'moment';
 import 'moment/locale/ru';
 moment.locale('ru_RU');
 
+import { Footer } from '../components/Footer/Footer';
 import { PrisonersSearch } from '../components/PrisonersSearch/PrisonersSearch';
 
 export async function generateMetadata() {
@@ -22,25 +23,29 @@ export async function generateMetadata() {
 
 export default function Prisoners() {
   return (
-    <Grid container>
-      <Grid
-        item
-        width="100%"
-        padding={{ xs: 1, sm: 2, lg: 10.75 }}
-        pt={{ xs: 0, sm: 0, lg: 0 }}
-      >
+    <>
+      <Grid container>
         <Grid
-          container
-          maxWidth={{ xs: '100%', lg: '1200px' }}
-          margin="auto"
-          flexDirection="column"
-          mt={4}
-          mb={8}
-          position="relative"
+          item
+          width="100%"
+          padding={{ xs: 1, sm: 2, lg: 10.75 }}
+          pt={{ xs: 0, sm: 0, lg: 0 }}
         >
-          <PrisonersSearch paginationStep={27} />
+          <Grid
+            container
+            maxWidth={{ xs: '100%', lg: '1200px' }}
+            margin="auto"
+            flexDirection="column"
+            mt={4}
+            mb={8}
+            position="relative"
+          >
+            <PrisonersSearch paginationStep={27} />
+          </Grid>
         </Grid>
       </Grid>
-    </Grid>
+
+      <Footer />
+    </>
   );
 }

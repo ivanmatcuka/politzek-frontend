@@ -21,6 +21,8 @@ export type TypographyProps = {
   | 'lineHeight'
   | 'margin'
   | 'mb'
+  | 'mt'
+  | 'my'
 >;
 export const Typography: FC<PropsWithChildren<TypographyProps>> = ({
   children,
