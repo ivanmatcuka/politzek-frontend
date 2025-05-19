@@ -1,4 +1,5 @@
 import { Box, Grid } from '@mui/material';
+import Link from 'next/link';
 
 import { Button } from '@/components/atoms/Button/Button';
 import { Typography } from '@/components/typography/Typography/Typography';
@@ -69,7 +70,11 @@ export default function Donate() {
             <Typography variant="caption" color="white" my={2}>
               российский рубль
             </Typography>
-            <Button variant="red" href="#">
+            <Button
+              variant="red"
+              href="https://friendly2.me/support/avtozaklive/"
+              component={Link}
+            >
               ПОДДЕРЖАТЬ
             </Button>
           </Box>
@@ -80,7 +85,11 @@ export default function Donate() {
             <Typography variant="caption" color="white" my={2}>
               иностранная валюта
             </Typography>
-            <Button variant="red" href="#">
+            <Button
+              variant="red"
+              href="https://avtozak.info/donate/"
+              component={Link}
+            >
               ПОДДЕРЖАТЬ
             </Button>
           </Box>
@@ -91,7 +100,11 @@ export default function Donate() {
             <Typography variant="caption" color="white" my={2}>
               USDT/BTC/TON...
             </Typography>
-            <Button variant="red" href="#">
+            <Button
+              variant="red"
+              href="https://t.me/donat_avtozak"
+              component={Link}
+            >
               ПОДДЕРЖАТЬ
             </Button>
           </Box>
