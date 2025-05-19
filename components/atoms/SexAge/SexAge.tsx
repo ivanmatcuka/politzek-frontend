@@ -68,7 +68,7 @@ export const SexAge: FC<SexAgeProps> = ({ data }) => {
             .sort((a, b) => b.age - a.age)
             .map((row) => (
               <StyledTableRow key={row.label}>
-                <StyledTableCell align="right">
+                <StyledTableCell align="right" style={{ maxWidth: 325 }}>
                   {Array.from(Array(row.female).keys()).map((_, index) => (
                     <Image
                       alt={`female-${index}`}

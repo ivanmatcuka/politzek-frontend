@@ -159,7 +159,7 @@ export default async function PrisonerPage({
                 <DescriptionLayout
                   variant="p2"
                   dangerouslySetInnerHTML={{
-                    __html: prisoner?.description ?? '',
+                    __html: prisoner?.formatted_description ?? '',
                   }}
                 />
               </Grid>

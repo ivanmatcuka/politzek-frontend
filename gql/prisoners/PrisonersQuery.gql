@@ -3,6 +3,7 @@ fragment PrisonerItem on airtable_data_edge {
   created_time
   name
   description
+  formatted_description
   articles
   photo
   coordinates
