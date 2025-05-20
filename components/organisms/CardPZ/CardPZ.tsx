@@ -87,7 +87,7 @@ export const CardPZ: FC<Partial<CardPZProps>> = ({
   secondaryAction,
   pictureUrl,
 }) => {
-  const filteredArticles = articles?.slice(0, 5).filter((a) => a);
+  const filteredArticles = articles?.slice(0, 5)?.filter((a) => a);
 
   return (
     <Container
