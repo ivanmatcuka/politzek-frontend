@@ -7,7 +7,7 @@ import { Footer } from '../components/Footer/Footer';
 import { PrisonersSearch } from '../components/PrisonersSearch/PrisonersSearch';
 
 export async function generateMetadata() {
-  const title = 'Если б не было войны';
+  const title = 'politzek.org - площадка помощи политзаключенным в России';
   const description = 'Список преследуемых';
 
   return {

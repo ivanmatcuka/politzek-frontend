@@ -35,9 +35,8 @@ export async function generateMetadata({
   params: Props;
 }): Promise<Metadata> {
   const prisoner = await getPrisoner(params.slug);
-  const title = `${
-    prisoner?.name ?? 'Страница заключенного'
-  } — Если б не было войны`;
+  const title = `${prisoner?.name ?? 'Страница заключенного'} — politzek.org`;
+
   const picture = prisoner?.photo;
   const description = 'Платформа для помощи политзаключенным в России';
 
