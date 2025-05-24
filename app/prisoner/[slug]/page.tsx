@@ -14,7 +14,7 @@ import { LetterDialog } from '@/app/components/LetterDialog/LetterDialog';
 import { Page } from '@/app/components/Page';
 import { PageWithHeader } from '@/app/components/PageWithHeader';
 import { PrisonerArticles } from '@/app/components/PrisonerArticles/PrisonerArticles';
-import { Status } from '@/app/components/Status/Status';
+import { Gender, Status } from '@/app/components/Status/Status';
 import { Button } from '@/components/atoms/Button/Button';
 import { Typography } from '@/components/typography/Typography/Typography';
 import { getPrisonerPicture } from '@/helpers/getPrisonerPicture';
@@ -135,7 +135,7 @@ export default async function PrisonerPage({
                 {prisoner?.status && prisoner?.gender && (
                   <Status
                     status={prisoner.status as Status}
-                    gender={prisoner.gender}
+                    gender={prisoner.gender as Gender}
                   />
                 )}
               </Grid>
