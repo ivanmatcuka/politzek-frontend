@@ -1,12 +1,15 @@
 import { Grid, Dialog as MUIDialog, styled } from '@mui/material';
+import moment from 'moment';
+import 'moment/locale/ru';
 import { FC } from 'react';
+
+moment.locale('ru_RU');
 
 import { Prisoner } from '@/apollo/hooks/usePrisoners';
 import { Button } from '@/components/atoms/Button/Button';
 import { Typography } from '@/components/typography/Typography/Typography';
 
 import { DrawingFrame } from '../DrawingFrame/DrawingFrame';
-
 type MessageDialogProps = {
   open: boolean;
   prisoner: Prisoner;
@@ -25,6 +28,12 @@ export const MessageDialog: FC<MessageDialogProps> = ({
   const handleClose = () => {
     onClose && onClose('');
   };
+  const birthday = prisoner?.date_of_birth
+    ? moment(prisoner.date_of_birth)
+    : null;
+  const birthdayString = `День рождения: ${
+    birthday ? `${birthday.format('DD MMMM YYYY')}` : '–'
+  }`;
 
   return (
     <StyledDialog
@@ -59,6 +68,8 @@ export const MessageDialog: FC<MessageDialogProps> = ({
           <Typography variant="p3">
             {prisoner.institution_short_name}
           </Typography>
+          <br />
+          <Typography variant="p3">{birthdayString}</Typography>
         </Grid>
         <Grid mt={8} item flex={1}>
           <Button variant="outline" onClick={handleClose}>

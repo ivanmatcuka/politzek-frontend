@@ -109,9 +109,9 @@ export const CardPZ: FC<Partial<CardPZProps>> = ({
           {name}
         </StyledName>
       </Grid>
-      {status && (
+      {status && sex && (
         <StatusContainer>
-          <Status status={status} />
+          <Status status={status as Status} gender={sex} />
         </StatusContainer>
       )}
       {filteredArticles && filteredArticles.length > 0 && (

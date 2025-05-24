@@ -5,11 +5,11 @@ import { Typography } from '@/components/typography/Typography/Typography';
 
 import styles from './page.module.css';
 
-import { Footer } from '../components/Footer/Footer';
+import { PageWithHeader } from '../components/PageWithHeader';
 
 export default function Maintainance() {
   return (
-    <>
+    <PageWithHeader>
       <Grid container>
         <Grid
           item
@@ -86,8 +86,6 @@ export default function Maintainance() {
           </Grid>
         </Grid>
       </Grid>
-
-      <Footer />
-    </>
+    </PageWithHeader>
   );
 }
