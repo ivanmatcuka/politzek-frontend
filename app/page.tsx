@@ -13,6 +13,7 @@ import { Cards } from './components/Cards/Cards';
 import { Carousel } from './components/Carousel/Carousel';
 import { CarouselImage } from './components/CarouselImage/CarouselImage';
 import Dashboard from './components/Dashboard/Dashboard';
+import { DrawingFrame } from './components/DrawingFrame/DrawingFrame';
 import { Page } from './components/Page';
 import { PageWithHeader } from './components/PageWithHeader';
 import { PrisonersSearch } from './components/PrisonersSearch/PrisonersSearch';
@@ -47,6 +48,7 @@ export default async function Home() {
             maxWidth={1200}
             margin="auto"
             justifyContent={{ xs: 'center', lg: 'space-between' }}
+            columnGap={1}
           >
             <Grid item flex={1} xs={12} lg={6}>
               <Grid container mb={{ xs: 3, lg: 11 }}>
@@ -133,10 +135,10 @@ export default async function Home() {
             </Grid>
 
             {/* LG photo */}
-            <Grid
+            <DrawingFrame
               item
               className={styles.frame}
-              lg={6}
+              lg={5}
               display={{ xs: 'none', lg: 'flex' }}
               position="relative"
               justifyContent="center"
@@ -149,7 +151,7 @@ export default async function Home() {
                 height={381}
                 className={styles.frame__photo}
               />
-            </Grid>
+            </DrawingFrame>
           </Grid>
 
           {/* Carousel section */}

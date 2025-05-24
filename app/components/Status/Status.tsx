@@ -34,11 +34,36 @@ const statusMap: Record<Status, ReactElement> = {
   'смерть при задержании': <GrayCircle />,
 };
 
-const applyGenderToStatus = (status: Status, gender: string) => {
-  const genderedStatuses: Status[] = ['лишен/а свободы', 'не лишен/а свободы'];
-  if (!genderedStatuses.includes(status)) return status;
-
-  return status.replace('/а', gender === 'мужской' ? '' : 'а');
+export type Gender = 'мужской' | 'женский';
+const genderMap: Record<Status, Record<Gender, string>> = {
+  'лишен/а свободы': {
+    женский: 'лишена свободы',
+    мужской: 'лишен свободы',
+  },
+  'не лишен/а свободы': {
+    женский: 'не лишена свободы',
+    мужской: 'не лишен свободы',
+  },
+  'нет информации': {
+    женский: 'нет информации',
+    мужской: 'нет информации',
+  },
+  'нет фигуранта': {
+    женский: 'нет фигуранта',
+    мужской: 'нет фигуранта',
+  },
+  'смерть в заключении': {
+    женский: 'умерла в заключении',
+    мужской: 'умер в заключении',
+  },
+  'смерть под следствием': {
+    женский: 'умерла под следствием',
+    мужской: 'умер под следствием',
+  },
+  'смерть при задержании': {
+    женский: 'умерла при задержании',
+    мужской: 'умер при задержании',
+  },
 };
 
 export type Status =
@@ -51,15 +76,14 @@ export type Status =
   | 'смерть в заключении';
 type StatusProps = {
   status: Status;
-  gender: string;
+  gender: Gender;
 };
 export const Status: FC<StatusProps> = ({ status, gender }) => {
-  console.log(gender);
   return (
     <Box display="flex" gap={1}>
       {statusMap[status]}
       <Typography variant="button" component="p">
-        {applyGenderToStatus(status, gender)}
+        {genderMap[status][gender]}
       </Typography>
     </Box>
   );

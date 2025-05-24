@@ -5,7 +5,7 @@ import { FC, ReactNode } from 'react';
 import ShowMoreText from 'react-show-more-text';
 
 import { DrawingFrame } from '@/app/components/DrawingFrame/DrawingFrame';
-import { Status } from '@/app/components/Status/Status';
+import { Gender, Status } from '@/app/components/Status/Status';
 import { Article } from '@/components/atoms/Article/Article';
 import { Typography } from '@/components/typography/Typography/Typography';
 
@@ -111,7 +111,7 @@ export const CardPZ: FC<Partial<CardPZProps>> = ({
       </Grid>
       {status && sex && (
         <StatusContainer>
-          <Status status={status as Status} gender={sex} />
+          <Status status={status as Status} gender={sex as Gender} />
         </StatusContainer>
       )}
       {filteredArticles && filteredArticles.length > 0 && (
