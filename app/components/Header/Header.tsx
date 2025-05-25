@@ -29,13 +29,13 @@ export const Header = () => (
               <Menu
                 items={[
                   {
-                    element: <a href="/#what">КАК ПОМОЧЬ</a>,
+                    element: <Link href="/#what">КАК ПОМОЧЬ</Link>,
                   },
                   {
                     element: <Link href="/prisoners">СПИСОК ПРЕСЛЕДУЕМЫХ</Link>,
                   },
                   {
-                    element: <a href="#footer">ПОЖЕРТВОВАТЬ ПРОЕКТУ</a>,
+                    element: <Link href="#footer">ПОЖЕРТВОВАТЬ ПРОЕКТУ</Link>,
                   },
                   {
                     element: (

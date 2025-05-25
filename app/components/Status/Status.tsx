@@ -34,7 +34,6 @@ const statusMap: Record<Status, ReactElement> = {
   'смерть при задержании': <GrayCircle />,
 };
 
-export type Gender = 'мужской' | 'женский';
 const genderMap: Record<Status, Record<Gender, string>> = {
   'лишен/а свободы': {
     женский: 'лишена свободы',
@@ -66,6 +65,7 @@ const genderMap: Record<Status, Record<Gender, string>> = {
   },
 };
 
+export type Gender = 'мужской' | 'женский';
 export type Status =
   | 'лишен/а свободы'
   | 'не лишен/а свободы'

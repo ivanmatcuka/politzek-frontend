@@ -207,7 +207,10 @@ export default async function Home() {
                   {prisoners?.edges
                     .filter(({ node: prisoner }) => !!prisoner.photo)
                     .map(({ node: prisoner }) => (
-                      <a href={`/prisoner/${prisoner.slug}`} key={prisoner.id}>
+                      <Link
+                        href={`/prisoner/${prisoner.slug}`}
+                        key={prisoner.id}
+                      >
                         <CarouselImage
                           height={150}
                           src={getPrisonerPicture(
@@ -215,7 +218,7 @@ export default async function Home() {
                             prisoner.gender,
                           )}
                         />
-                      </a>
+                      </Link>
                     ))}
                 </Carousel>
               </Grid>

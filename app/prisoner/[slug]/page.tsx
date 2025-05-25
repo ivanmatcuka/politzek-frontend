@@ -4,6 +4,7 @@ import { Grid } from '@mui/material';
 import moment from 'moment';
 import 'moment/locale/ru';
 import { Metadata } from 'next';
+import Link from 'next/link';
 moment.locale('ru_RU');
 
 import { PrisonersDocument, PrisonersQueryResult } from '@/apollo/generated';
@@ -14,6 +15,7 @@ import { LetterDialog } from '@/app/components/LetterDialog/LetterDialog';
 import { Page } from '@/app/components/Page';
 import { PageWithHeader } from '@/app/components/PageWithHeader';
 import { PrisonerArticles } from '@/app/components/PrisonerArticles/PrisonerArticles';
+import { ShareSnackbar } from '@/app/components/ShareSnackbar/ShareSnackbar';
 import { Gender, Status } from '@/app/components/Status/Status';
 import { Button } from '@/components/atoms/Button/Button';
 import { Typography } from '@/components/typography/Typography/Typography';
@@ -187,9 +189,11 @@ export default async function PrisonerPage({
                     {prisoner?.can_write && (
                       <LetterDialog prisoner={prisoner} />
                     )}
-                    <a href="https://t.me/avtozakinfo_bot" target="_blank">
+                    <Link href="https://t.me/avtozakinfo_bot" target="_blank">
                       <Button variant="outline">Сообщить о неточности</Button>
-                    </a>
+                    </Link>
+
+                    {prisoner?.slug && <ShareSnackbar slug={prisoner.slug} />}
                   </Grid>
                 </Grid>
               </DrawingFrame>
