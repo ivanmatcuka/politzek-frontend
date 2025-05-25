@@ -185,7 +185,14 @@ export default async function PrisonerPage({
                       </Typography>
                     </Grid>
                   )}
-                  <Grid mt={10} item display="flex" gap={2}>
+                  <Grid
+                    mt={10}
+                    item
+                    display="flex"
+                    gap={2}
+                    alignItems="flex-start"
+                    flexDirection={{ xs: 'column', md: 'row' }}
+                  >
                     {prisoner?.can_write && (
                       <LetterDialog prisoner={prisoner} />
                     )}
