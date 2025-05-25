@@ -1,6 +1,7 @@
 'use client';
 
 import { Snackbar, SnackbarCloseReason } from '@mui/material';
+import Icon from '@mui/material/Icon';
 import { FC, useState } from 'react';
 
 import { Button } from '@/components/atoms/Button/Button';
@@ -28,8 +29,12 @@ export const ShareSnackbar: FC<ShareSnackbarProps> = ({ slug }) => {
 
   return (
     <>
-      <Button variant="outline" onClick={handleClick}>
-        Поделиться (без VPN)
+      <Button
+        variant="outline"
+        onClick={handleClick}
+        startIcon={<Icon>share</Icon>}
+      >
+        Скопировать ссылку (без VPN)
       </Button>
       <Snackbar
         open={isDialogOpen}

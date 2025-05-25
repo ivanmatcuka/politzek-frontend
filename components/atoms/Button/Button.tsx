@@ -116,7 +116,7 @@ type ButtonProps = {
   variant?: 'red' | 'default' | 'outline';
 } & Pick<
   MUIButtonProps,
-  'onClick' | 'endIcon' | 'disabled' | 'component' | 'href'
+  'onClick' | 'endIcon' | 'disabled' | 'component' | 'href' | 'startIcon'
 >;
 export const Button: FC<PropsWithChildren<ButtonProps>> = ({
   variant = 'default',
