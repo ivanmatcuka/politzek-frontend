@@ -23,6 +23,7 @@ export type TypographyProps = {
   | 'mb'
   | 'mt'
   | 'my'
+  | 'sx'
 >;
 export const Typography: FC<PropsWithChildren<TypographyProps>> = ({
   children,

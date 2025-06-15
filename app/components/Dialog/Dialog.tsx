@@ -1,33 +1,28 @@
-import { Grid, Dialog as MUIDialog, styled } from '@mui/material';
+import { Box, Dialog } from '@mui/material';
 import moment from 'moment';
 import 'moment/locale/ru';
 import { FC } from 'react';
-
-moment.locale('ru_RU');
 
 import { Prisoner } from '@/apollo/hooks/usePrisoners';
 import { Button } from '@/components/atoms/Button/Button';
 import { Typography } from '@/components/typography/Typography/Typography';
 
 import { DrawingFrame } from '../DrawingFrame/DrawingFrame';
+
+moment.locale('ru_RU');
+
 type MessageDialogProps = {
   open: boolean;
   prisoner: Prisoner;
   onClose?: (value: string) => void;
 };
-
-const StyledDialog = styled(MUIDialog)({
-  backgroundColor: 'rgba(255, 255, 255, 0.95)',
-});
-
 export const MessageDialog: FC<MessageDialogProps> = ({
   open,
   prisoner,
   onClose,
 }) => {
-  const handleClose = () => {
-    onClose && onClose('');
-  };
+  const handleClose = () => onClose?.('');
+
   const birthday = prisoner?.date_of_birth
     ? moment(prisoner.date_of_birth)
     : null;
@@ -36,7 +31,7 @@ export const MessageDialog: FC<MessageDialogProps> = ({
   }`;
 
   return (
-    <StyledDialog
+    <Dialog
       onClose={handleClose}
       open={open}
       hideBackdrop
@@ -47,36 +42,33 @@ export const MessageDialog: FC<MessageDialogProps> = ({
         },
       }}
       maxWidth="md"
+      sx={{ backgroundColor: 'rgba(255, 255, 255, 0.95)' }}
     >
       <DrawingFrame
         py={{ xs: 2, lg: 4.5 }}
         px={{ xs: 2, lg: 16.25 }}
         flexDirection="column"
-        container
+        component={Box}
+        display="flex"
       >
-        <Grid item>
-          <Typography variant="subtitle1">
-            Хорошо, что ты решил начать переписку! Вот данные, которые могут
-            пригодиться:
-          </Typography>
-        </Grid>
-        <Grid mt={8} item>
+        <Typography variant="subtitle1">
+          Хорошо, что ты решил начать переписку! Вот данные, которые могут
+          пригодиться:
+        </Typography>
+        <Box mt={8} display="flex" flexDirection="column">
           <Typography variant="p3">{prisoner.name}</Typography>
-          <br />
           <Typography variant="p3">{prisoner.address_for_letters}</Typography>
-          <br />
           <Typography variant="p3">
             {prisoner.institution_short_name}
           </Typography>
-          <br />
           <Typography variant="p3">{birthdayString}</Typography>
-        </Grid>
-        <Grid mt={8} item flex={1}>
+        </Box>
+        <Box mt={8} flex={1}>
           <Button variant="outline" onClick={handleClose}>
             в следующий раз
           </Button>
-        </Grid>
+        </Box>
       </DrawingFrame>
-    </StyledDialog>
+    </Dialog>
   );
 };
