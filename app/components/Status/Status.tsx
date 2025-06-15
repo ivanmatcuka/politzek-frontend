@@ -83,7 +83,7 @@ export const Status: FC<StatusProps> = ({ status, gender }) => {
     <Box display="flex" gap={1}>
       {statusMap[status]}
       <Typography variant="button" component="p">
-        {genderMap[status][gender]}
+        {genderMap?.[status]?.[gender]}
       </Typography>
     </Box>
   );

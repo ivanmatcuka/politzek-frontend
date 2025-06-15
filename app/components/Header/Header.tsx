@@ -35,7 +35,7 @@ export const Header = () => (
                     element: <Link href="/prisoners">СПИСОК ПРЕСЛЕДУЕМЫХ</Link>,
                   },
                   {
-                    element: <Link href="#footer">ПОЖЕРТВОВАТЬ ПРОЕКТУ</Link>,
+                    element: <Link href="/donate">ПОЖЕРТВОВАТЬ ПРОЕКТУ</Link>,
                   },
                   {
                     element: (

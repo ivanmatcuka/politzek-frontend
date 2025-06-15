@@ -1,7 +1,13 @@
 'use client';
 
 import { Grid, styled } from '@mui/material';
-import { FC, ReactNode } from 'react';
+import {
+  DetailedHTMLProps,
+  FC,
+  ImgHTMLAttributes,
+  ReactNode,
+  useState,
+} from 'react';
 import ShowMoreText from 'react-show-more-text';
 
 import { DrawingFrame } from '@/app/components/DrawingFrame/DrawingFrame';
@@ -48,6 +54,22 @@ const CardImage = styled('img')({
   clipPath: 'polygon(98% 0, 100% 74%, 96% 100%, 0 97%, 4% 0)',
 });
 
+type ProfileImageProps = DetailedHTMLProps<
+  ImgHTMLAttributes<HTMLImageElement>,
+  HTMLImageElement
+>;
+const ProfileImage: FC<ProfileImageProps> = (props) => {
+  const [hasError, setHasError] = useState(false);
+
+  return (
+    <CardImage
+      {...props}
+      src={hasError ? '/error.avif' : props.src}
+      onError={() => setHasError(true)}
+    />
+  );
+};
+
 const EmptyImage = styled(CardImage)({
   clipPath: 'none',
 
@@ -87,13 +109,6 @@ export const CardPZ: FC<Partial<CardPZProps>> = ({
   secondaryAction,
   pictureUrl,
 }) => {
-  const filteredArticles: string[] =
-    typeof articles === 'string'
-      ? JSON.parse(articles)
-          .slice(0, 5)
-          ?.filter((a: string) => a)
-      : [];
-
   return (
     <Container
       container
@@ -114,10 +129,10 @@ export const CardPZ: FC<Partial<CardPZProps>> = ({
           <Status status={status as Status} gender={sex as Gender} />
         </StatusContainer>
       )}
-      {filteredArticles && filteredArticles.length > 0 && (
+      {articles && articles.length > 0 && (
         <Grid item>
           <Grid container spacing={0.5}>
-            {filteredArticles.map((article, index) => (
+            {articles.map((article, index) => (
               <Grid item key={index}>
                 <Article label={article} />
               </Grid>
@@ -145,17 +160,11 @@ export const CardPZ: FC<Partial<CardPZProps>> = ({
       )}
       {pictureUrl ? (
         <CardImageContainer>
-          <CardImage
+          <ProfileImage
             alt="icon_letter"
             width={126}
             height={126}
-            src={
-              pictureUrl
-                ? pictureUrl
-                : sex === 'мужской'
-                ? '/default_man.png'
-                : '/default_woman.png'
-            }
+            src={pictureUrl}
           />
         </CardImageContainer>
       ) : (
@@ -164,7 +173,7 @@ export const CardPZ: FC<Partial<CardPZProps>> = ({
             alt="icon_letter"
             width={126}
             height={126}
-            src="/default_man.png"
+            src={sex === 'мужской' ? '/default_man.png' : '/default_woman.png'}
           />
         </CardEmptyImageContainer>
       )}
