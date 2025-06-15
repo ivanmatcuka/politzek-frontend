@@ -1,28 +1,15 @@
-'use client';
-
-import { Box, styled } from '@mui/material';
+import { Box } from '@mui/material';
 import { FC, ReactElement } from 'react';
 
 import { Typography } from '@/components/typography/Typography/Typography';
 
-// @TODO: violently get rid of styled components here
-const Circle = styled('div')({
-  width: 16,
-  height: 16,
-  borderRadius: 8,
-});
+const Circle: FC<{ backgroundColor: string }> = ({ backgroundColor }) => (
+  <Box width={16} height={16} borderRadius={8} bgcolor={backgroundColor} />
+);
 
-const RedCircle = styled(Circle)(({ theme }) => ({
-  backgroundColor: theme.palette.brand.red,
-}));
-
-const GreenCircle = styled(Circle)(({ theme }) => ({
-  backgroundColor: theme.palette.brand.emerald,
-}));
-
-const GrayCircle = styled(Circle)(({ theme }) => ({
-  backgroundColor: theme.palette.brand.grey,
-}));
+const RedCircle = () => <Circle backgroundColor="brand.red" />;
+const GreenCircle = () => <Circle backgroundColor="brand.emerald" />;
+const GrayCircle = () => <Circle backgroundColor="brand.grey" />;
 
 const statusMap: Record<Status, ReactElement> = {
   'лишен/а свободы': <RedCircle />,
