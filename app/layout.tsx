@@ -8,7 +8,7 @@ import 'slick-carousel/slick/slick.css';
 import './globals.css';
 import Maintainance from './maintainance/page';
 
-import { ApolloWrapper } from '../ApolloWrapper';
+import { ApolloWrapper } from '../apollo/ApolloWrapper';
 import ThemeRegistry from '../theming/ThemeRegistry';
 
 const inter = Inter({ subsets: ['latin'] });
