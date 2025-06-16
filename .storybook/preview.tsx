@@ -1,7 +1,5 @@
-import React from 'react';
-
-import type { Preview } from '@storybook/react';
 import { ThemeProvider } from '@emotion/react';
+import type { Preview } from '@storybook/react';
 
 import { theme } from '../theming/theme';
 
