@@ -508,7 +508,6 @@ const getPrisoners = async (): Promise<
 
   const res: Partial<PrisonersQueryResult> = await client.query({
     query: PrisonersDocument,
-    // variables: { offset: 50 },
     errorPolicy: 'all',
   });
 

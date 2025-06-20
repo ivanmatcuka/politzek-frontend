@@ -9,12 +9,11 @@ import {
 } from '@apollo/experimental-nextjs-app-support/ssr';
 import { PropsWithChildren } from 'react';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export function makeClient() {
   const httpLink = new HttpLink({
-    uri: `${process.env.NEXT_PUBLIC_API_URL}/graphql/v1`,
-    headers: {
-      apikey: process.env.NEXT_PUBLIC_SUPABASE_KEY ?? '',
-    },
+    uri: API_URL,
   });
 
   return new NextSSRApolloClient({

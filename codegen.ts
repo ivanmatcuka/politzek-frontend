@@ -1,11 +1,13 @@
 import type { CodegenConfig } from '@graphql-codegen/cli';
 
+const SUPABASE_URL = process.env.SUPABASE_URL;
+
 const config: CodegenConfig = {
   overwrite: true,
   schema: {
-    [`${process.env.NEXT_PUBLIC_API_URL}/graphql/v1`]: {
+    [`${SUPABASE_URL}/graphql/v1`]: {
       headers: {
-        apikey: process.env.NEXT_PUBLIC_SUPABASE_KEY ?? '',
+        apikey: process.env.SUPABASE_KEY ?? '',
       },
     },
   },

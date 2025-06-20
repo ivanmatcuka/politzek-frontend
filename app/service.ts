@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const SUPABASE_URL = process.env.SUPABASE_URL;
 
 type BirthdaysResponse = {
   data: {
@@ -17,11 +17,10 @@ export const getBirthDays = async (
 ): Promise<BirthdaysResponse['data']> => {
   try {
     const response = await fetch(
-      `${API_URL}/functions/v1/get-upcoming-birthdays?date=${formattedDate}`,
+      `${SUPABASE_URL}/functions/v1/get-upcoming-birthdays?date=${formattedDate}`,
       {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_KEY}`,
           'Content-Type': 'application/json',
         },
       },

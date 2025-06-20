@@ -103,7 +103,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 Create a `.env.local` file based on `.env.example`. Required variables include:
 
 - `NEXT_PUBLIC_API_URL` – GraphQL API endpoint
-- `NEXT_PUBLIC_SUPABASE_KEY` – Supabase API key
+- `SUPABASE_KEY` – Supabase API key (server-only, not exposed to frontend)
 
 ## Scripts
 
