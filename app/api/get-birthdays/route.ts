@@ -3,11 +3,15 @@ import { NextRequest } from 'next/server';
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_KEY;
 
+const DEFAULT_HEADERS = {
+  'Content-Type': 'application/json',
+};
+
 export async function GET(req: NextRequest) {
   if (!SUPABASE_URL || !SUPABASE_KEY) {
     return new Response(JSON.stringify({ error: 'Missing Supabase config' }), {
       status: 500,
-      headers: { 'Content-Type': 'application/json' },
+      headers: DEFAULT_HEADERS,
     });
   }
 
@@ -19,7 +23,7 @@ export async function GET(req: NextRequest) {
       JSON.stringify({ error: 'Missing or invalid date parameter' }),
       {
         status: 400,
-        headers: { 'Content-Type': 'application/json' },
+        headers: DEFAULT_HEADERS,
       },
     );
   }
@@ -32,9 +36,9 @@ export async function GET(req: NextRequest) {
       {
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json',
           apikey: SUPABASE_KEY,
           authorization: `Bearer ${SUPABASE_KEY}`,
+          ...DEFAULT_HEADERS,
         },
       },
     );
@@ -44,20 +48,20 @@ export async function GET(req: NextRequest) {
         JSON.stringify({ error: 'Failed to fetch birthdays' }),
         {
           status: response.status,
-          headers: { 'Content-Type': 'application/json' },
+          headers: DEFAULT_HEADERS,
         },
       );
     }
 
-    const data = await response.json();
+    const data = await response.text();
     return new Response(data, {
       status: 200,
-      headers: { 'Content-Type': 'application/json' },
+      headers: DEFAULT_HEADERS,
     });
   } catch (error) {
     return new Response(JSON.stringify({ error: 'Internal Server Error' }), {
       status: 500,
-      headers: { 'Content-Type': 'application/json' },
+      headers: DEFAULT_HEADERS,
     });
   }
 }
