@@ -1,5 +1,3 @@
-const SUPABASE_URL = process.env.SUPABASE_URL;
-
 type BirthdaysResponse = {
   data: {
     id: 'string';
@@ -17,7 +15,7 @@ export const getBirthDays = async (
 ): Promise<BirthdaysResponse['data']> => {
   try {
     const response = await fetch(
-      `${SUPABASE_URL}/functions/v1/get-upcoming-birthdays?date=${formattedDate}`,
+      `/api/get-birthdays?date=${encodeURIComponent(formattedDate)}`,
       {
         method: 'GET',
         headers: {
