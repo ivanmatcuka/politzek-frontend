@@ -21,7 +21,7 @@ import styles from './page.module.css';
 import { getBirthDays } from './service';
 
 import {
-  PrisonersDocument,
+  // PrisonersDocument,
   PrisonersQueryResult,
 } from '../apollo/hooks/usePrisoners';
 import { Button } from '../components/atoms/Button/Button';
@@ -506,10 +506,14 @@ const getPrisoners = async (): Promise<
 > => {
   const client = makeClient();
 
-  const res: Partial<PrisonersQueryResult> = await client.query({
-    query: PrisonersDocument,
-    errorPolicy: 'all',
-  });
+  if (!client) {
+    return { edges: [] };
+  }
 
-  return res.data?.airtable_data_edgeCollection;
+  // const res: Partial<PrisonersQueryResult> = await client.query({
+  //   query: PrisonersDocument,
+  //   errorPolicy: 'all',
+  // });
+
+  // return res.data?.airtable_data_edgeCollection;
 };

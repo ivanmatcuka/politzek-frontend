@@ -7,7 +7,6 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 moment.locale('ru_RU');
 
-import { PrisonersDocument, PrisonersQueryResult } from '@/apollo/generated';
 import { Prisoner } from '@/apollo/hooks/usePrisoners';
 import { Cards } from '@/app/components/Cards/Cards';
 import { DrawingFrame } from '@/app/components/DrawingFrame/DrawingFrame';
@@ -212,12 +211,20 @@ export default async function PrisonerPage({
 const getPrisoner = async (slug: string): Promise<Prisoner | null> => {
   const client = makeClient();
 
-  const res: Partial<PrisonersQueryResult> = await client.query({
-    query: PrisonersDocument,
-    variables: { offset: 1, filter: { slug: { eq: slug } } },
-    errorPolicy: 'all',
-    fetchPolicy: 'no-cache',
-  });
+  if (!client) {
+    return null;
+  }
 
-  return res.data?.airtable_data_edgeCollection?.edges[0]?.node ?? null;
+  console.log('Fetching prisoner data for slug:', slug);
+
+  return null;
+
+  // const res: Partial<PrisonersQueryResult> = await client.query({
+  //   query: PrisonersDocument,
+  //   variables: { offset: 1, filter: { slug: { eq: slug } } },
+  //   errorPolicy: 'all',
+  //   fetchPolicy: 'no-cache',
+  // });
+
+  // return res.data?.airtable_data_edgeCollection?.edges[0]?.node ?? null;
 };
