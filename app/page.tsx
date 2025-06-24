@@ -504,12 +504,21 @@ export default async function Home() {
 const getPrisoners = async (): Promise<
   NonNullable<PrisonersQueryResult['data']>['airtable_data_edgeCollection']
 > => {
-  const client = makeClient();
+  try {
+    const client = makeClient();
 
-  const res: Partial<PrisonersQueryResult> = await client.query({
-    query: PrisonersDocument,
-    errorPolicy: 'all',
-  });
+    if (!client) {
+      return { edges: [] };
+    }
 
-  return res.data?.airtable_data_edgeCollection;
+    const res: Partial<PrisonersQueryResult> = await client.query({
+      query: PrisonersDocument,
+      errorPolicy: 'all',
+    });
+
+    return res.data?.airtable_data_edgeCollection;
+  } catch (error) {
+    console.error('Error fetching prisoners:', error);
+    return { edges: [] };
+  }
 };
