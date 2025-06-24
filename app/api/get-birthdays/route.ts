@@ -8,16 +8,9 @@ const DEFAULT_HEADERS = {
 };
 
 export async function OPTIONS() {
-  return NextResponse.json(
-    {},
-    {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'POST',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-      },
-    },
-  );
+  return new NextResponse('', {
+    status: 200,
+  });
 }
 
 export async function GET(req: NextRequest) {
