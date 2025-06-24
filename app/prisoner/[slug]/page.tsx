@@ -210,14 +210,19 @@ export default async function PrisonerPage({
 }
 
 const getPrisoner = async (slug: string): Promise<Prisoner | null> => {
-  const client = makeClient();
+  try {
+    const client = makeClient();
 
-  const res: Partial<PrisonersQueryResult> = await client.query({
-    query: PrisonersDocument,
-    variables: { offset: 1, filter: { slug: { eq: slug } } },
-    errorPolicy: 'all',
-    fetchPolicy: 'no-cache',
-  });
+    const res: Partial<PrisonersQueryResult> = await client.query({
+      query: PrisonersDocument,
+      variables: { offset: 1, filter: { slug: { eq: slug } } },
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
+    });
 
-  return res.data?.airtable_data_edgeCollection?.edges[0]?.node ?? null;
+    return res.data?.airtable_data_edgeCollection?.edges[0]?.node ?? null;
+  } catch (error) {
+    console.error('Error fetching prisoner:', error);
+    return null;
+  }
 };
