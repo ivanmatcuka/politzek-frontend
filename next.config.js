@@ -17,6 +17,9 @@ const nextConfig = {
   },
   experimental: { scrollRestoration: true },
   output: 'standalone',
+  env: {
+    nodeEnv: process.env.NODE_ENV,
+  },
   async headers() {
     return [
       {
