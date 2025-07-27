@@ -1,10 +1,10 @@
 import { Grid } from '@mui/material';
 import moment from 'moment';
 
-import { Page } from '@/src/components/Page';
-import { PageWithHeader } from '@/src/components/PageWithHeader';
-import { PrisonersSearch } from '@/src/components/PrisonersSearch/PrisonersSearch';
 import 'moment/locale/ru';
+import { Page } from '~/components/extractions/Page';
+import { PageWithHeader } from '~/components/extractions/PageWithHeader';
+import { PrisonersSearch } from '~/components/extractions/PrisonersSearch/PrisonersSearch';
 moment.locale('ru_RU');
 
 export async function generateMetadata() {

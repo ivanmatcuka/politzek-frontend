@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { FC } from 'react';
 
-import { Article } from '@/components/atoms/Article/Article';
+import { Article } from '~/components/atoms/Article/Article';
 
 type PrisonerArticlesProps = {
   articles: (string | null)[];

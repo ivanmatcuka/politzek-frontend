@@ -7,24 +7,21 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 moment.locale('ru_RU');
 
-import { Button } from '@/components/atoms/Button/Button';
-import { Typography } from '@/components/typography/Typography/Typography';
-import {
-  PrisonersDocument,
-  PrisonersQueryResult,
-} from '@/src/app/apollo/generated';
-import { Prisoner } from '@/src/app/apollo/hooks/usePrisoners';
-import { PrisonerArticles } from '@/src/app/prisoner/[slug]/PrisonerArticles';
-import { Cards } from '@/src/components/Cards/Cards';
-import { DrawingFrame } from '@/src/components/DrawingFrame/DrawingFrame';
-import { LetterDialog } from '@/src/components/LetterDialog/LetterDialog';
-import { Page } from '@/src/components/Page';
-import { PageWithHeader } from '@/src/components/PageWithHeader';
-import { ShareSnackbar } from '@/src/components/ShareSnackbar/ShareSnackbar';
-import { Gender, Status } from '@/src/components/Status/Status';
-import { getPrisonerPicture } from '@/src/helpers/getPrisonerPicture';
-import { makeClient } from '@/src/helpers/makeClient';
+import { PrisonersDocument, PrisonersQueryResult } from '~/apollo/generated';
+import { Prisoner } from '~/apollo/hooks/usePrisoners';
+import { Button } from '~/components/atoms/Button/Button';
+import { Cards } from '~/components/extractions/Cards/Cards';
+import { DrawingFrame } from '~/components/extractions/DrawingFrame/DrawingFrame';
+import { LetterDialog } from '~/components/extractions/LetterDialog/LetterDialog';
+import { Page } from '~/components/extractions/Page';
+import { PageWithHeader } from '~/components/extractions/PageWithHeader';
+import { ShareSnackbar } from '~/components/extractions/ShareSnackbar/ShareSnackbar';
+import { Gender, Status } from '~/components/extractions/Status/Status';
+import { Typography } from '~/components/typography/Typography/Typography';
+import { getPrisonerPicture } from '~/helpers/getPrisonerPicture';
+import { makeClient } from '~/helpers/makeClient';
 
+import { PrisonerArticles } from './PrisonerArticles';
 import {
   DescriptionLayout,
   EmptyProfileImage,

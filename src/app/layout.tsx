@@ -6,10 +6,11 @@ import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 
 import './globals.css';
-import Maintainance from './maintainance/page';
 
-import ThemeRegistry from '../theming/ThemeRegistry';
-import { ApolloWrapper } from './apollo/ApolloWrapper';
+import { ApolloWrapper } from '~/apollo/ApolloWrapper';
+import ThemeRegistry from '~/theming/ThemeRegistry';
+
+import Maintainance from './maintainance/page';
 
 const inter = Inter({ subsets: ['latin'] });
 

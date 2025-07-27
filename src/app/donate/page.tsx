@@ -1,9 +1,9 @@
 import { Box, Grid } from '@mui/material';
 import Link from 'next/link';
 
-import { Button } from '@/components/atoms/Button/Button';
-import { Typography } from '@/components/typography/Typography/Typography';
-import { PageWithHeader } from '@/src/components/PageWithHeader';
+import { Button } from '~/components/atoms/Button/Button';
+import { PageWithHeader } from '~/components/extractions/PageWithHeader';
+import { Typography } from '~/components/typography/Typography/Typography';
 
 export default function Donate() {
   return (

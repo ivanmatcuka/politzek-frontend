@@ -5,27 +5,27 @@ import Image from 'next/image';
 import Link from 'next/link';
 moment.locale('ru_RU');
 
-import { PersonCard } from '@/components/organisms/PersonCard/PersonCard';
-import { getPrisonerPicture } from '@/src/helpers/getPrisonerPicture';
-import { makeClient } from '@/src/helpers/makeClient';
+import { Button } from '~/components/atoms/Button/Button';
+import { Cards } from '~/components/extractions/Cards/Cards';
+import { Carousel } from '~/components/extractions/Carousel/Carousel';
+import { CarouselImage } from '~/components/extractions/CarouselImage/CarouselImage';
+import Dashboard from '~/components/extractions/Dashboard/Dashboard';
+import { DrawingFrame } from '~/components/extractions/DrawingFrame/DrawingFrame';
+import { Page } from '~/components/extractions/Page';
+import { PageWithHeader } from '~/components/extractions/PageWithHeader';
+import { PrisonersSearch } from '~/components/extractions/PrisonersSearch/PrisonersSearch';
+import { PersonCard } from '~/components/organisms/PersonCard/PersonCard';
+import { Typography } from '~/components/typography/Typography/Typography';
+import { getPrisonerPicture } from '~/helpers/getPrisonerPicture';
+import { makeClient } from '~/helpers/makeClient';
+
+import styles from './page.module.css';
+import { getBirthDays } from './services';
 
 import {
   PrisonersDocument,
   PrisonersQueryResult,
-} from './apollo/hooks/usePrisoners';
-import styles from './page.module.css';
-import { getBirthDays } from './services';
-
-import { Button } from '../../components/atoms/Button/Button';
-import { Typography } from '../../components/typography/Typography/Typography';
-import { Cards } from '../components/Cards/Cards';
-import { Carousel } from '../components/Carousel/Carousel';
-import { CarouselImage } from '../components/CarouselImage/CarouselImage';
-import Dashboard from '../components/Dashboard/Dashboard';
-import { DrawingFrame } from '../components/DrawingFrame/DrawingFrame';
-import { Page } from '../components/Page';
-import { PageWithHeader } from '../components/PageWithHeader';
-import { PrisonersSearch } from '../components/PrisonersSearch/PrisonersSearch';
+} from '../apollo/hooks/usePrisoners';
 
 export default async function Home() {
   const today = moment().format('YYYY-MM-DD');

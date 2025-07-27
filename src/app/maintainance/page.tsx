@@ -1,8 +1,8 @@
 import { Grid } from '@mui/material';
 
-import { Button } from '@/components/atoms/Button/Button';
-import { Typography } from '@/components/typography/Typography/Typography';
-import { PageWithHeader } from '@/src/components/PageWithHeader';
+import { Button } from '~/components/atoms/Button/Button';
+import { PageWithHeader } from '~/components/extractions/PageWithHeader';
+import { Typography } from '~/components/typography/Typography/Typography';
 
 import styles from './page.module.css';
 
