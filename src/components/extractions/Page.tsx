@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren } from 'react';
 
-import { Banner } from './Banner/Banner';
-import { Footer } from './Footer/Footer';
+import { Banner } from './Banner';
+import { Footer } from './Footer';
 
 export const Page: FC<PropsWithChildren> = ({ children }) => (
   <>

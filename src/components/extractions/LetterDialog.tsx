@@ -5,7 +5,7 @@ import { FC, useState } from 'react';
 import { Prisoner } from '~/apollo/hooks/usePrisoners';
 import { Button } from '~/components/atoms/Button/Button';
 
-import { MessageDialog } from '../Dialog/Dialog';
+import { MessageDialog } from './Dialog';
 
 type LetterDialogProps = {
   prisoner: Prisoner;

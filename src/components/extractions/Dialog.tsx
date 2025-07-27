@@ -7,7 +7,7 @@ import { Prisoner } from '~/apollo/hooks/usePrisoners';
 import { Button } from '~/components/atoms/Button/Button';
 import { Typography } from '~/components/typography/Typography/Typography';
 
-import { DrawingFrame } from '../DrawingFrame/DrawingFrame';
+import { DrawingFrame } from './DrawingFrame';
 
 moment.locale('ru_RU');
 

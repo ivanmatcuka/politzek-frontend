@@ -6,14 +6,14 @@ import { FC, ReactNode, useEffect, useState } from 'react';
 
 import { Prisoners, usePrisoners } from '~/apollo/hooks/usePrisoners';
 import { Button } from '~/components/atoms/Button/Button';
+import { SearchIcon } from '~/components/atoms/SearchIcon';
 import { FilterCheckbox } from '~/components/molecules/FilterCheckbox/FilterCheckbox';
 import { FilterSlider } from '~/components/molecules/FilterSlider/FilterSlider';
 import { Input } from '~/components/molecules/Input/Input';
 import { getRegions } from '~/helpers/getRegions';
 import { useSearch } from '~/hooks/useSearch';
 
-import { PrisonersList } from '../PrisonersList/PrisonersList';
-import { SearchIcon } from '../SearchIcon/SearchIcon';
+import { PrisonersList } from '../PrisonersList';
 import { interests } from './interests';
 
 const DEFAULT_OFFSET = 300;

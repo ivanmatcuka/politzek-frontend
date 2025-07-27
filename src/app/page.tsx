@@ -6,11 +6,11 @@ import Link from 'next/link';
 moment.locale('ru_RU');
 
 import { Button } from '~/components/atoms/Button/Button';
-import { Cards } from '~/components/extractions/Cards/Cards';
-import { Carousel } from '~/components/extractions/Carousel/Carousel';
-import { CarouselImage } from '~/components/extractions/CarouselImage/CarouselImage';
-import Dashboard from '~/components/extractions/Dashboard/Dashboard';
-import { DrawingFrame } from '~/components/extractions/DrawingFrame/DrawingFrame';
+import { Cards } from '~/components/extractions/Cards';
+import { Carousel } from '~/components/extractions/Carousel';
+import { CarouselImage } from '~/components/extractions/CarouselImage';
+import Dashboard from '~/components/extractions/Dashboard';
+import { DrawingFrame } from '~/components/extractions/DrawingFrame';
 import { Page } from '~/components/extractions/Page';
 import { PageWithHeader } from '~/components/extractions/PageWithHeader';
 import { PrisonersSearch } from '~/components/extractions/PrisonersSearch/PrisonersSearch';

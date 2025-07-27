@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { Button } from '~/components/atoms/Button/Button';
 import { Typography } from '~/components/typography/Typography/Typography';
 
-import { DrawingFrame } from '../DrawingFrame/DrawingFrame';
+import { DrawingFrame } from './DrawingFrame';
 
 const StyledGrid = styled(Grid)(({ theme }) => ({
   backgroundColor: theme.palette.brand.green,

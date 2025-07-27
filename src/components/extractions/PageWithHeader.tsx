@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from 'react';
 
-import { Header } from './Header/Header';
+import { Header } from './Header';
 
 export const PageWithHeader: FC<PropsWithChildren> = ({ children }) => (
   <>

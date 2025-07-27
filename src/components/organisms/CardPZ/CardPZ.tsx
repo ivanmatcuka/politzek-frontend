@@ -11,8 +11,8 @@ import {
 import ShowMoreText from 'react-show-more-text';
 
 import { Article } from '~/components/atoms/Article/Article';
-import { DrawingFrame } from '~/components/extractions/DrawingFrame/DrawingFrame';
-import { Gender, Status } from '~/components/extractions/Status/Status';
+import { DrawingFrame } from '~/components/extractions/DrawingFrame';
+import { Gender, Status } from '~/components/extractions/Status';
 import { Typography } from '~/components/typography/Typography/Typography';
 
 const Container = styled(DrawingFrame)({
