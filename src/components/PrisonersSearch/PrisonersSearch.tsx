@@ -14,8 +14,8 @@ import { getRegions } from '@/src/helpers/getRegions';
 
 import { interests } from './interests';
 
-import { SearchIcon } from '../icons/SearchIcon/SearchIcon';
 import { PrisonersList } from '../PrisonersList/PrisonersList';
+import { SearchIcon } from '../SearchIcon/SearchIcon';
 
 const DEFAULT_OFFSET = 300;
 const DEFAULT_PAGINATION = 9;

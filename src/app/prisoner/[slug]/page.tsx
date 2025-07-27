@@ -14,12 +14,12 @@ import {
   PrisonersQueryResult,
 } from '@/src/app/apollo/generated';
 import { Prisoner } from '@/src/app/apollo/hooks/usePrisoners';
+import { PrisonerArticles } from '@/src/app/prisoner/[slug]/PrisonerArticles';
 import { Cards } from '@/src/components/Cards/Cards';
 import { DrawingFrame } from '@/src/components/DrawingFrame/DrawingFrame';
 import { LetterDialog } from '@/src/components/LetterDialog/LetterDialog';
 import { Page } from '@/src/components/Page';
 import { PageWithHeader } from '@/src/components/PageWithHeader';
-import { PrisonerArticles } from '@/src/components/PrisonerArticles/PrisonerArticles';
 import { ShareSnackbar } from '@/src/components/ShareSnackbar/ShareSnackbar';
 import { Gender, Status } from '@/src/components/Status/Status';
 import { getPrisonerPicture } from '@/src/helpers/getPrisonerPicture';

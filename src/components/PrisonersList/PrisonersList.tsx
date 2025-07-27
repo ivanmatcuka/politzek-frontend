@@ -6,7 +6,7 @@ import { Button } from '@/components/atoms/Button/Button';
 import { CardPZ } from '@/components/organisms/CardPZ/CardPZ';
 import { Prisoners } from '@/src/app/apollo/hooks/usePrisoners';
 
-import { LetterIcon } from '../icons/LetterIcon/LetterIcon';
+import { LetterIcon } from '../LetterIcon/LetterIcon';
 
 type PrisonersListProps = {
   prisoners: Prisoners;
