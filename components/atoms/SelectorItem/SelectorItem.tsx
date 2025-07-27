@@ -2,7 +2,7 @@ import { Tab as MUITab, TabProps as MUITabProps, styled } from '@mui/material';
 import { FC, PropsWithChildren } from 'react';
 
 import { TypographyProps } from '../../../components/typography/Typography/Typography';
-import { TypographyVariants } from '../../../theming/theme/typography';
+import { TypographyVariants } from '../../../src/theming/theme/typography';
 
 const StyledTab = styled(MUITab)<{ variant: TypographyVariants }>(({
   theme,

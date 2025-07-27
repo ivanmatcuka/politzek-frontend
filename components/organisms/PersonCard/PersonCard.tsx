@@ -6,7 +6,7 @@ import { FC, PropsWithChildren } from 'react';
 
 import { Button } from '@/components/atoms/Button/Button';
 import { Typography } from '@/components/typography/Typography/Typography';
-import { getPrisonerPicture } from '@/helpers/getPrisonerPicture';
+import { getPrisonerPicture } from '@/src/helpers/getPrisonerPicture';
 
 import { PersonCardContainer } from './PersonCardContainer';
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { Grid, styled } from '@mui/material';
+import { Box, Grid, styled } from '@mui/material';
 import {
   DetailedHTMLProps,
   FC,
@@ -10,28 +10,16 @@ import {
 } from 'react';
 import ShowMoreText from 'react-show-more-text';
 
-import { DrawingFrame } from '@/app/components/DrawingFrame/DrawingFrame';
-import { Gender, Status } from '@/app/components/Status/Status';
 import { Article } from '@/components/atoms/Article/Article';
 import { Typography } from '@/components/typography/Typography/Typography';
+import { DrawingFrame } from '@/src/components/DrawingFrame/DrawingFrame';
+import { Gender, Status } from '@/src/components/Status/Status';
 
 const Container = styled(DrawingFrame)({
   position: 'relative',
 
   boxSizing: 'border-box',
 });
-
-const PrimaryActionContainer = styled('div')(({ theme }) => ({
-  position: 'absolute',
-  left: theme.spacing(2),
-  bottom: theme.spacing(2),
-}));
-
-const SecondaryActionContainer = styled('div')(({ theme }) => ({
-  position: 'absolute',
-  right: theme.spacing(2),
-  bottom: theme.spacing(2),
-}));
 
 const CardImageContainer = styled('div')({
   position: 'absolute',
@@ -82,12 +70,6 @@ const StyledName = styled(Typography)({
   wordSpacing: 999,
 });
 
-const StatusContainer = styled('div')({
-  position: 'absolute',
-  top: -32,
-  right: 0,
-});
-
 type CardPZProps = {
   name: string | null;
   body: string | null;
@@ -114,10 +96,10 @@ export const CardPZ: FC<Partial<CardPZProps>> = ({
       container
       flexDirection="column"
       rowSpacing={2}
-      width={392}
       pl={2}
       pr={3}
       pb={8}
+      position="relative"
     >
       <Grid item maxWidth="100%">
         <StyledName variant="h3" component="p" pl={15.5}>
@@ -125,9 +107,9 @@ export const CardPZ: FC<Partial<CardPZProps>> = ({
         </StyledName>
       </Grid>
       {status && sex && (
-        <StatusContainer>
+        <Box position="absolute" top={-32} right={0}>
           <Status status={status as Status} gender={sex as Gender} />
-        </StatusContainer>
+        </Box>
       )}
       {articles && articles.length > 0 && (
         <Grid item>
@@ -153,10 +135,14 @@ export const CardPZ: FC<Partial<CardPZProps>> = ({
         </Typography>
       </Grid>
       {primaryAction && (
-        <PrimaryActionContainer>{primaryAction}</PrimaryActionContainer>
+        <Box left={16} bottom={16} position="absolute">
+          {primaryAction}
+        </Box>
       )}
       {secondaryAction && (
-        <SecondaryActionContainer>{secondaryAction}</SecondaryActionContainer>
+        <Box right={16} bottom={16} position="absolute">
+          {secondaryAction}
+        </Box>
       )}
       {pictureUrl ? (
         <CardImageContainer>

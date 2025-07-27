@@ -9,7 +9,7 @@ import { FC } from 'react';
 
 type InputProps = Pick<
   MUIInputProps,
-  'startAdornment' | 'placeholder' | 'onChange' | 'value'
+  'startAdornment' | 'placeholder' | 'onChange' | 'value' | 'fullWidth'
 >;
 
 const StyledInput = styled(MUIInput)(({ theme }) => ({

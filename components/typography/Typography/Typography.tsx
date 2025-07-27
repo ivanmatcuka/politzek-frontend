@@ -4,7 +4,7 @@ import {
 } from '@mui/material';
 import { FC, PropsWithChildren } from 'react';
 
-import { TypographyVariants } from '../../../theming/theme/typography';
+import { TypographyVariants } from '../../../src/theming/theme/typography';
 
 export type TypographyProps = {
   variant: TypographyVariants;

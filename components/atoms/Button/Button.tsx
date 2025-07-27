@@ -8,7 +8,7 @@ import {
 import { FC, PropsWithChildren } from 'react';
 
 import { Typography } from '../../../components/typography/Typography/Typography';
-import { PaletteColors } from '../../../theming/theme/palette';
+import { PaletteColors } from '../../../src/theming/theme/palette';
 
 const Container = styled('div')<{ variant: ButtonProps['variant'] }>(({
   theme,
