@@ -1,13 +1,13 @@
 type BirthdaysResponse = {
+  targetDate: string;
+  weekLater: string;
   data: {
+    date_of_birth: 'string';
     id: 'string';
     name: 'string';
     photo: 'string';
-    date_of_birth: 'string';
     slug: 'string';
   }[];
-  targetDate: string;
-  weekLater: string;
 };
 
 export const getBirthDays = async (

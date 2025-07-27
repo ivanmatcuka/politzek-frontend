@@ -3,12 +3,12 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { FreeNotFree as Component } from './FreeNotFree';
 
 const meta = {
-  title: 'Atoms/FreeNotFree',
   component: Component,
+  tags: ['autodocs'],
+  title: 'Atoms/FreeNotFree',
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs'],
 } satisfies Meta<typeof Component>;
 
 export default meta;

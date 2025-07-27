@@ -3,12 +3,12 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Logo as Component } from './Logo';
 
 const meta = {
-  title: 'Atoms/Logo',
   component: Component,
+  tags: ['autodocs'],
+  title: 'Atoms/Logo',
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs'],
 } satisfies Meta<typeof Component>;
 
 export default meta;

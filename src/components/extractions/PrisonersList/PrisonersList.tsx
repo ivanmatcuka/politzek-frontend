@@ -12,31 +12,24 @@ type PrisonersListProps = {
   prisoners: Prisoners;
 };
 export const PrisonersList: FC<PrisonersListProps> = ({ prisoners }) => (
-  <Grid container rowSpacing={8.5} columnSpacing={2} justifyContent="center">
+  <Grid columnSpacing={2} justifyContent="center" rowSpacing={8.5} container>
     {prisoners.map(({ node: prisoner }, index) => (
       <Grid
-        item
-        xs={12}
-        lg={4}
-        key={index}
         display="flex"
         justifyContent="center"
+        key={index}
+        lg={4}
+        xs={12}
+        item
       >
         <CardPZ
-          status={prisoner.status}
-          articles={prisoner.articles}
-          body={prisoner.description}
-          name={prisoner.name}
-          sex={prisoner.gender}
-          pictureUrl={prisoner.photo ?? ''}
-          freedomdate={prisoner.release_date}
           primaryAction={
             prisoner.can_write && (
               <Button
+                component={Link}
+                endIcon={<LetterIcon />}
                 href={`/prisoner/${prisoner.slug}`}
                 key={prisoner.id}
-                endIcon={<LetterIcon />}
-                component={Link}
               >
                 написать
               </Button>
@@ -44,14 +37,21 @@ export const PrisonersList: FC<PrisonersListProps> = ({ prisoners }) => (
           }
           secondaryAction={
             <Button
-              variant="outline"
               component={Link}
               href={`/prisoner/${prisoner.slug}`}
               key={prisoner.id}
+              variant="outline"
             >
               подробнее
             </Button>
           }
+          articles={prisoner.articles}
+          body={prisoner.description}
+          freedomdate={prisoner.release_date}
+          name={prisoner.name}
+          pictureUrl={prisoner.photo ?? ''}
+          sex={prisoner.gender}
+          status={prisoner.status}
         />
       </Grid>
     ))}

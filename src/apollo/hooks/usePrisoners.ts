@@ -15,12 +15,12 @@ export { PrisonersDocument };
 export type { PrisonersQueryResult };
 
 export const usePrisoners = (offset?: number, filter?: PrisonersInput) => {
-  const { loading, error, data } = usePrisonersQuery({
-    fetchPolicy: 'no-cache',
+  const { data, error, loading } = usePrisonersQuery({
     errorPolicy: 'all',
+    fetchPolicy: 'no-cache',
     variables: {
-      offset,
       filter,
+      offset,
     },
   });
 
@@ -31,9 +31,9 @@ export const usePrisoners = (offset?: number, filter?: PrisonersInput) => {
 
   return useMemo(
     () => ({
-      loading,
-      error,
       data: result,
+      error,
+      loading,
     }),
     [loading, error, result],
   );

@@ -14,38 +14,38 @@ declare module '@mui/material/styles/createPalette' {
 
 declare module '@mui/material/styles' {
   interface TypographyVariants {
+    button: CSSObject;
+    caption: CSSObject;
     h1: CSSObject;
-    h2: CSSObject;
-    h3: CSSObject;
 
-    subtitle1: CSSObject;
+    h2: CSSObject;
+
+    h3: CSSObject;
+    legend: CSSObject;
+    mi: CSSObject;
 
     p1: CSSObject;
     p2: CSSObject;
     p3: CSSObject;
-
-    mi: CSSObject;
-    button: CSSObject;
-    legend: CSSObject;
-    caption: CSSObject;
+    subtitle1: CSSObject;
   }
 }
 
 declare module '@mui/material/Typography' {
   interface TypographyPropsVariantOverrides {
+    button: true;
+    caption: true;
     h1: true;
-    h2: true;
-    h3: true;
 
-    subtitle1: true;
+    h2: true;
+
+    h3: true;
+    legend: true;
+    mi: true;
 
     p1: true;
     p2: true;
     p3: true;
-
-    mi: true;
-    button: true;
-    legend: true;
-    caption: true;
+    subtitle1: true;
   }
 }

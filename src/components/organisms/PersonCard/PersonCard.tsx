@@ -23,30 +23,30 @@ const ButtonContainer = styled('div')({
 });
 
 type PersonCardProps = {
-  subtitle: string;
-  size: 'l' | 'm';
-  name: string;
-  mediaItemUrl: string;
   id: string;
+  mediaItemUrl: string;
+  name: string;
+  size: 'l' | 'm';
+  subtitle: string;
 };
 
 export const PersonCard: FC<PropsWithChildren<PersonCardProps>> = ({
-  subtitle,
-  size,
-  name,
-  mediaItemUrl,
   id,
+  mediaItemUrl,
+  name,
+  size,
+  subtitle,
 }) => {
   const photoUrl = getPrisonerPicture(mediaItemUrl);
 
   return (
     <PersonCardContainer
       sx={{
-        width: size === 'l' ? 392 : 291,
         height: size === 'l' ? 392 : 291,
+        width: size === 'l' ? 392 : 291,
       }}
-      photoUrl={photoUrl}
       hasPicture={!!mediaItemUrl}
+      photoUrl={photoUrl}
     >
       <ButtonContainer className="button">
         <Link href={`/prisoner/${id}`}>

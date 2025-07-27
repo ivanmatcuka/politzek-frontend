@@ -36,9 +36,9 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 type SexAgeItem = {
   age: number;
+  female?: number;
   label: string;
   male?: number;
-  female?: number;
 };
 type SexAgeProps = {
   data: SexAgeItem[];
@@ -72,10 +72,10 @@ export const SexAge: FC<SexAgeProps> = ({ data }) => {
                   {Array.from(Array(row.female).keys()).map((_, index) => (
                     <Image
                       alt={`female-${index}`}
+                      height={12}
                       key={index}
                       src="/person.svg"
                       width={6}
-                      height={12}
                     />
                   ))}
                 </StyledTableCell>
@@ -86,10 +86,10 @@ export const SexAge: FC<SexAgeProps> = ({ data }) => {
                   {Array.from(Array(row.male).keys()).map((_, index) => (
                     <Image
                       alt={`male-${index}`}
+                      height={12}
                       key={index}
                       src="/person.svg"
                       width={6}
-                      height={12}
                     />
                   ))}
                 </StyledTableCell>

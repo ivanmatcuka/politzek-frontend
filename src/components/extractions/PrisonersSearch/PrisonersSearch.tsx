@@ -12,22 +12,21 @@ import { Input } from '~/components/molecules/Input/Input';
 import { getRegions } from '~/helpers/getRegions';
 import { useSearch } from '~/hooks/useSearch';
 
-import { interests } from './interests';
-
 import { PrisonersList } from '../PrisonersList/PrisonersList';
 import { SearchIcon } from '../SearchIcon/SearchIcon';
+import { interests } from './interests';
 
 const DEFAULT_OFFSET = 300;
 const DEFAULT_PAGINATION = 9;
 
 type PrisonersSearchProps = {
-  paginationStep?: number;
   overrideCta?: ReactNode;
+  paginationStep?: number;
 };
 
 export const PrisonersSearch: FC<PrisonersSearchProps> = ({
-  paginationStep = DEFAULT_PAGINATION,
   overrideCta,
+  paginationStep = DEFAULT_PAGINATION,
 }) => {
   const [pagination, setPgination] = useState(paginationStep);
   const [cachedPrisoners, setCachedPrisoners] = useState<Prisoners>([]);
@@ -45,24 +44,24 @@ export const PrisonersSearch: FC<PrisonersSearchProps> = ({
 
   return (
     <Box
-      maxWidth={1200}
-      margin="auto"
-      gap={6}
       display="flex"
       flexDirection="column"
+      gap={6}
+      margin="auto"
+      maxWidth={1200}
     >
-      <Typography variant="h1" color="brand.red">
+      <Typography color="brand.red" variant="h1">
         Список
         <br />
         преследуемых
       </Typography>
 
-      <Box display="flex" width="100%" flexWrap="wrap">
-        <Box flexBasis={{ xs: 'auto', lg: 500 }}>
-          <Image height={320} width={500} alt="photos" src="/photos.png" />
+      <Box display="flex" flexWrap="wrap" width="100%">
+        <Box flexBasis={{ lg: 500, xs: 'auto' }}>
+          <Image alt="photos" height={320} src="/photos.png" width={500} />
         </Box>
-        <Box flexBasis={{ xs: 'auto', lg: 'calc(100% - 500px)' }}>
-          <Typography variant="subtitle1" color="brand.black" component="p">
+        <Box flexBasis={{ lg: 'calc(100% - 500px)', xs: 'auto' }}>
+          <Typography color="brand.black" component="p" variant="subtitle1">
             В этом списке собраны истории тех, кого российское государство
             преследует из-за войны в Украине. Не все они признаны
             политзаключёнными. Среди преследуемых есть люди с разными
@@ -73,7 +72,7 @@ export const PrisonersSearch: FC<PrisonersSearchProps> = ({
             уголовных дел.
           </Typography>
           <br />
-          <Typography variant="subtitle1" color="brand.black" component="p">
+          <Typography color="brand.black" component="p" variant="subtitle1">
             Если бы не российский политический режим и война, все они были бы на
             свободе. В этом списке важно каждое имя. Однажды все эти уголовные
             дела будут прекращены или пересмотрены. Сейчас нужно сделать так,
@@ -81,60 +80,54 @@ export const PrisonersSearch: FC<PrisonersSearchProps> = ({
           </Typography>
         </Box>
 
-        <Box flexBasis="100%" mt={8} mb={1}>
+        <Box flexBasis="100%" mb={1} mt={8}>
           <Input
-            value={values.name}
-            startAdornment={<SearchIcon />}
-            placeholder="Поиск по ФИО"
             onChange={(e) => setters.setName(e.target.value)}
+            placeholder="Поиск по ФИО"
+            startAdornment={<SearchIcon />}
+            value={values.name}
             fullWidth
           />
         </Box>
 
-        <Box display="flex" gap={1} flex={1} flexWrap="wrap">
+        <Box display="flex" flex={1} flexWrap="wrap" gap={1}>
           <FilterSlider
-            label="Возраст"
-            value={[values.age[0], values.age[1]]}
-            min={0}
-            max={99}
             onChange={(_, value) =>
               Array.isArray(value) && setters.setAge([value[0], value[1]])
             }
+            label="Возраст"
+            max={99}
+            min={0}
+            value={[values.age[0], values.age[1]]}
           />
           <FilterCheckbox
-            label="регион"
-            value={values.region}
             options={getRegions().map(({ fullname }) => ({
               id: fullname,
               value: fullname,
             }))}
+            label="регион"
             onChange={(value) => setters.setRegion(String(value))}
+            value={values.region}
           />
           <FilterCheckbox
-            label="пол"
-            value={values.sex}
             options={[
               { id: 'мужской', value: 'мужской' },
               { id: 'женский', value: 'женский' },
             ]}
+            label="пол"
             onChange={(value) => setters.setSex(String(value))}
+            value={values.sex}
           />
           <FilterCheckbox
-            label="можно написать"
-            value={values.canWrite}
-            options={[{ id: 'да', value: 'да' }]}
             onChange={(value) => {
               if (value !== 'да') return;
               setters.setCanWrite('да');
             }}
+            label="можно написать"
+            options={[{ id: 'да', value: 'да' }]}
+            value={values.canWrite}
           />
           <FilterCheckbox
-            label="интересы"
-            value={values.mailInterests}
-            options={interests.map((interest) => ({
-              id: interest,
-              value: interest,
-            }))}
             onChange={(value) => {
               if (!Array.isArray(value)) return;
               value &&
@@ -142,10 +135,15 @@ export const PrisonersSearch: FC<PrisonersSearchProps> = ({
                   value.map((interest) => String(interest)),
                 );
             }}
+            options={interests.map((interest) => ({
+              id: interest,
+              value: interest,
+            }))}
+            label="интересы"
+            value={values.mailInterests}
             multiple
           />
           <Button
-            variant="outline"
             onClick={() => {
               setters.setAge([0, 99]);
               setters.setRegion('');
@@ -154,12 +152,13 @@ export const PrisonersSearch: FC<PrisonersSearchProps> = ({
               setters.setCanWrite(undefined);
               setters.setMailInterests([]);
             }}
+            variant="outline"
           >
             очистить
           </Button>
         </Box>
 
-        <Box flexBasis="100%" textAlign="center" mt={1}>
+        <Box flexBasis="100%" mt={1} textAlign="center">
           <Typography variant="subtitle1">
             {loading
               ? 'Загрузка...'
@@ -183,8 +182,8 @@ export const PrisonersSearch: FC<PrisonersSearchProps> = ({
           {overrideCta ?? (
             <Button
               disabled={loading}
-              variant="outline"
               onClick={() => setPgination(pagination + paginationStep)}
+              variant="outline"
             >
               {loading ? 'загрузка...' : ' показать ещё'}
             </Button>

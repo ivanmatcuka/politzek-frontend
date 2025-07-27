@@ -26,6 +26,29 @@ const Container = styled('div')<{ variant: ButtonProps['variant'] }>(({
 
     position: 'relative',
 
+    '&:active': {
+      '&:after': {
+        backgroundColor: palette ? theme.palette.brand[palette[2]] : undefined,
+      },
+    },
+
+    '&:before': {
+      backgroundColor: palette ? theme.palette.brand[palette[0]] : undefined,
+
+      borderRadius: '50%',
+      content: '""',
+      height: 54,
+
+      inset: '-8px 0 0 0',
+
+      position: 'absolute',
+      transform: 'rotate(1.8deg)',
+
+      transition: 'transform 125ms',
+
+      zIndex: 100,
+    },
+
     '&:hover': {
       '.button__body': {
         transform: 'rotate(2.86deg)',
@@ -36,46 +59,23 @@ const Container = styled('div')<{ variant: ButtonProps['variant'] }>(({
         transform: 'rotate(-2.92deg)',
       },
     },
-
-    '&:active': {
-      '&:after': {
-        backgroundColor: palette ? theme.palette.brand[palette[2]] : undefined,
-      },
-    },
-
-    '&:before': {
-      content: '""',
-
-      position: 'absolute',
-      inset: '-8px 0 0 0',
-      zIndex: 100,
-
-      transform: 'rotate(1.8deg)',
-
-      height: 54,
-      borderRadius: '50%',
-
-      backgroundColor: palette ? theme.palette.brand[palette[0]] : undefined,
-
-      transition: 'transform 125ms',
-    },
   };
 });
 
 const Background = styled('div')(() => ({}));
 
 const StyledMUIButton = styled(MUIButton)(({ theme }) => ({
-  position: 'relative',
-  zIndex: 200,
-
-  height: 36,
   border: `solid 2px ${theme.palette.brand.black}`,
   borderRadius: 18,
-  padding: theme.spacing(0, 3),
 
+  height: 36,
+  padding: theme.spacing(0, 3),
+  position: 'relative',
   transform: 'rotate(-2.16deg)',
 
   transition: 'transform 125ms',
+
+  zIndex: 200,
 
   [theme.breakpoints.down('lg')]: {
     '.MuiButton-endIcon': {
@@ -99,16 +99,16 @@ const OutlineMUIButton = styled(StyledMUIButton)(({ theme }) => ({
 
   color: theme.palette.brand.black,
 
-  '&:hover': {
-    backgroundColor: theme.palette.brand.black,
-
-    color: theme.palette.brand.white,
-  },
-
   '&:active': {
     backgroundColor: theme.palette.brand.black20,
 
     color: theme.palette.brand.yellow,
+  },
+
+  '&:hover': {
+    backgroundColor: theme.palette.brand.black,
+
+    color: theme.palette.brand.white,
   },
 }));
 
@@ -119,8 +119,8 @@ type ButtonProps = {
   'onClick' | 'endIcon' | 'disabled' | 'component' | 'href' | 'startIcon'
 >;
 export const Button: FC<PropsWithChildren<ButtonProps>> = ({
-  variant = 'default',
   children,
+  variant = 'default',
   ...rest
 }) => {
   let button = (
@@ -138,8 +138,8 @@ export const Button: FC<PropsWithChildren<ButtonProps>> = ({
   } else if (variant === 'outline') {
     button = (
       <OutlineMUIButton
-        variant="outlined"
         className="button__body"
+        variant="outlined"
         disableRipple
         {...rest}
       >

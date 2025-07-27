@@ -47,10 +47,6 @@ export const PersonCardContainer = styled('div')<PersonCardContainerProps>(({
     overflow: 'hidden',
     position: 'relative',
 
-    h2: {
-      textTransform: 'uppercase',
-    },
-
     '&:hover': {
       background: hoverBackground,
       backgroundBlendMode: hasPicture ? 'normal' : 'multiply',
@@ -61,6 +57,10 @@ export const PersonCardContainer = styled('div')<PersonCardContainerProps>(({
       '.button': {
         opacity: 1,
       },
+    },
+
+    h2: {
+      textTransform: 'uppercase',
     },
   };
 });

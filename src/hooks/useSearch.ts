@@ -31,15 +31,15 @@ export const useSearch = () => {
   );
 
   return {
-    values: { name, age, region, sex, canWrite, mailInterests },
+    filter,
+    values: { age, canWrite, mailInterests, name, region, sex },
     setters: {
-      setName,
       setAge,
-      setRegion,
-      setSex,
       setCanWrite,
       setMailInterests,
+      setName,
+      setRegion,
+      setSex,
     },
-    filter,
   } as const;
 };

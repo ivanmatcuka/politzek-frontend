@@ -7,17 +7,17 @@ import { FC, ReactNode } from 'react';
 import { Typography } from '../../../components/typography/Typography/Typography';
 
 const Container = styled('div')(() => ({
-  position: 'relative',
+  boxSizing: 'border-box',
 
   maxWidth: 594,
   minHeight: 285,
-  boxSizing: 'border-box',
+  position: 'relative',
 }));
 
 const ActionContainer = styled('div')({
+  bottom: 5,
   position: 'absolute',
   right: 0,
-  bottom: 5,
 });
 
 const Title = styled(Typography)({
@@ -25,45 +25,45 @@ const Title = styled(Typography)({
 });
 
 const StyledImage = styled(Image)(({ theme }) => ({
+  left: 0,
   position: 'absolute',
   top: 150,
-  left: 0,
 
   [theme.breakpoints.down('lg')]: {
-    width: 100,
     height: 90,
+    width: 100,
   },
 }));
 
 const Background = styled('img')({
-  position: 'absolute',
+  height: '100%',
   inset: 0,
-  zIndex: -1,
+  position: 'absolute',
 
   width: '100%',
-  height: '100%',
+  zIndex: -1,
 });
 
 type CardProps = {
-  title: ReactNode;
+  action?: ReactNode;
   body: ReactNode;
 
-  action?: ReactNode;
   catPictureUrl?: string;
+  title: ReactNode;
 };
-export const Card: FC<CardProps> = ({ title, body, action, catPictureUrl }) => {
+export const Card: FC<CardProps> = ({ action, body, catPictureUrl, title }) => {
   return (
     <Container>
-      <Title variant="h2" component="p">
+      <Title component="p" variant="h2">
         {title}
       </Title>
       <Typography
-        variant="p2"
         component="p"
-        pt={1.5}
-        pr={1.5}
-        pl={{ xs: 12.5, lg: 17.5 }}
         pb={{ xs: 9 }}
+        pl={{ lg: 17.5, xs: 12.5 }}
+        pr={1.5}
+        pt={1.5}
+        variant="p2"
       >
         {body}
       </Typography>
@@ -72,9 +72,9 @@ export const Card: FC<CardProps> = ({ title, body, action, catPictureUrl }) => {
       {catPictureUrl && (
         <StyledImage
           alt="icon_letter"
-          width={135}
           height={121}
           src={catPictureUrl}
+          width={135}
         />
       )}
     </Container>

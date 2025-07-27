@@ -7,39 +7,39 @@ import { Typography } from '~/components/typography/Typography/Typography';
 
 export const Banner = () => {
   return (
-    <Box width="100%" bgcolor="brand.green">
+    <Box bgcolor="brand.green" width="100%">
       <Box
-        maxWidth={1200}
-        margin="auto"
-        display="flex"
         alignItems="center"
-        py={4}
-        px={2}
+        display="flex"
         flexDirection="column"
+        margin="auto"
+        maxWidth={1200}
+        px={2}
+        py={4}
       >
-        <Typography variant="h2" color="brand.yellow" textAlign="center">
+        <Typography color="brand.yellow" textAlign="center" variant="h2">
           МЫ НА ГРАНИ ЗАКРЫТИЯ!
           <br />
           ПОМОГИТЕ НАМ
         </Typography>
         <Typography
-          variant="subtitle1"
-          pt={3}
-          pb={3}
           color="white"
+          pb={3}
+          pt={3}
           textAlign="center"
+          variant="subtitle1"
         >
           Этот проект существует только благодаря вашей поддержке. Помогите нам
           выжить:
         </Typography>
-        <Box display="flex" alignItems="center" ml="-207px">
+        <Box alignItems="center" display="flex" ml="-207px">
           <Image
             alt="patreon"
+            height={157}
             src="/donation_cat.png"
             width={207}
-            height={157}
           />
-          <Button variant="red" component={Link} href="/donate">
+          <Button component={Link} href="/donate" variant="red">
             Поддержать
           </Button>
         </Box>

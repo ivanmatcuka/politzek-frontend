@@ -17,9 +17,9 @@ export const LetterDialog: FC<LetterDialogProps> = ({ prisoner }) => {
     <>
       {prisoner && (
         <MessageDialog
-          prisoner={prisoner}
-          open={isDialogOpen}
           onClose={() => setIsDialogOpen(false)}
+          open={isDialogOpen}
+          prisoner={prisoner}
         />
       )}
       <Button onClick={() => setIsDialogOpen(true)}>написать письмо</Button>

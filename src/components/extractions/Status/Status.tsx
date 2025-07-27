@@ -4,7 +4,7 @@ import { FC, ReactElement } from 'react';
 import { Typography } from '~/components/typography/Typography/Typography';
 
 const Circle: FC<{ backgroundColor: string }> = ({ backgroundColor }) => (
-  <Box width={16} height={16} borderRadius={8} bgcolor={backgroundColor} />
+  <Box bgcolor={backgroundColor} borderRadius={8} height={16} width={16} />
 );
 
 const RedCircle = () => <Circle backgroundColor="brand.red" />;
@@ -62,14 +62,14 @@ export type Status =
   | 'смерть под следствием'
   | 'смерть в заключении';
 type StatusProps = {
-  status: Status;
   gender: Gender;
+  status: Status;
 };
-export const Status: FC<StatusProps> = ({ status, gender }) => {
+export const Status: FC<StatusProps> = ({ gender, status }) => {
   return (
     <Box display="flex" gap={1}>
       {statusMap[status]}
-      <Typography variant="button" component="p">
+      <Typography component="p" variant="button">
         {genderMap?.[status]?.[gender]}
       </Typography>
     </Box>

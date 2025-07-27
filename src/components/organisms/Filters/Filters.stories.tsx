@@ -3,12 +3,12 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Filters as Component } from './Filters';
 
 const meta = {
-  title: 'Organisms/Filters',
   component: Component,
+  tags: ['autodocs'],
+  title: 'Organisms/Filters',
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs'],
 } satisfies Meta<typeof Component>;
 
 export default meta;

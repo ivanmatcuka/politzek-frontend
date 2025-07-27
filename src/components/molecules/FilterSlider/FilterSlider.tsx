@@ -17,32 +17,32 @@ type FilterSliderProps = {
 } & Pick<SliderProps, 'value' | 'onChange' | 'onChangeCommitted'>;
 
 const StyledSlider = styled(Slider)(({ theme }) => ({
-  padding: 0,
+  boxShadow: 'none',
   height: 2,
 
-  boxShadow: 'none',
-
-  '.MuiSlider-track': {
-    height: 0,
-
-    color: theme.palette.brand.black,
-  },
-
-  '& .MuiSlider-rail': {
-    color: theme.palette.brand.grey,
-  },
+  padding: 0,
 
   '.MuiSlider-thumb': {
-    height: 15,
-    width: 15,
-
     boxShadow: 'none !important',
-
     color: theme.palette.brand.black,
+
+    height: 15,
+
+    width: 15,
 
     '&:before, &:after': {
       display: 'none',
     },
+  },
+
+  '.MuiSlider-track': {
+    color: theme.palette.brand.black,
+
+    height: 0,
+  },
+
+  '& .MuiSlider-rail': {
+    color: theme.palette.brand.grey,
   },
 }));
 
@@ -57,25 +57,22 @@ const ValueLabelComponent = (props: SliderValueLabelProps) => {
 };
 
 export const FilterSlider: FC<FilterSliderProps> = ({
-  value,
   label,
   max,
   min,
   onChange,
   onChangeCommitted,
+  value,
 }) => {
   return (
     <Select
-      id="range-selector"
-      value={value}
-      IconComponent={Arrow}
       MenuProps={{
+        MenuListProps: {
+          component: MenuList,
+          disabledItemsFocusable: true,
+        },
         slots: {
           paper: Paper,
-        },
-        MenuListProps: {
-          disabledItemsFocusable: true,
-          component: MenuList,
         },
       }}
       renderValue={() =>
@@ -83,17 +80,20 @@ export const FilterSlider: FC<FilterSliderProps> = ({
           <Typography variant="button">{`${label} (${value[0]}-${value[1]})`}</Typography>
         )
       }
+      IconComponent={Arrow}
+      id="range-selector"
+      value={value}
       multiple
     >
-      <MenuItem dense disableRipple autoFocus>
+      <MenuItem autoFocus dense disableRipple>
         <StyledSlider
-          value={value}
-          valueLabelDisplay="on"
-          onChange={onChange}
-          onChangeCommitted={onChangeCommitted}
           max={max}
           min={min}
+          onChange={onChange}
+          onChangeCommitted={onChangeCommitted}
           slots={{ valueLabel: ValueLabelComponent }}
+          value={value}
+          valueLabelDisplay="on"
         />
       </MenuItem>
     </Select>

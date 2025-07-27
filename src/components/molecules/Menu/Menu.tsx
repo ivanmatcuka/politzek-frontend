@@ -15,12 +15,12 @@ const StyledMUIListItem = styled(MUIListItem)(({ theme }) => ({
   padding: 0,
   paddingBottom: theme.spacing(1),
 
+  '&:active, &:active .MuiListItemIcon-root': {
+    color: theme.palette.brand.yellow40,
+  },
   '&:hover, &:hover .MuiListItemIcon-root': {
     color: theme.palette.brand.yellow,
     cursor: 'pointer',
-  },
-  '&:active, &:active .MuiListItemIcon-root': {
-    color: theme.palette.brand.yellow40,
   },
 }));
 
@@ -40,10 +40,10 @@ const StyledMUIListItemText = styled(MUIListItemText)({
 
 const Arrow = ({ fill = '#151515', ...rest }: SVGProps<SVGSVGElement>) => (
   <svg
-    width="35"
+    fill="none"
     height="7"
     viewBox="0 0 35 7"
-    fill="none"
+    width="35"
     xmlns="http://www.w3.org/2000/svg"
     {...rest}
   >
@@ -70,8 +70,8 @@ export const Menu: FC<MenuProps> = ({ items }) => {
             <Arrow fill="currentColor" />
           </StyledMUIListItemIcon>
           <StyledMUIListItemText
-            disableTypography
             primary={<Typography variant="mi">{item.element}</Typography>}
+            disableTypography
           />
         </StyledMUIListItem>
       ))}

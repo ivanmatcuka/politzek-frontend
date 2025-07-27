@@ -22,69 +22,69 @@ const StyledLink = styled('a')(({ theme }) => ({
 
 export const Footer = () => (
   <Grid
-    width="100%"
     flexDirection="column"
-    justifyContent="center"
-    id="footer"
     flexWrap="nowrap"
-    container
+    id="footer"
+    justifyContent="center"
     style={{ overflowX: 'clip' }}
+    width="100%"
+    container
   >
-    <Grid item flex={1}>
+    <Grid flex={1} item>
       <Grid
-        container
-        maxWidth={1200}
-        width="100%"
+        className="footer"
         flexDirection="column"
         margin="auto"
-        className="footer"
-        py={{ xs: 6, lg: 10.75 }}
+        maxWidth={1200}
         px={2}
+        py={{ lg: 10.75, xs: 6 }}
+        width="100%"
+        container
       >
         <Grid alignSelf="flex-start" item>
-          <Typography variant="h1" color="brand.yellow">
+          <Typography color="brand.yellow" variant="h1">
             Помочь нашему
             <br />
             проекту
           </Typography>
         </Grid>
         <Grid
-          item
-          pt={{ xs: 2, sm: 8, lg: 2 }}
-          my={8}
-          maxWidth={{ xs: '100%', lg: '594px' }}
           alignSelf="center"
+          maxWidth={{ lg: '594px', xs: '100%' }}
+          my={8}
+          pt={{ lg: 2, sm: 8, xs: 2 }}
+          item
         >
-          <Typography variant="subtitle1" textAlign="center">
+          <Typography textAlign="center" variant="subtitle1">
             Над большой базой данных работает целая команда. Помогите нам
             продолжать и развивать этот проект.
           </Typography>
         </Grid>
         <DrawingFrame
-          maxWidth={{ xs: '380px', lg: '796px' }}
-          width="100%"
+          alignSelf="center"
+          maxWidth={{ lg: '796px', xs: '380px' }}
           p={3}
           pb={4}
-          alignSelf="center"
+          width="100%"
           item
         >
           <Grid container>
-            <Grid item flexBasis="100%">
-              <Typography variant="subtitle1" textAlign="center" width="100%">
+            <Grid flexBasis="100%" item>
+              <Typography textAlign="center" variant="subtitle1" width="100%">
                 Вы можете поддержать нас через Boosty или Patreon:
               </Typography>
             </Grid>
             <Grid
-              flexBasis={{ xs: '100%', lg: '50%' }}
               alignSelf="end"
+              flexBasis={{ lg: '50%', xs: '100%' }}
               textAlign="center"
             >
               <Image
                 alt="boosty"
+                className="footer__image"
+                height={57}
                 src="/boosty.png"
                 width={181}
-                height={57}
-                className="footer__image"
               />
               <div>
                 <a href="https://boosty.to/avtozaklive" target="_blank">
@@ -93,16 +93,16 @@ export const Footer = () => (
               </div>
             </Grid>
             <Grid
-              flexBasis={{ xs: '100%', lg: '50%' }}
               alignSelf="end"
+              flexBasis={{ lg: '50%', xs: '100%' }}
               textAlign="center"
             >
               <Image
                 alt="patreon"
+                className="footer__image"
+                height={71}
                 src="/patreon.png"
                 width={208}
-                height={71}
-                className="footer__image"
               />
               <div>
                 <a href="https://www.patreon.com/avtozak" target="_blank">
@@ -114,14 +114,14 @@ export const Footer = () => (
         </DrawingFrame>
       </Grid>
     </Grid>
-    <StyledGrid flex={1} item py={6} px={{ xs: 2, lg: 6 }}>
-      <StyledTypography variant="p3" component="p" width={1200} color="white">
+    <StyledGrid flex={1} px={{ lg: 6, xs: 2 }} py={6} item>
+      <StyledTypography color="white" component="p" variant="p3" width={1200}>
         Дизайн сайта разработан студией{' '}
         <StyledLink href="https://neimark-art.ru" target="_blank">
           Neklistic
         </StyledLink>
       </StyledTypography>
-      <StyledTypography variant="p3" component="p" width={1200} color="white">
+      <StyledTypography color="white" component="p" variant="p3" width={1200}>
         Спецпроект{' '}
         <StyledLink href="https://t.me/avtozaklive" target="_blank">
           Avtozak LIVE

@@ -14,14 +14,14 @@ interface TabPanelProps {
 }
 
 const CustomTabPanel = (props: TabPanelProps) => {
-  const { children, value, index, ...rest } = props;
+  const { children, index, value, ...rest } = props;
 
   return (
     <div
-      role="tabpanel"
+      aria-labelledby={`simple-tab-${index}`}
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
+      role="tabpanel"
       {...rest}
     >
       {value === index && <Box>{children}</Box>}
@@ -41,14 +41,14 @@ const StyledMUITabs = styled(MUITabs)(() => ({
 
 const a11yProps = (index: number) => {
   return {
-    id: `simple-tab-${index}`,
     'aria-controls': `simple-tabpanel-${index}`,
+    id: `simple-tab-${index}`,
   };
 };
 
 type TabsItem = {
-  label: string;
   element: ReactNode;
+  label: string;
 };
 
 type TabsProps = {
@@ -64,23 +64,23 @@ export const Selector: FC<TabsProps> = ({ items }) => {
   return (
     <Box>
       <StyledMUITabs
-        value={value}
-        onChange={handleChange}
         TabIndicatorProps={{
           style: { display: 'none' },
         }}
+        onChange={handleChange}
+        value={value}
       >
         {items.map((item, index) => (
           <SelectorItem
             key={index + 1}
-            variant="subtitle1"
             label={item.label}
+            variant="subtitle1"
             {...a11yProps(index)}
           />
         ))}
       </StyledMUITabs>
       {items.map((item, index) => (
-        <CustomTabPanel key={index + 1} value={value} index={index}>
+        <CustomTabPanel index={index} key={index + 1} value={value}>
           {item.element}
         </CustomTabPanel>
       ))}

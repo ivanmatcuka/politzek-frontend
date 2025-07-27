@@ -9,35 +9,35 @@ export default function Donate() {
   return (
     <PageWithHeader>
       <Box
-        width="100%"
         boxSizing="border-box"
-        pt={{ xs: 0, sm: 0, lg: 0 }}
+        pt={{ lg: 0, sm: 0, xs: 0 }}
         sx={{ overflowX: 'clip' }}
+        width="100%"
       >
         <Grid
-          container
-          maxWidth={1200}
+          justifyContent={{ lg: 'space-between', xs: 'center' }}
           margin="auto"
-          justifyContent={{ xs: 'center', lg: 'space-between' }}
+          maxWidth={1200}
+          container
         >
-          <Grid item flex={1} xs={12} lg={6}>
-            <Grid container mb={{ xs: 3, lg: 11 }}>
-              <Grid item mt={{ xs: 3, lg: 11.75 }} mb={{ xs: 1.5, lg: 4.5 }}>
-                <Typography variant="h1" color="brand.red">
+          <Grid flex={1} lg={6} xs={12} item>
+            <Grid mb={{ lg: 11, xs: 3 }} container>
+              <Grid mb={{ lg: 4.5, xs: 1.5 }} mt={{ lg: 11.75, xs: 3 }} item>
+                <Typography color="brand.red" variant="h1">
                   Помочь politzek.org
                 </Typography>
               </Grid>
               <Grid
-                item
+                pl={{ lg: '101px', xs: 0 }}
+                pr={{ lg: 4, xs: 0 }}
                 width="100%"
-                pl={{ xs: 0, lg: '101px' }}
-                pr={{ xs: 0, lg: 4 }}
+                item
               >
                 <Typography
-                  variant="subtitle1"
-                  textAlign="left"
                   lineHeight="32.74px"
                   margin="auto"
+                  textAlign="left"
+                  variant="subtitle1"
                 >
                   Мы ежедневно обновляем информацию на этом сайте, а вы можете
                   найти политзаключенного, которому нужна помощь.
@@ -53,59 +53,59 @@ export default function Donate() {
 
           {/* LG photo */}
           <Grid
-            item
-            lg={6}
-            xs={12}
+            bgcolor="brand.green"
             display="flex"
             flexDirection="column"
-            position="relative"
-            justifyContent="center"
-            mt={{ lg: '-130px', xs: 0 }}
-            bgcolor="brand.green"
             gap={10}
+            justifyContent="center"
+            lg={6}
+            mt={{ lg: '-130px', xs: 0 }}
+            position="relative"
             py={10}
+            xs={12}
+            item
           >
-            <Box display="flex" flexDirection="column" alignItems="center">
-              <Typography variant="h2" color="white">
+            <Box alignItems="center" display="flex" flexDirection="column">
+              <Typography color="white" variant="h2">
                 ₽
               </Typography>
-              <Typography variant="caption" color="white" my={2}>
+              <Typography color="white" my={2} variant="caption">
                 российский рубль
               </Typography>
               <Button
-                variant="red"
-                href="https://friendly2.me/support/avtozaklive/"
                 component={Link}
+                href="https://friendly2.me/support/avtozaklive/"
+                variant="red"
               >
                 ПОДДЕРЖАТЬ
               </Button>
             </Box>
-            <Box display="flex" flexDirection="column" alignItems="center">
-              <Typography variant="h2" color="white">
+            <Box alignItems="center" display="flex" flexDirection="column">
+              <Typography color="white" variant="h2">
                 €/$
               </Typography>
-              <Typography variant="caption" color="white" my={2}>
+              <Typography color="white" my={2} variant="caption">
                 иностранная валюта
               </Typography>
               <Button
-                variant="red"
-                href="https://avtozak.info/donate/"
                 component={Link}
+                href="https://avtozak.info/donate/"
+                variant="red"
               >
                 ПОДДЕРЖАТЬ
               </Button>
             </Box>
-            <Box display="flex" flexDirection="column" alignItems="center">
-              <Typography variant="h2" color="white">
+            <Box alignItems="center" display="flex" flexDirection="column">
+              <Typography color="white" variant="h2">
                 crypto
               </Typography>
-              <Typography variant="caption" color="white" my={2}>
+              <Typography color="white" my={2} variant="caption">
                 USDT/BTC/TON...
               </Typography>
               <Button
-                variant="red"
-                href="https://t.me/donat_avtozak"
                 component={Link}
+                href="https://t.me/donat_avtozak"
+                variant="red"
               >
                 ПОДДЕРЖАТЬ
               </Button>

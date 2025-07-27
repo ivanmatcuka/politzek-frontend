@@ -4,10 +4,10 @@ import { Typography, styled } from '@mui/material';
 import { DetailedHTMLProps, FC, ImgHTMLAttributes, useState } from 'react';
 
 export const ProfileImageContainer = styled('div')(({ theme }) => ({
-  position: 'absolute',
-  zIndex: 100,
-
   filter: 'drop-shadow(4px 4px 0px #000000)',
+  position: 'absolute',
+
+  zIndex: 100,
 
   [theme.breakpoints.down('lg')]: {
     position: 'static',
@@ -19,13 +19,13 @@ export const EmptyProfileImageContainer = styled(ProfileImageContainer)({
 });
 
 const StyledImage = styled('img')(({ theme }) => ({
-  objectFit: 'cover',
-
   clipPath: 'polygon(98% 0, 100% 74%, 96% 100%, 0 97%, 4% 0)',
 
+  objectFit: 'cover',
+
   [theme.breakpoints.down('lg')]: {
-    width: 184,
     height: 188,
+    width: 184,
   },
 }));
 
@@ -39,8 +39,8 @@ export const ProfileImage: FC<ProfileImageProps> = (props) => {
   return (
     <StyledImage
       {...props}
-      src={hasError ? '/error.avif' : props.src}
       onError={() => setHasError(true)}
+      src={hasError ? '/error.avif' : props.src}
     />
   );
 };

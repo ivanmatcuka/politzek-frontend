@@ -13,10 +13,10 @@ type InputProps = Pick<
 >;
 
 const StyledInput = styled(MUIInput)(({ theme }) => ({
-  padding: '0 10px',
-
   border: `solid 3px ${theme.palette.brand.black}`,
+
   borderRadius: 16.5,
+  padding: '0 10px',
 
   ...theme.typography.p3,
 

@@ -19,12 +19,12 @@ export async function generateMetadata() {
   const description = 'Площадка помощи политзаключенным в России';
 
   return {
-    title,
     description,
+    title,
     openGraph: {
-      title,
       description,
       images: '/images/logo.svg',
+      title,
     },
   };
 }
@@ -34,8 +34,8 @@ export default function RootLayout({ children }: PropsWithChildren) {
     <html lang="en">
       <head>
         <link
-          rel="stylesheet"
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet"
         />
       </head>
       <body className={inter.className}>
@@ -51,7 +51,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
           </AppRouterCacheProvider>
         </ApolloWrapper>
         {process.env.NODE_ENV === 'production' && (
-          <script type="text/javascript" src="/ym.js" async />
+          <script src="/ym.js" type="text/javascript" async />
         )}
       </body>
     </html>

@@ -3,12 +3,12 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { FilterCheckbox as Component } from './FilterCheckbox';
 
 const meta = {
-  title: 'Molecules/FilterCheckbox',
   component: Component,
+  tags: ['autodocs'],
+  title: 'Molecules/FilterCheckbox',
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs'],
 } satisfies Meta<typeof Component>;
 
 export default meta;

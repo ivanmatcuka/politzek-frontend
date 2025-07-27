@@ -9,25 +9,35 @@ const StyledTab = styled(MUITab)<{ variant: TypographyVariants }>(({
   variant,
 }) => {
   return {
-    position: 'relative',
-
     opacity: '40%',
+
+    position: 'relative',
 
     textTransform: 'none',
     ...theme.typography[variant],
 
+    '.MuiTabs-indicator': {
+      display: 'none',
+    },
+
+    '&:active:after': {
+      display: 'block',
+
+      opacity: '100%',
+    },
+
     '&:after': {
+      background: 'url("/circle.svg") center no-repeat',
+
+      backgroundSize: 'contain',
       content: '""',
 
-      position: 'absolute',
-      inset: 0,
-
       display: 'none',
-      transform: 'rotate(-4deg)',
+      inset: 0,
       opacity: '40%',
 
-      background: 'url("/circle.svg") center no-repeat',
-      backgroundSize: 'contain',
+      position: 'absolute',
+      transform: 'rotate(-4deg)',
     },
 
     '&:hover': {
@@ -38,16 +48,10 @@ const StyledTab = styled(MUITab)<{ variant: TypographyVariants }>(({
       display: 'block',
     },
 
-    '&:active:after': {
-      display: 'block',
-
-      opacity: '100%',
-    },
-
     '&.Mui-selected': {
-      opacity: '100%',
-
       color: theme.palette.brand.black,
+
+      opacity: '100%',
     },
 
     '&.Mui-selected:after': {
@@ -55,15 +59,11 @@ const StyledTab = styled(MUITab)<{ variant: TypographyVariants }>(({
 
       opacity: '100%',
     },
-
-    '.MuiTabs-indicator': {
-      display: 'none',
-    },
   };
 });
 
 export const SelectorItem: FC<
-  PropsWithChildren<TypographyProps & Omit<MUITabProps, 'children'>>
+  PropsWithChildren<Omit<MUITabProps, 'children'> & TypographyProps>
 > = ({ children, variant = 'subtitle1', ...rest }) => (
-  <StyledTab variant={variant} label={children} disableRipple {...rest} />
+  <StyledTab label={children} variant={variant} disableRipple {...rest} />
 );

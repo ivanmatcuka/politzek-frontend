@@ -5,27 +5,27 @@ import { Logo } from '~/components/atoms/Logo/Logo';
 import { Menu } from '~/components/molecules/Menu/Menu';
 
 export const Header = () => (
-  <Grid container overflow="hidden" className="header">
+  <Grid className="header" overflow="hidden" container>
     <Grid
-      item
+      padding={{ lg: 10.75, sm: 2, xs: 1 }}
+      pb={{ lg: 0, sm: 0, xs: 0 }}
       width="100%"
-      padding={{ xs: 1, sm: 2, lg: 10.75 }}
-      pb={{ xs: 0, sm: 0, lg: 0 }}
+      item
     >
       <Grid
-        container
-        maxWidth={1200}
+        justifyContent={{ lg: 'space-between', xs: 'center' }}
         margin="auto"
-        justifyContent={{ xs: 'center', lg: 'space-between' }}
+        maxWidth={1200}
+        container
       >
-        <Grid item flex={1} xs={12} lg={6}>
+        <Grid flex={1} lg={6} xs={12} item>
           <Grid container>
-            <Grid item mr={1.5} flexBasis="191px">
+            <Grid flexBasis="191px" mr={1.5} item>
               <Link href="/">
                 <Logo />
               </Link>
             </Grid>
-            <Grid item flexBasis="calc(100% - 203px)">
+            <Grid flexBasis="calc(100% - 203px)" item>
               <Menu
                 items={[
                   {

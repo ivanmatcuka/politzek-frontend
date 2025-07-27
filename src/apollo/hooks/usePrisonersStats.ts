@@ -14,9 +14,9 @@ type PrisonerStatusCountsNode = NonNullable<
 export type AgeRanges = PrisonerStatusCountsNode['age_ranges'];
 
 export const usePrisonersStats = () => {
-  const { loading, error, data } = usePrisonerStatusCountsQuery({
-    fetchPolicy: 'no-cache',
+  const { data, error, loading } = usePrisonerStatusCountsQuery({
     errorPolicy: 'all',
+    fetchPolicy: 'no-cache',
   });
 
   const result = useMemo(
@@ -25,7 +25,7 @@ export const usePrisonersStats = () => {
   ) as PrisonerStatusCountsNode;
 
   return useMemo(
-    () => ({ loading, error, data: result }),
+    () => ({ data: result, error, loading }),
     [loading, error, result],
   );
 };

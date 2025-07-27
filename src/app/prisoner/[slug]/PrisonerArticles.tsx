@@ -8,7 +8,7 @@ type PrisonerArticlesProps = {
 };
 export const PrisonerArticles: FC<PrisonerArticlesProps> = ({ articles }) => (
   <>
-    <Box gap={1} mb={2} display="flex">
+    <Box display="flex" gap={1} mb={2}>
       {articles?.map((article) => (
         <Box key={article}>
           <Article label={article} />

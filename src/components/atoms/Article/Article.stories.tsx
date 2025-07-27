@@ -3,12 +3,12 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Article as Component } from './Article';
 
 const meta = {
-  title: 'Atoms/Article',
   component: Component,
+  tags: ['autodocs'],
+  title: 'Atoms/Article',
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs'],
 } satisfies Meta<typeof Component>;
 
 export default meta;

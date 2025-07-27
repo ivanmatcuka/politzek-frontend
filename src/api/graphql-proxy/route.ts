@@ -12,9 +12,9 @@ export async function OPTIONS() {
     {},
     {
       headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'POST',
         'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        'Access-Control-Allow-Methods': 'POST',
+        'Access-Control-Allow-Origin': '*',
       },
     },
   );
@@ -23,27 +23,27 @@ export async function OPTIONS() {
 export async function POST(req: NextRequest) {
   if (!SUPABASE_KEY || !SUPABASE_URL) {
     return new Response(JSON.stringify({ error: 'Missing Supabase config' }), {
-      status: 500,
       headers: DEFAULT_HEADERS,
+      status: 500,
     });
   }
 
   const body = await req.json();
 
   const response = await fetch(`${SUPABASE_URL}/graphql/v1`, {
+    body: JSON.stringify(body),
     method: 'POST',
     headers: {
       apikey: SUPABASE_KEY,
       authorization: `Bearer ${SUPABASE_KEY}`,
       ...DEFAULT_HEADERS,
     },
-    body: JSON.stringify(body),
   });
 
   const data = await response.text();
 
   return new Response(data, {
-    status: response.status,
     headers: DEFAULT_HEADERS,
+    status: response.status,
   });
 }

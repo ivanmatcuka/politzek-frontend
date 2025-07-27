@@ -12,9 +12,9 @@ export async function OPTIONS() {
     {},
     {
       headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'POST',
         'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        'Access-Control-Allow-Methods': 'POST',
+        'Access-Control-Allow-Origin': '*',
       },
     },
   );
@@ -23,8 +23,8 @@ export async function OPTIONS() {
 export async function GET(req: NextRequest) {
   if (!SUPABASE_URL || !SUPABASE_KEY) {
     return new Response(JSON.stringify({ error: 'Missing Supabase config' }), {
-      status: 500,
       headers: DEFAULT_HEADERS,
+      status: 500,
     });
   }
 
@@ -35,8 +35,8 @@ export async function GET(req: NextRequest) {
     return new Response(
       JSON.stringify({ error: 'Missing or invalid date parameter' }),
       {
-        status: 400,
         headers: DEFAULT_HEADERS,
+        status: 400,
       },
     );
   }
@@ -60,21 +60,21 @@ export async function GET(req: NextRequest) {
       return new Response(
         JSON.stringify({ error: 'Failed to fetch birthdays' }),
         {
-          status: response.status,
           headers: DEFAULT_HEADERS,
+          status: response.status,
         },
       );
     }
 
     const data = await response.text();
     return new Response(data, {
-      status: 200,
       headers: DEFAULT_HEADERS,
+      status: 200,
     });
   } catch (error) {
     return new Response(JSON.stringify({ error: 'Internal Server Error' }), {
-      status: 500,
       headers: DEFAULT_HEADERS,
+      status: 500,
     });
   }
 }

@@ -3,12 +3,12 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { SelectorItem as Component } from './SelectorItem';
 
 const meta = {
-  title: 'Atoms/SelectorItem',
   component: Component,
+  tags: ['autodocs'],
+  title: 'Atoms/SelectorItem',
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs'],
 } satisfies Meta<typeof Component>;
 
 export default meta;

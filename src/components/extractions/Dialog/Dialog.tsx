@@ -17,9 +17,9 @@ type MessageDialogProps = {
   onClose?: (value: string) => void;
 };
 export const MessageDialog: FC<MessageDialogProps> = ({
+  onClose,
   open,
   prisoner,
-  onClose,
 }) => {
   const handleClose = () => onClose?.('');
 
@@ -32,9 +32,6 @@ export const MessageDialog: FC<MessageDialogProps> = ({
 
   return (
     <Dialog
-      onClose={handleClose}
-      open={open}
-      hideBackdrop
       PaperProps={{
         elevation: 0,
         style: {
@@ -42,20 +39,23 @@ export const MessageDialog: FC<MessageDialogProps> = ({
         },
       }}
       maxWidth="md"
+      onClose={handleClose}
+      open={open}
       sx={{ backgroundColor: 'rgba(255, 255, 255, 0.95)' }}
+      hideBackdrop
     >
       <DrawingFrame
-        py={{ xs: 2, lg: 4.5 }}
-        px={{ xs: 2, lg: 16.25 }}
-        flexDirection="column"
         component={Box}
         display="flex"
+        flexDirection="column"
+        px={{ lg: 16.25, xs: 2 }}
+        py={{ lg: 4.5, xs: 2 }}
       >
         <Typography variant="subtitle1">
           Хорошо, что ты решил начать переписку! Вот данные, которые могут
           пригодиться:
         </Typography>
-        <Box mt={8} display="flex" flexDirection="column">
+        <Box display="flex" flexDirection="column" mt={8}>
           <Typography variant="p3">{prisoner.name}</Typography>
           <Typography variant="p3">{prisoner.address_for_letters}</Typography>
           <Typography variant="p3">
@@ -63,8 +63,8 @@ export const MessageDialog: FC<MessageDialogProps> = ({
           </Typography>
           <Typography variant="p3">{birthdayString}</Typography>
         </Box>
-        <Box mt={8} flex={1}>
-          <Button variant="outline" onClick={handleClose}>
+        <Box flex={1} mt={8}>
+          <Button onClick={handleClose} variant="outline">
             в следующий раз
           </Button>
         </Box>

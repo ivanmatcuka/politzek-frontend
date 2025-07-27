@@ -3,12 +3,12 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Button as Component } from './Button';
 
 const meta = {
-  title: 'Atoms/Button',
   component: Component,
+  tags: ['autodocs'],
+  title: 'Atoms/Button',
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs'],
 } satisfies Meta<typeof Component>;
 
 export default meta;
@@ -23,18 +23,18 @@ export const DefaultButton: Story = {
     children: { control: 'text' },
     variant: {
       control: {
-        type: 'select',
         options: ['default', 'red', 'outline'],
+        type: 'select',
       },
     },
   },
   parameters: {
+    tags: ['button', 'default'],
     docs: {
       description: {
         component: 'This is the default button variant.',
       },
     },
-    tags: ['button', 'default'],
   },
 };
 
@@ -47,18 +47,18 @@ export const RedButton: Story = {
     children: { control: 'text' },
     variant: {
       control: {
-        type: 'select',
         options: ['default', 'red', 'outline'],
+        type: 'select',
       },
     },
   },
   parameters: {
+    tags: ['button', 'red'],
     docs: {
       description: {
         component: 'This is the red button variant.',
       },
     },
-    tags: ['button', 'red'],
   },
 };
 
@@ -71,17 +71,17 @@ export const OutlineButton: Story = {
     children: { control: 'text' },
     variant: {
       control: {
-        type: 'select',
         options: ['default', 'red', 'outline'],
+        type: 'select',
       },
     },
   },
   parameters: {
+    tags: ['button', 'outline'],
     docs: {
       description: {
         component: 'This is the outline button variant.',
       },
     },
-    tags: ['button', 'outline'],
   },
 };

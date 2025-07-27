@@ -7,17 +7,17 @@ import { Typography as Component } from './Typography';
 const loremIpsum = 'The quick brown fox jumps over the lazy dog.';
 
 const meta = {
-  title: 'Typography/Typography',
   component: Component,
-  parameters: {
-    layout: 'centered',
-  },
   tags: ['autodocs'],
+  title: 'Typography/Typography',
   argTypes: {
     variant: {
-      options: Object.keys(typography),
       control: 'select',
+      options: Object.keys(typography),
     },
+  },
+  parameters: {
+    layout: 'centered',
   },
 } satisfies Meta<typeof Component>;
 
@@ -26,7 +26,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Typography: Story = {
   args: {
-    variant: 'h1',
     children: loremIpsum,
+    variant: 'h1',
   },
 };

@@ -20,9 +20,9 @@ export default function Dashboard() {
       return JSON.parse(prisonerStatusCounts.age_ranges).map(
         (ageRange: AgeRanges) => ({
           age: ageRange.age_range ?? 0,
+          female: ageRange.female ?? 0,
           label: ageRange.age_range ?? '',
           male: ageRange.male ?? 0,
-          female: ageRange.female ?? 0,
         }),
       );
     } catch (error) {
@@ -31,23 +31,23 @@ export default function Dashboard() {
   }, [prisonerStatusCounts]);
 
   return (
-    <Box maxWidth={1200} margin="auto" display="flex" flexWrap="wrap">
-      <Box mb={4.5} flex="1 0 100%">
+    <Box display="flex" flexWrap="wrap" margin="auto" maxWidth={1200}>
+      <Box flex="1 0 100%" mb={4.5}>
         <Typography
-          variant="h1"
           color="brand.red"
           sx={{ wordBreak: 'break-word' }}
+          variant="h1"
         >
           Политические репрессии в цифрах
         </Typography>
       </Box>
       <Box
-        display="flex"
-        width={392}
-        flexDirection="column"
         alignItems="baseline"
+        display="flex"
+        flexDirection="column"
+        height={{ lg: 575, xs: 443 }}
         justifyContent="space-between"
-        height={{ xs: 443, lg: 575 }}
+        width={392}
       >
         <Counter label="Всего фигурантов уголовных дел">
           {prisonerStatusCounts?.total_count}
@@ -55,16 +55,16 @@ export default function Dashboard() {
         <Counter label="Имена фигурантов известны">
           {prisonerStatusCounts?.in_process_count}
         </Counter>
-        <Counter label="Заключенным можно написать" catPictureUrl="/cat_3.svg">
+        <Counter catPictureUrl="/cat_3.svg" label="Заключенным можно написать">
           {prisonerStatusCounts?.imprisoned_count}
         </Counter>
       </Box>
-      <Box mt={{ xs: 3, lg: -1.5 }} mb={{ xs: 8 }}>
+      <Box mb={{ xs: 8 }} mt={{ lg: -1.5, xs: 3 }}>
         <Selector
           items={[
             {
-              label: 'по полу и возрасту:',
               element: <SexAge data={ageRanges} />,
+              label: 'по полу и возрасту:',
             },
             {
               label: 'лишены свободы/на свободе',

@@ -19,26 +19,26 @@ type SliderListProps = {
 };
 const SliderList = styled('ul')<SliderListProps>(({ translateOffset }) => ({
   display: 'flex',
+  listStyle: 'none',
   padding: 0,
   transform: `translateX(${translateOffset}px)`,
   transition: 'transform 0.3s ease',
-  listStyle: 'none',
 }));
 
 const defaultSettings: Settings = {
-  swipeToSlide: true,
+  adaptiveHeight: true,
   arrows: false,
-  dots: false,
-  infinite: true,
   autoplay: true,
-  speed: 300,
   autoplaySpeed: 5000,
   cssEase: 'linear',
+  dots: false,
+  infinite: true,
+  speed: 300,
+  swipeToSlide: true,
   variableWidth: true,
-  adaptiveHeight: true,
 };
 
-export const Carousel: FC<PropsWithChildren & { settings?: Settings }> = ({
+export const Carousel: FC<{ settings?: Settings } & PropsWithChildren> = ({
   children,
   settings = {},
 }) => {
@@ -72,9 +72,9 @@ export const Carousel: FC<PropsWithChildren & { settings?: Settings }> = ({
   return (
     <Slider
       {...mergedSettings}
-      ref={sliderRef}
       appendDots={appendDots}
       beforeChange={(_, next) => setCurrentSlide(next)}
+      ref={sliderRef}
     >
       {children}
     </Slider>

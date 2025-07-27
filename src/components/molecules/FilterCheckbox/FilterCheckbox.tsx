@@ -30,10 +30,10 @@ type FilterCheckboxProps = {
 
 export const FilterCheckbox: FC<FilterCheckboxProps> = ({
   label,
-  options,
-  value = '',
   multiple = false,
   onChange,
+  options,
+  value = '',
 }) => {
   const handleChange = useCallback(
     (event: SelectChangeEvent<unknown>) => {
@@ -52,27 +52,27 @@ export const FilterCheckbox: FC<FilterCheckboxProps> = ({
 
   return (
     <Select
-      name={label}
-      id="range-selector"
-      value={value}
-      IconComponent={Arrow}
       MenuProps={{
-        slots: {
-          paper: Paper,
-        },
         MenuListProps: {
           disabledItemsFocusable: true,
         },
+        slots: {
+          paper: Paper,
+        },
       }}
-      displayEmpty
       renderValue={() => (
         <Typography variant="button">{renderValueString}</Typography>
       )}
-      onChange={handleChange}
+      IconComponent={Arrow}
+      id="range-selector"
       multiple={multiple}
+      name={label}
+      onChange={handleChange}
+      value={value}
+      displayEmpty
     >
       <MenuItem value="">
-        <Typography variant="button" color="brand.grey">
+        <Typography color="brand.grey" variant="button">
           {<em>None</em>}
         </Typography>
       </MenuItem>
@@ -80,9 +80,9 @@ export const FilterCheckbox: FC<FilterCheckboxProps> = ({
         <MenuItem
           key={option.id}
           value={option.id}
+          autoFocus
           dense
           disableRipple
-          autoFocus
         >
           <Checkbox
             checked={

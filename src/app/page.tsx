@@ -19,13 +19,12 @@ import { Typography } from '~/components/typography/Typography/Typography';
 import { getPrisonerPicture } from '~/helpers/getPrisonerPicture';
 import { makeClient } from '~/helpers/makeClient';
 
-import styles from './page.module.css';
-import { getBirthDays } from './services';
-
 import {
   PrisonersDocument,
   PrisonersQueryResult,
 } from '../apollo/hooks/usePrisoners';
+import styles from './page.module.css';
+import { getBirthDays } from './services';
 
 export default async function Home() {
   const today = moment().format('YYYY-MM-DD');
@@ -37,56 +36,56 @@ export default async function Home() {
     <Page>
       <PageWithHeader>
         <Box
-          width="100%"
           boxSizing="border-box"
-          pt={{ xs: 0, sm: 0, lg: 0 }}
+          pt={{ lg: 0, sm: 0, xs: 0 }}
           sx={{ overflowX: 'clip' }}
+          width="100%"
         >
           {/* Header */}
           <Grid
-            container
-            maxWidth={1200}
-            margin="auto"
-            justifyContent={{ xs: 'center', lg: 'space-between' }}
             columnGap={1}
+            justifyContent={{ lg: 'space-between', xs: 'center' }}
+            margin="auto"
+            maxWidth={1200}
+            container
           >
-            <Grid item flex={1} xs={12} lg={6}>
-              <Grid container mb={{ xs: 3, lg: 11 }}>
+            <Grid flex={1} lg={6} xs={12} item>
+              <Grid mb={{ lg: 11, xs: 3 }} container>
                 {/* XS photo */}
                 <Grid
-                  item
                   className={styles.frame}
-                  xs={12}
-                  position="relative"
+                  display={{ lg: 'none', xs: 'flex' }}
                   justifyContent="center"
-                  display={{ xs: 'flex', lg: 'none' }}
                   mt={3}
+                  position="relative"
+                  xs={12}
+                  item
                 >
                   <Image
                     alt="photo"
+                    className={styles.frame__photo}
+                    height={331}
                     src="/photo.png"
                     width={572}
-                    height={331}
-                    className={styles.frame__photo}
                   />
                 </Grid>
 
-                <Grid item mt={{ xs: 3, lg: 11.75 }} mb={{ xs: 1.5, lg: 4.5 }}>
-                  <Typography variant="h1" color="brand.red">
+                <Grid mb={{ lg: 4.5, xs: 1.5 }} mt={{ lg: 11.75, xs: 3 }} item>
+                  <Typography color="brand.red" variant="h1">
                     Площадка для поддержки полититеских заключенных
                   </Typography>
                 </Grid>
                 <Grid
-                  item
+                  pl={{ lg: '101px', xs: 0 }}
+                  pr={{ lg: 4, xs: 0 }}
                   width="100%"
-                  pl={{ xs: 0, lg: '101px' }}
-                  pr={{ xs: 0, lg: 4 }}
+                  item
                 >
                   <Typography
-                    variant="subtitle1"
-                    textAlign="left"
                     lineHeight="32.74px"
                     margin="auto"
+                    textAlign="left"
+                    variant="subtitle1"
                   >
                     Команда politzek.org собирает самую обширную базу данных
                     политических преследований за всю историю современной
@@ -94,36 +93,36 @@ export default async function Home() {
                   </Typography>
                 </Grid>
 
-                <Grid item mt={{ xs: 3, lg: 11.75 }}>
-                  <Grid container alignItems="start">
-                    <Grid item display={{ xs: 'none', lg: 'block' }}>
+                <Grid mt={{ lg: 11.75, xs: 3 }} item>
+                  <Grid alignItems="start" container>
+                    <Grid display={{ lg: 'block', xs: 'none' }} item>
                       <video
-                        src="/cat-walking.webm"
-                        autoPlay
                         height={118}
-                        width={190}
-                        loop
+                        src="/cat-walking.webm"
                         style={{ mixBlendMode: 'multiply' }}
+                        width={190}
+                        autoPlay
+                        loop
                       />
                     </Grid>
                     <Grid
+                      display={{ lg: 'none', xs: 'block' }}
+                      flexBasis={{ lg: 'auto', xs: '140px' }}
                       item
-                      flexBasis={{ xs: '140px', lg: 'auto' }}
-                      display={{ xs: 'block', lg: 'none' }}
                     >
                       <video
-                        src="/cat-walking.webm"
-                        autoPlay
                         height={87}
-                        width={140}
-                        loop
+                        src="/cat-walking.webm"
                         style={{ mixBlendMode: 'multiply' }}
+                        width={140}
+                        autoPlay
+                        loop
                       />
                     </Grid>
                     <Grid
-                      item
+                      flexBasis={{ lg: 'auto', xs: 'calc(100% - 140px)' }}
                       pl={1.5}
-                      flexBasis={{ xs: 'calc(100% - 140px)', lg: 'auto' }}
+                      item
                     >
                       <Link href="/prisoners">
                         <Button>Узнать их истории</Button>
@@ -136,73 +135,73 @@ export default async function Home() {
 
             {/* LG photo */}
             <DrawingFrame
-              item
               className={styles.frame}
-              lg={5}
-              display={{ xs: 'none', lg: 'flex' }}
-              position="relative"
+              display={{ lg: 'flex', xs: 'none' }}
               justifyContent="center"
+              lg={5}
               mt="-130px"
+              position="relative"
+              item
             >
               <Image
                 alt="photo"
+                className={styles.frame__photo}
+                height={381}
                 src="/photo.png"
                 width={600}
-                height={381}
-                className={styles.frame__photo}
               />
             </DrawingFrame>
           </Grid>
 
           {/* Carousel section */}
           <Grid
-            item
             className={styles.carousel}
-            width="100%"
-            py={{ xs: 6, lg: 10.75 }}
-            px={2}
             position="relative"
+            px={2}
+            py={{ lg: 10.75, xs: 6 }}
+            width="100%"
+            item
           >
             <Grid
-              container
-              maxWidth={1200}
               alignItems="end"
               flexDirection="column"
               margin="auto"
+              maxWidth={1200}
+              container
             >
               <Image
                 alt="scraches"
+                className={styles.carousel__scratches}
+                height={483}
                 src="/scratches.png"
                 width={700}
-                height={483}
-                className={styles.carousel__scratches}
               />
-              <Grid item width={{ xs: 'auto', lg: 695 }} zIndex={200}>
-                <Typography variant="h1" color="brand.yellow">
+              <Grid width={{ lg: 695, xs: 'auto' }} zIndex={200} item>
+                <Typography color="brand.yellow" variant="h1">
                   О ком эта площадка?
                 </Typography>
               </Grid>
-              <Grid item width={{ xs: 'auto', lg: 594 }} mt={4} zIndex={200}>
+              <Grid mt={4} width={{ lg: 594, xs: 'auto' }} zIndex={200} item>
                 <Typography
-                  variant="subtitle1"
                   color="brand.white"
-                  lineHeight="32.74px"
                   component="p"
+                  lineHeight="32.74px"
+                  variant="subtitle1"
                 >
                   На этом сайте мы рассказываем о тех, кого, по нашему мнению,
                   российское государство преследует по политическим мотивам.
                 </Typography>
                 <br />
                 <Typography
-                  variant="subtitle1"
                   color="brand.white"
-                  lineHeight="32.74px"
                   component="p"
+                  lineHeight="32.74px"
+                  variant="subtitle1"
                 >
                   В нашей базе есть люди с абсолютно противоположными взглядами
                 </Typography>
               </Grid>
-              <Grid item width="100%" mt={7} zIndex={200}>
+              <Grid mt={7} width="100%" zIndex={200} item>
                 <Carousel settings={{ dots: true }}>
                   {prisoners?.edges
                     .filter(({ node: prisoner }) => !!prisoner.photo)
@@ -212,17 +211,17 @@ export default async function Home() {
                         key={prisoner.id}
                       >
                         <CarouselImage
-                          height={150}
                           src={getPrisonerPicture(
                             prisoner.photo,
                             prisoner.gender,
                           )}
+                          height={150}
                         />
                       </Link>
                     ))}
                 </Carousel>
               </Grid>
-              <Grid item alignSelf="center" mt={8}>
+              <Grid alignSelf="center" mt={8} item>
                 <Link href="/prisoners">
                   <Button variant="red">Смотреть список</Button>
                 </Link>
@@ -232,67 +231,67 @@ export default async function Home() {
 
           {/* Numbers section */}
           <Grid
-            item
             className={styles.numbers}
-            width="100%"
             position="relative"
-            py={{ xs: 6, lg: 10.75 }}
             px={2}
+            py={{ lg: 10.75, xs: 6 }}
+            width="100%"
+            item
           >
             <Dashboard />
           </Grid>
 
           {/* Why section */}
           <Grid
-            item
             className={styles.why}
             id="why"
-            width="100%"
+            padding={{ lg: 10.75, sm: 2, xs: 1 }}
+            paddingTop={{ lg: 'auto', xs: 6 }}
             position="relative"
-            padding={{ xs: 1, sm: 2, lg: 10.75 }}
-            paddingTop={{ xs: 6, lg: 'auto' }}
+            width="100%"
+            item
           >
             <Image
               alt="strokes"
+              className={styles.why__strokes}
+              height={377}
               src="/strokes.png"
               width={548}
-              height={377}
-              className={styles.why__strokes}
             />
             <Grid
-              container
-              maxWidth={1200}
-              margin="auto"
-              flexDirection="column"
               alignItems="end"
+              flexDirection="column"
+              margin="auto"
+              maxWidth={1200}
               position="relative"
+              container
             >
               <Image
                 alt="photo-1"
+                className={styles.why__photo}
+                height={428}
                 src="/photo-1.png"
                 width={645}
-                height={428}
-                className={styles.why__photo}
               />
-              <Grid item mb={4.5} textAlign="right" zIndex={200}>
-                <Typography variant="h1" color="brand.yellow">
+              <Grid mb={4.5} textAlign="right" zIndex={200} item>
+                <Typography color="brand.yellow" variant="h1">
                   Почему помогать всем —<br />
                   это важно?
                 </Typography>
               </Grid>
               <Grid
-                item
                 maxWidth={594}
                 mb={{ lg: 7.25 }}
-                order={{ xs: 2, lg: 1 }}
+                order={{ lg: 1, xs: 2 }}
+                item
               >
-                <Typography variant="subtitle1" component="p">
+                <Typography component="p" variant="subtitle1">
                   В этой базе данных много тех, кого не признали
                   политзаключенными и тех, кто не пользуется широкой поддержкой
                   из-за жесткости и неоднозначности обвинений.
                 </Typography>
                 <br />
-                <Typography variant="subtitle1" component="p">
+                <Typography component="p" variant="subtitle1">
                   Наша позиция простая: нельзя забывать никого. В поддержке
                   нуждаются все, кто столкнулся с произволом и жестокостью
                   российской военно-полицейской машины, кто совершил даже
@@ -302,17 +301,17 @@ export default async function Home() {
                 </Typography>
               </Grid>
               <Grid
-                item
-                order={{ xs: 1, lg: 2 }}
+                mb={{ lg: 0, xs: 7 }}
                 mt={{ xs: 3 }}
-                mb={{ xs: 7, lg: 0 }}
+                order={{ lg: 2, xs: 1 }}
+                item
               >
                 <Image
                   alt="cat_2"
-                  width={230}
-                  height={177}
                   className={styles.why__cat}
+                  height={177}
                   src="/cat_2.svg"
+                  width={230}
                 />
               </Grid>
             </Grid>
@@ -320,57 +319,57 @@ export default async function Home() {
 
           {/* What section */}
           <Grid
-            item
             className={styles.what}
             id="what"
+            padding={{ lg: 10.75, sm: 2, xs: 1 }}
+            paddingTop={{ lg: 'auto', xs: 6 }}
             width="100%"
-            padding={{ xs: 1, sm: 2, lg: 10.75 }}
-            paddingTop={{ xs: 6, lg: 'auto' }}
+            item
           >
             <Grid
-              container
-              maxWidth={1200}
-              margin="auto"
-              flexDirection="column"
               alignItems="start"
+              flexDirection="column"
+              margin="auto"
+              maxWidth={1200}
               position="relative"
+              container
             >
               <Image
                 alt="arrow"
-                width={89}
+                className={styles.what__arrow}
                 height={129}
                 src="/arrow.png"
-                className={styles.what__arrow}
+                width={89}
               />
               <Image
                 alt="scratches_2"
-                width={508}
+                className={styles.what__scratches}
                 height={347}
                 src="/scratches_2.png"
-                className={styles.what__scratches}
+                width={508}
               />
               <Image
                 alt="stripes"
-                width={508}
+                className={styles.what__stripes}
                 height={350}
                 src="/stripes.png"
-                className={styles.what__stripes}
+                width={508}
               />
-              <Grid item textAlign="left" zIndex={200}>
-                <Typography variant="h1" color="brand.red">
+              <Grid textAlign="left" zIndex={200} item>
+                <Typography color="brand.red" variant="h1">
                   Что вы можете
                   <br />
                   сделать?
                 </Typography>
               </Grid>
               <Grid
-                item
+                alignSelf="end"
                 maxWidth={594}
                 mb={7.25}
-                alignSelf="end"
-                mt={{ xs: 4, lg: '-20px' }}
+                mt={{ lg: '-20px', xs: 4 }}
+                item
               >
-                <Typography variant="subtitle1" component="p">
+                <Typography component="p" variant="subtitle1">
                   Мы с вами — последняя надежда для этих людей, их последняя
                   связь с внешним миром. Вы можете писать им письма,
                   поддерживать финансово их семьи, делать передачи, отправлять
@@ -385,24 +384,24 @@ export default async function Home() {
 
           {/* Whom section */}
           <Grid
-            item
             className={styles.whom}
             id="whom"
-            width="100%"
+            padding={{ lg: 10.75, sm: 2, xs: 1 }}
+            paddingTop={{ lg: 'auto', xs: 6 }}
             position="relative"
-            padding={{ xs: 1, sm: 2, lg: 10.75 }}
-            paddingTop={{ xs: 6, lg: 'auto' }}
+            width="100%"
+            item
           >
             <Grid
-              container
-              maxWidth={1100}
-              margin="auto"
-              flexDirection="column"
               alignItems="start"
+              flexDirection="column"
               gap={7.25}
+              margin="auto"
+              maxWidth={1100}
+              container
             >
-              <Grid item textAlign="left" zIndex={200}>
-                <Typography variant="h1" color="brand.yellow">
+              <Grid textAlign="left" zIndex={200} item>
+                <Typography color="brand.yellow" variant="h1">
                   Кому можно помочь
                   <br />
                   прямо сейчас?
@@ -411,29 +410,29 @@ export default async function Home() {
 
               {!!birthdays.length && (
                 <>
-                  <Grid item width="100%" mb={-2.75}>
-                    <Typography variant="subtitle1" color="brand.white">
+                  <Grid mb={-2.75} width="100%" item>
+                    <Typography color="brand.white" variant="subtitle1">
                       Скоро день рождения: можно поздравить
                     </Typography>
                   </Grid>
-                  <Grid item width="100%" height={335}>
+                  <Grid height={335} width="100%" item>
                     <Carousel
                       settings={{
+                        autoplay: false,
                         dots: true,
                         infinite: false,
-                        autoplay: false,
                       }}
                     >
                       {birthdays.map((birthday, index) => (
                         <PersonCard
-                          key={index}
-                          id={birthday.slug}
-                          size="m"
-                          mediaItemUrl={birthday.photo}
-                          name={birthday.name}
                           subtitle={moment(birthday.date_of_birth).format(
                             'D MMMM',
                           )}
+                          id={birthday.slug}
+                          key={index}
+                          mediaItemUrl={birthday.photo}
+                          name={birthday.name}
+                          size="m"
                         />
                       ))}
                     </Carousel>
@@ -479,12 +478,12 @@ export default async function Home() {
           {/* List section */}
           <Grid container>
             <Grid
-              item
               className={styles.list}
-              width="100%"
               position="relative"
-              py={{ xs: 6, lg: 10.75 }}
               px={2}
+              py={{ lg: 10.75, xs: 6 }}
+              width="100%"
+              item
             >
               <PrisonersSearch
                 overrideCta={
@@ -512,8 +511,8 @@ const getPrisoners = async (): Promise<
     }
 
     const res: Partial<PrisonersQueryResult> = await client.query({
-      query: PrisonersDocument,
       errorPolicy: 'all',
+      query: PrisonersDocument,
     });
 
     return res.data?.airtable_data_edgeCollection;

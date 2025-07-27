@@ -11,31 +11,31 @@ export default function Maintainance() {
     <PageWithHeader>
       <Grid container>
         <Grid
-          item
           className={styles.header}
+          padding={{ lg: 10.75, sm: 2, xs: 1 }}
+          pt={{ lg: 0, sm: 0, xs: 0 }}
           width="100%"
-          padding={{ xs: 1, sm: 2, lg: 10.75 }}
-          pt={{ xs: 0, sm: 0, lg: 0 }}
+          item
         >
           <Grid
-            container
-            maxWidth={1200}
+            justifyContent={{ lg: 'space-between', xs: 'center' }}
             margin="auto"
-            justifyContent={{ xs: 'center', lg: 'space-between' }}
+            maxWidth={1200}
+            container
           >
-            <Grid item flex={1} xs={12}>
-              <Grid container mb={{ xs: 3, lg: 11 }}>
-                <Grid item mt={{ xs: 3, lg: 11.75 }} mb={{ xs: 1.5, lg: 4.5 }}>
-                  <Typography variant="h1" color="brand.red">
+            <Grid flex={1} xs={12} item>
+              <Grid mb={{ lg: 11, xs: 3 }} container>
+                <Grid mb={{ lg: 4.5, xs: 1.5 }} mt={{ lg: 11.75, xs: 3 }} item>
+                  <Typography color="brand.red" variant="h1">
                     Возвращайтесь в конце февраля
                   </Typography>
                 </Grid>
-                <Grid item width="100%" pl={{ xs: 0, lg: '101px' }}>
+                <Grid pl={{ lg: '101px', xs: 0 }} width="100%" item>
                   <Typography
-                    variant="subtitle1"
-                    textAlign="left"
                     lineHeight="32.74px"
                     margin="auto"
+                    textAlign="left"
+                    variant="subtitle1"
                   >
                     Скоро здесь будет информация о тех, кого российское
                     государство преследуют из-за войны в Украине. Следите за
@@ -43,36 +43,36 @@ export default function Maintainance() {
                   </Typography>
                 </Grid>
 
-                <Grid item mt={{ xs: 3, lg: 11.75 }}>
-                  <Grid container alignItems="start">
-                    <Grid item display={{ xs: 'none', lg: 'block' }}>
+                <Grid mt={{ lg: 11.75, xs: 3 }} item>
+                  <Grid alignItems="start" container>
+                    <Grid display={{ lg: 'block', xs: 'none' }} item>
                       <video
-                        src="/cat-walking.webm"
-                        autoPlay
                         height={118}
-                        width={190}
-                        loop
+                        src="/cat-walking.webm"
                         style={{ mixBlendMode: 'multiply' }}
+                        width={190}
+                        autoPlay
+                        loop
                       />
                     </Grid>
                     <Grid
+                      display={{ lg: 'none', xs: 'block' }}
+                      flexBasis={{ lg: 'auto', xs: '140px' }}
                       item
-                      flexBasis={{ xs: '140px', lg: 'auto' }}
-                      display={{ xs: 'block', lg: 'none' }}
                     >
                       <video
-                        src="/cat-walking.webm"
-                        autoPlay
                         height={87}
-                        width={140}
-                        loop
+                        src="/cat-walking.webm"
                         style={{ mixBlendMode: 'multiply' }}
+                        width={140}
+                        autoPlay
+                        loop
                       />
                     </Grid>
                     <Grid
-                      item
+                      flexBasis={{ lg: 'auto', xs: 'calc(100% - 140px)' }}
                       pl={1.5}
-                      flexBasis={{ xs: 'calc(100% - 140px)', lg: 'auto' }}
+                      item
                     >
                       <a href="https://t.me/+fl5X4ur0GsFmOTYy" target="_blank">
                         <Button>Хочу подписаться!</Button>

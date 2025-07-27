@@ -16,17 +16,17 @@ import { Gender, Status } from '~/components/extractions/Status/Status';
 import { Typography } from '~/components/typography/Typography/Typography';
 
 const Container = styled(DrawingFrame)({
-  position: 'relative',
-
   boxSizing: 'border-box',
+
+  position: 'relative',
 });
 
 const CardImageContainer = styled('div')({
-  position: 'absolute',
-  top: -40,
-  left: -6,
-
   filter: 'drop-shadow(4px 4px 0px #000000)',
+  left: -6,
+  position: 'absolute',
+
+  top: -40,
 });
 
 const CardEmptyImageContainer = styled(CardImageContainer)({
@@ -34,12 +34,12 @@ const CardEmptyImageContainer = styled(CardImageContainer)({
 });
 
 const CardImage = styled('img')({
-  width: 126,
+  clipPath: 'polygon(98% 0, 100% 74%, 96% 100%, 0 97%, 4% 0)',
   height: 126,
 
   objectFit: 'contain',
 
-  clipPath: 'polygon(98% 0, 100% 74%, 96% 100%, 0 97%, 4% 0)',
+  width: 126,
 });
 
 type ProfileImageProps = DetailedHTMLProps<
@@ -52,16 +52,16 @@ const ProfileImage: FC<ProfileImageProps> = (props) => {
   return (
     <CardImage
       {...props}
-      src={hasError ? '/error.avif' : props.src}
       onError={() => setHasError(true)}
+      src={hasError ? '/error.avif' : props.src}
     />
   );
 };
 
 const EmptyImage = styled(CardImage)({
-  clipPath: 'none',
-
   backgroundColor: 'none',
+
+  clipPath: 'none',
 });
 
 const StyledName = styled(Typography)({
@@ -71,63 +71,63 @@ const StyledName = styled(Typography)({
 });
 
 type CardPZProps = {
-  name: string | null;
-  body: string | null;
-  sex: string | null;
-  status: string | null;
-  freedomdate: string | null;
   articles: (null | string)[] | null;
+  body: string | null;
+  freedomdate: string | null;
+  name: string | null;
+  pictureUrl: string | null;
   primaryAction: ReactNode;
   secondaryAction: ReactNode;
-  pictureUrl: string | null;
+  sex: string | null;
+  status: string | null;
 };
 export const CardPZ: FC<Partial<CardPZProps>> = ({
-  name,
-  body,
-  sex,
-  status,
   articles,
+  body,
+  name,
+  pictureUrl,
   primaryAction,
   secondaryAction,
-  pictureUrl,
+  sex,
+  status,
 }) => {
   return (
     <Container
-      container
       flexDirection="column"
-      rowSpacing={2}
-      pl={2}
-      pr={3}
       pb={8}
+      pl={2}
       position="relative"
+      pr={3}
+      rowSpacing={2}
+      container
     >
-      <Grid item maxWidth="100%">
-        <StyledName variant="h3" component="p" pl={15.5}>
+      <Grid maxWidth="100%" item>
+        <StyledName component="p" pl={15.5} variant="h3">
           {name}
         </StyledName>
       </Grid>
       {status && sex && (
-        <Box position="absolute" top={-32} right={0}>
-          <Status status={status as Status} gender={sex as Gender} />
+        <Box position="absolute" right={0} top={-32}>
+          <Status gender={sex as Gender} status={status as Status} />
         </Box>
       )}
       {articles && articles.length > 0 && (
         <Grid item>
-          <Grid container spacing={0.5}>
+          <Grid spacing={0.5} container>
             {articles.map((article, index) => (
-              <Grid item key={index}>
+              <Grid key={index} item>
                 <Article label={article} />
               </Grid>
             ))}
           </Grid>
         </Grid>
       )}
-      <Grid item pb={2} height={175}>
-        <Typography variant="p3" component="div">
+      <Grid height={175} pb={2} item>
+        <Typography component="div" variant="p3">
           <ShowMoreText
+            less=""
             lines={5}
             more=""
-            less=""
             truncatedEndingComponent={'...'}
           >
             {body}
@@ -135,12 +135,12 @@ export const CardPZ: FC<Partial<CardPZProps>> = ({
         </Typography>
       </Grid>
       {primaryAction && (
-        <Box left={16} bottom={16} position="absolute">
+        <Box bottom={16} left={16} position="absolute">
           {primaryAction}
         </Box>
       )}
       {secondaryAction && (
-        <Box right={16} bottom={16} position="absolute">
+        <Box bottom={16} position="absolute" right={16}>
           {secondaryAction}
         </Box>
       )}
@@ -148,18 +148,18 @@ export const CardPZ: FC<Partial<CardPZProps>> = ({
         <CardImageContainer>
           <ProfileImage
             alt="icon_letter"
-            width={126}
             height={126}
             src={pictureUrl}
+            width={126}
           />
         </CardImageContainer>
       ) : (
         <CardEmptyImageContainer>
           <EmptyImage
             alt="icon_letter"
-            width={126}
             height={126}
             src={sex === 'мужской' ? '/default_man.png' : '/default_woman.png'}
+            width={126}
           />
         </CardEmptyImageContainer>
       )}

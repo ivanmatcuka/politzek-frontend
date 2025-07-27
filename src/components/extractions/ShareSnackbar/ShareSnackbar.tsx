@@ -30,17 +30,17 @@ export const ShareSnackbar: FC<ShareSnackbarProps> = ({ slug }) => {
   return (
     <>
       <Button
-        variant="outline"
         onClick={handleClick}
         startIcon={<Icon>share</Icon>}
+        variant="outline"
       >
         Скопировать ссылку (без VPN)
       </Button>
       <Snackbar
-        open={isDialogOpen}
         autoHideDuration={3000}
-        onClose={handleClose}
         message="Ссылка скопирована, её можно открыть из России без VPN"
+        onClose={handleClose}
+        open={isDialogOpen}
       />
     </>
   );
