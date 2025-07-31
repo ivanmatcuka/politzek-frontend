@@ -1,44 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+import { DEFAULT_OPTIONS_RESPONSE, res } from '~/utils/api';
+
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_KEY;
 
-const DEFAULT_HEADERS = {
-  'Content-Type': 'application/json',
-};
-
 export async function OPTIONS() {
-  return NextResponse.json(
-    {},
-    {
-      headers: {
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        'Access-Control-Allow-Methods': 'POST',
-        'Access-Control-Allow-Origin': '*',
-      },
-    },
-  );
+  return NextResponse.json({}, DEFAULT_OPTIONS_RESPONSE);
 }
 
 export async function GET(req: NextRequest) {
   if (!SUPABASE_URL || !SUPABASE_KEY) {
-    return new Response(JSON.stringify({ error: 'Missing Supabase config' }), {
-      headers: DEFAULT_HEADERS,
-      status: 500,
-    });
+    return res({ error: 'Missing Supabase config' }, 500);
   }
 
   const { searchParams } = new URL(req.url);
   const date = searchParams.get('date');
 
   if (!date) {
-    return new Response(
-      JSON.stringify({ error: 'Missing or invalid date parameter' }),
-      {
-        headers: DEFAULT_HEADERS,
-        status: 400,
-      },
-    );
+    return res({ error: 'Missing or invalid date parameter' }, 400);
   }
 
   try {
@@ -50,30 +30,18 @@ export async function GET(req: NextRequest) {
         method: 'GET',
         headers: {
           authorization: `Bearer ${SUPABASE_KEY}`,
-          ...DEFAULT_HEADERS,
+          'Content-Type': 'application/json',
         },
       },
     );
 
     if (!response.ok) {
-      return new Response(
-        JSON.stringify({ error: 'Failed to fetch birthdays' }),
-        {
-          headers: DEFAULT_HEADERS,
-          status: response.status,
-        },
-      );
+      return res({ error: 'Failed to fetch birthdays' }, response.status);
     }
 
     const data = await response.text();
-    return new Response(data, {
-      headers: DEFAULT_HEADERS,
-      status: 200,
-    });
+    return res(data, 200);
   } catch (error) {
-    return new Response(JSON.stringify({ error: 'Internal Server Error' }), {
-      headers: DEFAULT_HEADERS,
-      status: 500,
-    });
+    return res({ error: 'Internal Server Error' }, 500);
   }
 }

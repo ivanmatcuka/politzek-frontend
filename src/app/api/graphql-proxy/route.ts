@@ -1,30 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+import { DEFAULT_OPTIONS_RESPONSE, res } from '~/utils/api';
+
 const SUPABASE_URL = process.env.SUPABASE_URL;
 
-const DEFAULT_HEADERS = {
-  'Content-Type': 'application/json',
-};
-
 export async function OPTIONS() {
-  return NextResponse.json(
-    {},
-    {
-      headers: {
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        'Access-Control-Allow-Methods': 'POST',
-        'Access-Control-Allow-Origin': '*',
-      },
-    },
-  );
+  return NextResponse.json({}, DEFAULT_OPTIONS_RESPONSE);
 }
 
 export async function POST(req: NextRequest) {
   if (!SUPABASE_URL) {
-    return new Response(JSON.stringify({ error: 'Missing Supabase config' }), {
-      headers: DEFAULT_HEADERS,
-      status: 500,
-    });
+    return res({ error: 'Missing Supabase config' }, 500);
   }
 
   const body = await req.json();
@@ -33,14 +19,11 @@ export async function POST(req: NextRequest) {
     body: JSON.stringify(body),
     method: 'POST',
     headers: {
-      ...DEFAULT_HEADERS,
+      'Content-Type': 'application/json',
     },
   });
 
   const data = await response.text();
 
-  return new Response(data, {
-    headers: DEFAULT_HEADERS,
-    status: response.status,
-  });
+  return res(data, response.status);
 }
