@@ -83,3 +83,6 @@ p {
 .slick-dots li button::before {
   color: #fff !important;
 }
+.slick-slide {
+  margin-right: 10px;
+}

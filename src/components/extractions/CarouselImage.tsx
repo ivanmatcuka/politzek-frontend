@@ -1,23 +1,28 @@
 'use client';
 
-import { styled } from '@mui/material';
-import { DetailedHTMLProps, FC, ImgHTMLAttributes, useState } from 'react';
-
-const StyledImage = styled('img')({
-  marginRight: 10,
-});
+import Image, { ImageProps } from 'next/image';
+import { FC, useState } from 'react';
 
 type ProfileImageProps = {
   onError?: () => void;
-} & DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>;
-export const ProfileImage: FC<ProfileImageProps> = (props) => {
+} & ImageProps;
+export const ProfileImage: FC<ProfileImageProps> = ({
+  alt = 'image',
+  height,
+  src = '',
+  width,
+  ...props
+}) => {
   const [hasError, setHasError] = useState(false);
 
   return (
-    <StyledImage
+    <Image
       {...props}
+      alt={alt}
+      height={Number(height)}
       onError={() => setHasError(true)}
-      src={hasError ? '/error.avif' : props.src}
+      src={hasError ? '/error.avif' : src}
+      width={Number(width)}
     />
   );
 };
@@ -27,6 +32,10 @@ type CarouselImageProps = {
   height?: number | `${number}` | undefined;
   src: string;
 };
-export const CarouselImage: FC<CarouselImageProps> = ({ alt, height, src }) => {
-  return <ProfileImage alt={alt} height={height} src={src} />;
+export const CarouselImage: FC<CarouselImageProps> = ({
+  alt = 'image',
+  height,
+  src,
+}) => {
+  return <ProfileImage alt={alt} height={height} src={src} width={height} />;
 };

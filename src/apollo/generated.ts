@@ -3,25 +3,25 @@ import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = { [SubKey in K]?: Maybe<T[SubKey]> } & Omit<T, K>;
-export type MakeMaybe<T, K extends keyof T> = { [SubKey in K]: Maybe<T[SubKey]> } & Omit<T, K>;
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
 export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
+  ID: { input: string; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
   BigFloat: { input: any; output: any; }
   BigInt: { input: any; output: any; }
-  Boolean: { input: boolean; output: boolean; }
   Cursor: { input: any; output: any; }
   Date: { input: any; output: any; }
   Datetime: { input: any; output: any; }
-  Float: { input: number; output: number; }
-  ID: { input: string; output: string; }
-  Int: { input: number; output: number; }
   JSON: { input: any; output: any; }
   Opaque: { input: any; output: any; }
-  String: { input: string; output: string; }
   Time: { input: any; output: any; }
   UUID: { input: any; output: any; }
 };
@@ -180,13 +180,13 @@ export type IntListFilter = {
 /** The root type for creating and mutating data */
 export type Mutation = {
   __typename?: 'Mutation';
-  delete_logs?: Maybe<Scalars['Opaque']['output']>;
   /** Deletes zero or more records from the `airtable_data_edge` collection */
   deleteFromairtable_data_edgeCollection: Airtable_Data_EdgeDeleteResponse;
   /** Deletes zero or more records from the `logs` collection */
   deleteFromlogsCollection: LogsDeleteResponse;
   /** Deletes zero or more records from the `prisoner_stats` collection */
   deleteFromprisoner_statsCollection: Prisoner_StatsDeleteResponse;
+  delete_logs?: Maybe<Scalars['Opaque']['output']>;
   /** Adds one or more `airtable_data_edge` records to the collection */
   insertIntoairtable_data_edgeCollection?: Maybe<Airtable_Data_EdgeInsertResponse>;
   /** Adds one or more `logs` records to the collection */
@@ -414,7 +414,7 @@ export type UuidListFilter = {
   overlaps?: InputMaybe<Array<Scalars['UUID']['input']>>;
 };
 
-export type Airtable_Data_Edge = {
+export type Airtable_Data_Edge = Node & {
   __typename?: 'airtable_data_edge';
   address?: Maybe<Scalars['String']['output']>;
   address_for_letters?: Maybe<Scalars['String']['output']>;
@@ -441,7 +441,7 @@ export type Airtable_Data_Edge = {
   release_date?: Maybe<Scalars['String']['output']>;
   slug?: Maybe<Scalars['String']['output']>;
   status?: Maybe<Scalars['String']['output']>;
-} & Node;
+};
 
 export type Airtable_Data_EdgeConnection = {
   __typename?: 'airtable_data_edgeConnection';
@@ -588,7 +588,7 @@ export type Airtable_Data_EdgeUpdateResponse = {
   records: Array<Airtable_Data_Edge>;
 };
 
-export type Logs = {
+export type Logs = Node & {
   __typename?: 'logs';
   duration?: Maybe<Scalars['String']['output']>;
   id: Scalars['Int']['output'];
@@ -598,7 +598,7 @@ export type Logs = {
   status?: Maybe<Scalars['String']['output']>;
   timestamp?: Maybe<Scalars['Datetime']['output']>;
   type?: Maybe<Scalars['String']['output']>;
-} & Node;
+};
 
 export type LogsConnection = {
   __typename?: 'logsConnection';
@@ -677,7 +677,7 @@ export type LogsUpdateResponse = {
   records: Array<Logs>;
 };
 
-export type Prisoner_Stats = {
+export type Prisoner_Stats = Node & {
   __typename?: 'prisoner_stats';
   address_count?: Maybe<Scalars['Int']['output']>;
   age_ranges?: Maybe<Scalars['JSON']['output']>;
@@ -690,7 +690,7 @@ export type Prisoner_Stats = {
   out_count?: Maybe<Scalars['Int']['output']>;
   total_count?: Maybe<Scalars['Int']['output']>;
   updated_at?: Maybe<Scalars['String']['output']>;
-} & Node;
+};
 
 export type Prisoner_StatsConnection = {
   __typename?: 'prisoner_statsConnection';
@@ -784,22 +784,22 @@ export type PrisonerQueryVariables = Exact<{
 }>;
 
 
-export type PrisonerQuery = { __typename?: 'Query', airtable_data_edgeCollection?: { __typename?: 'airtable_data_edgeConnection', edges: Array<{ __typename?: 'airtable_data_edgeEdge', node: { __typename?: 'airtable_data_edge', address?: string | null, address_for_letters?: string | null, age?: number | null, articles?: Array<string | null> | null, can_write?: boolean | null, coordinates?: string | null, created_time?: any | null, date_of_arrest?: string | null, date_of_birth?: string | null, description?: string | null, formatted_description?: string | null, gender?: string | null, id: string, institution_short_name?: string | null, interests?: Array<string | null> | null, last_sync?: any | null, name?: string | null, photo?: string | null, published?: boolean | null, region?: string | null, release_date?: string | null; slug?: string | null, status?: string | null, } }> } | null };
+export type PrisonerQuery = { __typename?: 'Query', airtable_data_edgeCollection?: { __typename?: 'airtable_data_edgeConnection', edges: Array<{ __typename?: 'airtable_data_edgeEdge', node: { __typename?: 'airtable_data_edge', id: string, created_time?: any | null, name?: string | null, description?: string | null, formatted_description?: string | null, articles?: Array<string | null> | null, photo?: string | null, coordinates?: string | null, institution_short_name?: string | null, address?: string | null, date_of_arrest?: string | null, address_for_letters?: string | null, date_of_birth?: string | null, age?: number | null, gender?: string | null, region?: string | null, status?: string | null, published?: boolean | null, interests?: Array<string | null> | null, can_write?: boolean | null, slug?: string | null, last_sync?: any | null, release_date?: string | null } }> } | null };
 
-export type PrisonerItemFragment = { __typename?: 'airtable_data_edge', address?: string | null, address_for_letters?: string | null, age?: number | null, articles?: Array<string | null> | null, can_write?: boolean | null, coordinates?: string | null, created_time?: any | null, date_of_arrest?: string | null, date_of_birth?: string | null, description?: string | null, formatted_description?: string | null, gender?: string | null, id: string, institution_short_name?: string | null, interests?: Array<string | null> | null, last_sync?: any | null, name?: string | null, photo?: string | null, published?: boolean | null, region?: string | null, release_date?: string | null; slug?: string | null, status?: string | null, };
+export type PrisonerItemFragment = { __typename?: 'airtable_data_edge', id: string, created_time?: any | null, name?: string | null, description?: string | null, formatted_description?: string | null, articles?: Array<string | null> | null, photo?: string | null, coordinates?: string | null, institution_short_name?: string | null, address?: string | null, date_of_arrest?: string | null, address_for_letters?: string | null, date_of_birth?: string | null, age?: number | null, gender?: string | null, region?: string | null, status?: string | null, published?: boolean | null, interests?: Array<string | null> | null, can_write?: boolean | null, slug?: string | null, last_sync?: any | null, release_date?: string | null };
 
 export type PrisonersQueryVariables = Exact<{
-  filter?: InputMaybe<Airtable_Data_EdgeFilter>;
   offset?: InputMaybe<Scalars['Int']['input']>;
+  filter?: InputMaybe<Airtable_Data_EdgeFilter>;
 }>;
 
 
-export type PrisonersQuery = { __typename?: 'Query', airtable_data_edgeCollection?: { __typename?: 'airtable_data_edgeConnection', edges: Array<{ __typename?: 'airtable_data_edgeEdge', node: { __typename?: 'airtable_data_edge', address?: string | null, address_for_letters?: string | null, age?: number | null, articles?: Array<string | null> | null, can_write?: boolean | null, coordinates?: string | null, created_time?: any | null, date_of_arrest?: string | null, date_of_birth?: string | null, description?: string | null, formatted_description?: string | null, gender?: string | null, id: string, institution_short_name?: string | null, interests?: Array<string | null> | null, last_sync?: any | null, name?: string | null, photo?: string | null, published?: boolean | null, region?: string | null, release_date?: string | null; slug?: string | null, status?: string | null, } }> } | null };
+export type PrisonersQuery = { __typename?: 'Query', airtable_data_edgeCollection?: { __typename?: 'airtable_data_edgeConnection', edges: Array<{ __typename?: 'airtable_data_edgeEdge', node: { __typename?: 'airtable_data_edge', id: string, created_time?: any | null, name?: string | null, description?: string | null, formatted_description?: string | null, articles?: Array<string | null> | null, photo?: string | null, coordinates?: string | null, institution_short_name?: string | null, address?: string | null, date_of_arrest?: string | null, address_for_letters?: string | null, date_of_birth?: string | null, age?: number | null, gender?: string | null, region?: string | null, status?: string | null, published?: boolean | null, interests?: Array<string | null> | null, can_write?: boolean | null, slug?: string | null, last_sync?: any | null, release_date?: string | null } }> } | null };
 
 export type PrisonerStatusCountsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PrisonerStatusCountsQuery = { __typename?: 'Query', prisoner_statsCollection?: { __typename?: 'prisoner_statsConnection', edges: Array<{ __typename?: 'prisoner_statsEdge', node: { __typename?: 'prisoner_stats', address_count?: number | null, age_ranges?: any | null, created_at?: any | null, id: number, imprisoned_count?: number | null, in_process_count?: number | null, out_count?: number | null, total_count?: number | null, updated_at?: string | null } }> } | null };
+export type PrisonerStatusCountsQuery = { __typename?: 'Query', prisoner_statsCollection?: { __typename?: 'prisoner_statsConnection', edges: Array<{ __typename?: 'prisoner_statsEdge', node: { __typename?: 'prisoner_stats', id: number, total_count?: number | null, in_process_count?: number | null, imprisoned_count?: number | null, address_count?: number | null, out_count?: number | null, age_ranges?: any | null, created_at?: any | null, updated_at?: string | null } }> } | null };
 
 export const PrisonerItemFragmentDoc = gql`
     fragment PrisonerItem on airtable_data_edge {

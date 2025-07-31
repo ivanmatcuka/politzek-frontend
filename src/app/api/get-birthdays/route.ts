@@ -49,7 +49,6 @@ export async function GET(req: NextRequest) {
       {
         method: 'GET',
         headers: {
-          apikey: SUPABASE_KEY,
           authorization: `Bearer ${SUPABASE_KEY}`,
           ...DEFAULT_HEADERS,
         },

@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const SUPABASE_KEY = process.env.SUPABASE_KEY;
 const SUPABASE_URL = process.env.SUPABASE_URL;
 
 const DEFAULT_HEADERS = {
@@ -21,7 +20,7 @@ export async function OPTIONS() {
 }
 
 export async function POST(req: NextRequest) {
-  if (!SUPABASE_KEY || !SUPABASE_URL) {
+  if (!SUPABASE_URL) {
     return new Response(JSON.stringify({ error: 'Missing Supabase config' }), {
       headers: DEFAULT_HEADERS,
       status: 500,
@@ -34,8 +33,6 @@ export async function POST(req: NextRequest) {
     body: JSON.stringify(body),
     method: 'POST',
     headers: {
-      apikey: SUPABASE_KEY,
-      authorization: `Bearer ${SUPABASE_KEY}`,
       ...DEFAULT_HEADERS,
     },
   });

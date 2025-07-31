@@ -15,7 +15,9 @@ export const getBirthDays = async (
 ): Promise<BirthdaysResponse['data']> => {
   try {
     const response = await fetch(
-      `/api/get-birthdays?date=${encodeURIComponent(formattedDate)}`,
+      `${process.env.SITE_URL}/api/get-birthdays?date=${encodeURIComponent(
+        formattedDate,
+      )}`,
       {
         method: 'GET',
         headers: {
@@ -25,7 +27,7 @@ export const getBirthDays = async (
     );
 
     if (!response.ok) {
-      throw new Error('Failed to submit form');
+      throw new Error('Error');
     }
 
     const { data } = await response.json();

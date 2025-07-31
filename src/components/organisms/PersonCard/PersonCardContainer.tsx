@@ -43,7 +43,6 @@ export const PersonCardContainer = styled('div')<PersonCardContainerProps>(({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    margin: theme.spacing(1.5),
     overflow: 'hidden',
     position: 'relative',
 
