@@ -421,6 +421,7 @@ export type Airtable_Data_Edge = Node & {
   age?: Maybe<Scalars['Int']['output']>;
   articles?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   can_write?: Maybe<Scalars['Boolean']['output']>;
+  case_categories?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   coordinates?: Maybe<Scalars['String']['output']>;
   created_time?: Maybe<Scalars['Datetime']['output']>;
   date_of_arrest?: Maybe<Scalars['String']['output']>;
@@ -471,6 +472,7 @@ export type Airtable_Data_EdgeFilter = {
   and?: InputMaybe<Array<Airtable_Data_EdgeFilter>>;
   articles?: InputMaybe<StringListFilter>;
   can_write?: InputMaybe<BooleanFilter>;
+  case_categories?: InputMaybe<StringListFilter>;
   coordinates?: InputMaybe<StringFilter>;
   created_time?: InputMaybe<DatetimeFilter>;
   date_of_arrest?: InputMaybe<StringFilter>;
@@ -502,6 +504,7 @@ export type Airtable_Data_EdgeInsertInput = {
   age?: InputMaybe<Scalars['Int']['input']>;
   articles?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   can_write?: InputMaybe<Scalars['Boolean']['input']>;
+  case_categories?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   coordinates?: InputMaybe<Scalars['String']['input']>;
   created_time?: InputMaybe<Scalars['Datetime']['input']>;
   date_of_arrest?: InputMaybe<Scalars['String']['input']>;
@@ -560,6 +563,7 @@ export type Airtable_Data_EdgeUpdateInput = {
   age?: InputMaybe<Scalars['Int']['input']>;
   articles?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   can_write?: InputMaybe<Scalars['Boolean']['input']>;
+  case_categories?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   coordinates?: InputMaybe<Scalars['String']['input']>;
   created_time?: InputMaybe<Scalars['Datetime']['input']>;
   date_of_arrest?: InputMaybe<Scalars['String']['input']>;
@@ -784,9 +788,9 @@ export type PrisonerQueryVariables = Exact<{
 }>;
 
 
-export type PrisonerQuery = { __typename?: 'Query', airtable_data_edgeCollection?: { __typename?: 'airtable_data_edgeConnection', edges: Array<{ __typename?: 'airtable_data_edgeEdge', node: { __typename?: 'airtable_data_edge', id: string, created_time?: any | null, name?: string | null, description?: string | null, formatted_description?: string | null, articles?: Array<string | null> | null, photo?: string | null, coordinates?: string | null, institution_short_name?: string | null, address?: string | null, date_of_arrest?: string | null, address_for_letters?: string | null, date_of_birth?: string | null, age?: number | null, gender?: string | null, region?: string | null, status?: string | null, published?: boolean | null, interests?: Array<string | null> | null, can_write?: boolean | null, slug?: string | null, last_sync?: any | null, release_date?: string | null } }> } | null };
+export type PrisonerQuery = { __typename?: 'Query', airtable_data_edgeCollection?: { __typename?: 'airtable_data_edgeConnection', edges: Array<{ __typename?: 'airtable_data_edgeEdge', node: { __typename?: 'airtable_data_edge', id: string, created_time?: any | null, case_categories?: Array<string | null> | null, name?: string | null, description?: string | null, formatted_description?: string | null, articles?: Array<string | null> | null, photo?: string | null, coordinates?: string | null, institution_short_name?: string | null, address?: string | null, date_of_arrest?: string | null, address_for_letters?: string | null, date_of_birth?: string | null, age?: number | null, gender?: string | null, region?: string | null, status?: string | null, published?: boolean | null, interests?: Array<string | null> | null, can_write?: boolean | null, slug?: string | null, last_sync?: any | null, release_date?: string | null } }> } | null };
 
-export type PrisonerItemFragment = { __typename?: 'airtable_data_edge', id: string, created_time?: any | null, name?: string | null, description?: string | null, formatted_description?: string | null, articles?: Array<string | null> | null, photo?: string | null, coordinates?: string | null, institution_short_name?: string | null, address?: string | null, date_of_arrest?: string | null, address_for_letters?: string | null, date_of_birth?: string | null, age?: number | null, gender?: string | null, region?: string | null, status?: string | null, published?: boolean | null, interests?: Array<string | null> | null, can_write?: boolean | null, slug?: string | null, last_sync?: any | null, release_date?: string | null };
+export type PrisonerItemFragment = { __typename?: 'airtable_data_edge', id: string, created_time?: any | null, case_categories?: Array<string | null> | null, name?: string | null, description?: string | null, formatted_description?: string | null, articles?: Array<string | null> | null, photo?: string | null, coordinates?: string | null, institution_short_name?: string | null, address?: string | null, date_of_arrest?: string | null, address_for_letters?: string | null, date_of_birth?: string | null, age?: number | null, gender?: string | null, region?: string | null, status?: string | null, published?: boolean | null, interests?: Array<string | null> | null, can_write?: boolean | null, slug?: string | null, last_sync?: any | null, release_date?: string | null };
 
 export type PrisonersQueryVariables = Exact<{
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -794,7 +798,7 @@ export type PrisonersQueryVariables = Exact<{
 }>;
 
 
-export type PrisonersQuery = { __typename?: 'Query', airtable_data_edgeCollection?: { __typename?: 'airtable_data_edgeConnection', edges: Array<{ __typename?: 'airtable_data_edgeEdge', node: { __typename?: 'airtable_data_edge', id: string, created_time?: any | null, name?: string | null, description?: string | null, formatted_description?: string | null, articles?: Array<string | null> | null, photo?: string | null, coordinates?: string | null, institution_short_name?: string | null, address?: string | null, date_of_arrest?: string | null, address_for_letters?: string | null, date_of_birth?: string | null, age?: number | null, gender?: string | null, region?: string | null, status?: string | null, published?: boolean | null, interests?: Array<string | null> | null, can_write?: boolean | null, slug?: string | null, last_sync?: any | null, release_date?: string | null } }> } | null };
+export type PrisonersQuery = { __typename?: 'Query', airtable_data_edgeCollection?: { __typename?: 'airtable_data_edgeConnection', edges: Array<{ __typename?: 'airtable_data_edgeEdge', node: { __typename?: 'airtable_data_edge', id: string, created_time?: any | null, case_categories?: Array<string | null> | null, name?: string | null, description?: string | null, formatted_description?: string | null, articles?: Array<string | null> | null, photo?: string | null, coordinates?: string | null, institution_short_name?: string | null, address?: string | null, date_of_arrest?: string | null, address_for_letters?: string | null, date_of_birth?: string | null, age?: number | null, gender?: string | null, region?: string | null, status?: string | null, published?: boolean | null, interests?: Array<string | null> | null, can_write?: boolean | null, slug?: string | null, last_sync?: any | null, release_date?: string | null } }> } | null };
 
 export type PrisonerStatusCountsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -805,6 +809,7 @@ export const PrisonerItemFragmentDoc = gql`
     fragment PrisonerItem on airtable_data_edge {
   id
   created_time
+  case_categories
   name
   description
   formatted_description

@@ -132,12 +132,17 @@ export default async function PrisonerPage({
               <Typography mb={2} variant="h2">
                 {prisoner?.name && prisoner.name.split(' ').slice(1).join(' ')}
               </Typography>
-              {prisoner?.status && prisoner?.gender && (
-                <Status
-                  gender={prisoner.gender as Gender}
-                  status={prisoner.status as Status}
-                />
-              )}
+              <Box alignItems="center" display="flex" gap={2}>
+                {prisoner?.status && prisoner?.gender && (
+                  <Status
+                    gender={prisoner.gender as Gender}
+                    status={prisoner.status as Status}
+                  />
+                )}
+                {Array.isArray(prisoner?.case_categories) && (
+                  <PrisonerArticles articles={prisoner.case_categories} />
+                )}
+              </Box>
             </Grid>
             <DrawingFrame
               alignSelf="center"
@@ -149,7 +154,7 @@ export default async function PrisonerPage({
               item
             >
               <Grid flexDirection="column" container>
-                <Grid ml={{ lg: 36, xs: 0 }} item>
+                <Grid mb={2} ml={{ lg: 36, xs: 0 }} item>
                   {Array.isArray(prisoner?.articles) && (
                     <PrisonerArticles articles={prisoner.articles} />
                   )}
@@ -162,9 +167,6 @@ export default async function PrisonerPage({
                 </Grid>
                 <Grid ml={{ lg: 36, xs: 0 }} item>
                   <Typography variant="p3">{freedString}</Typography>
-                </Grid>
-                <Grid ml={{ lg: 36, xs: 0 }} item>
-                  <Typography variant="p3">Следующий суд: –</Typography>
                 </Grid>
                 <Grid my={4} item>
                   <DescriptionLayout
