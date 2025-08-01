@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { DEFAULT_OPTIONS_RESPONSE, res } from '~/utils/api';
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_KEY = process.env.SUPABASE_KEY;
 
 export async function OPTIONS() {
   return NextResponse.json({}, DEFAULT_OPTIONS_RESPONSE);
@@ -19,6 +20,7 @@ export async function POST(req: NextRequest) {
     body: JSON.stringify(body),
     method: 'POST',
     headers: {
+      apikey: SUPABASE_KEY ?? '',
       'Content-Type': 'application/json',
     },
   });
