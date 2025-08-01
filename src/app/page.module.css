@@ -33,48 +33,39 @@
 }
 
 .numbers::before {
-  content: '';
-
   position: absolute;
   bottom: -190px;
   left: 50%;
-  z-index: 100;
-
   transform: rotate(1deg);
-
+  z-index: 100;
+  background-color: #3e4137;
   width: 1078px;
   height: 206px;
-
-  background-color: #3e4137;
+  content: '';
 }
 
 .why {
   background: url('/background-3.png') left no-repeat white;
-  background-size: cover;
   background-position: right;
-
+  background-size: cover;
   overflow-x: clip;
 }
 
 .why::before {
-  content: '';
-
   position: absolute;
   top: 12px;
   right: -2px;
   left: -2px;
-
   transform: rotate(1deg);
-
-  height: 206px;
-
   background-color: #3e4137;
+  height: 206px;
+  content: '';
 }
 
 .whom {
   background: url('/background-4.png') left no-repeat #3e4137;
-  background-size: cover;
   background-position: left;
+  background-size: cover;
 }
 
 .what {
@@ -130,8 +121,8 @@
 
 .why__photo {
   position: absolute;
-  left: -210px;
   top: 78px;
+  left: -210px;
 
   @media (max-width: 1200px) {
     top: 150px;

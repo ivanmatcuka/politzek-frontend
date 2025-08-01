@@ -18,11 +18,8 @@ export const res = (
   const body =
     typeof data === 'string' ? data : JSON.stringify({ error: data });
 
-  return (
-    new Response(body),
-    {
-      headers: headers ?? DEFAULT_HEADERS,
-      status,
-    }
-  );
+  return new Response(body, {
+    headers: headers ?? DEFAULT_HEADERS,
+    status,
+  });
 };

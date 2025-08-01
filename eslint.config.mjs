@@ -28,6 +28,7 @@ export default defineConfig([
     },
 
     rules: {
+      'css-reorder/rule-name': 2,
       'perfectionist/sort-imports': 'error',
       'perfectionist/sort-interfaces': ['error'],
       'react-refresh/only-export-components': ['off'],

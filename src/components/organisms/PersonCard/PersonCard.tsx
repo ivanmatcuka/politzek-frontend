@@ -1,30 +1,19 @@
 'use client';
 
-import { styled } from '@mui/material';
+import classNames from 'classnames';
+import Image from 'next/image';
 import Link from 'next/link';
-import { FC, PropsWithChildren } from 'react';
+import { FC, PropsWithChildren, useState } from 'react';
 
 import { Button } from '~/components/atoms/Button/Button';
 import { Typography } from '~/components/typography/Typography/Typography';
 import { getPrisonerPicture } from '~/helpers/getPrisonerPicture';
 
-import { PersonCardContainer } from './PersonCardContainer';
-
-const PersonCardContent = styled('div')({
-  bottom: 9,
-  color: 'white',
-  left: 12,
-  position: 'absolute',
-});
-
-const ButtonContainer = styled('div')({
-  opacity: 0,
-  transition: 'opacity 0.125s ease-in-out',
-});
+import st from './PersonCard.module.scss';
 
 type PersonCardProps = {
   id: string;
-  mediaItemUrl: string;
+  imageUrl: string;
   name: string;
   size: 'l' | 'm';
   subtitle: string;
@@ -32,34 +21,43 @@ type PersonCardProps = {
 
 export const PersonCard: FC<PropsWithChildren<PersonCardProps>> = ({
   id,
-  mediaItemUrl,
+  imageUrl,
   name,
   size,
   subtitle,
 }) => {
-  const photoUrl = getPrisonerPicture(mediaItemUrl);
+  const [hasError, setHasError] = useState(false);
+  const photoUrl = hasError ? '/error.avif' : getPrisonerPicture(imageUrl);
 
   return (
-    <PersonCardContainer
-      sx={{
-        height: size === 'l' ? 392 : 291,
-        width: size === 'l' ? 392 : 291,
-      }}
-      hasPicture={!!mediaItemUrl}
-      photoUrl={photoUrl}
+    <div
+      className={classNames(
+        st['person-card'],
+        st[imageUrl ? 'person-card--has-photo' : 'person-card--no-photo'],
+        st[`person-card--${size}`],
+      )}
     >
-      <ButtonContainer className="button">
+      <Image
+        alt="hidden"
+        className={st['person-card__image']}
+        height={size === 'l' ? 392 : 291}
+        onError={() => setHasError(true)}
+        src={photoUrl}
+        width={size === 'l' ? 392 : 291}
+      />
+
+      <div className={st['person-card__button']}>
         <Link href={`/prisoner/${id}`}>
           <Button variant="red">перейти</Button>
         </Link>
-      </ButtonContainer>
+      </div>
 
-      <PersonCardContent>
+      <div className={st['person-card__content']}>
         <Typography variant={size === 'l' ? 'h2' : 'h3'}>{name}</Typography>
         <Typography variant={size === 'l' ? 'subtitle1' : 'p3'}>
           {subtitle}
         </Typography>
-      </PersonCardContent>
-    </PersonCardContainer>
+      </div>
+    </div>
   );
 };

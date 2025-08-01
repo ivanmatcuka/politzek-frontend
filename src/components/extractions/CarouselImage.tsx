@@ -3,6 +3,8 @@
 import Image, { ImageProps } from 'next/image';
 import { FC, useState } from 'react';
 
+const DEFAULT_DIMENSIONS = 150;
+
 export const CarouselImage: FC<ImageProps> = ({
   alt = 'carousel-image',
   height,
@@ -16,10 +18,10 @@ export const CarouselImage: FC<ImageProps> = ({
     <Image
       {...props}
       alt={alt}
-      height={Number(height)}
+      height={height ?? DEFAULT_DIMENSIONS}
       onError={() => setHasError(true)}
       src={hasError ? '/error.avif' : src}
-      width={Number(width)}
+      width={width ?? DEFAULT_DIMENSIONS}
     />
   );
 };

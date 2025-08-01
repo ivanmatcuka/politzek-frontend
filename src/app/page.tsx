@@ -205,7 +205,7 @@ export default async function Home() {
                 <Carousel settings={{ dots: true }}>
                   {prisoners?.edges
                     .filter(({ node: prisoner }) => !!prisoner.photo)
-                    .map(({ node: prisoner }) => (
+                    .map(({ node: prisoner }, index) => (
                       <Link
                         href={`/prisoner/${prisoner.slug}`}
                         key={prisoner.id}
@@ -215,6 +215,7 @@ export default async function Home() {
                             prisoner.photo,
                             prisoner.gender,
                           )}
+                          alt={`Carousel image ${index + 1}`}
                           height={150}
                         />
                       </Link>
@@ -429,8 +430,8 @@ export default async function Home() {
                             'D MMMM',
                           )}
                           id={birthday.slug}
+                          imageUrl={birthday.photo}
                           key={index}
-                          mediaItemUrl={birthday.photo}
                           name={birthday.name}
                           size="m"
                         />

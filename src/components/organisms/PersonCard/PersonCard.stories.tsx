@@ -20,7 +20,7 @@ export const PersonCardBig: Story = {
     name: 'Габышев Александр',
     size: 'l',
     subtitle: '18 сентября',
-    mediaItemUrl:
+    imageUrl:
       'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
   },
 };
@@ -31,7 +31,7 @@ export const PersonCardSmall: Story = {
     name: 'Габышев Александр',
     size: 'm',
     subtitle: '18 сентября',
-    mediaItemUrl:
+    imageUrl:
       'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
   },
 };
