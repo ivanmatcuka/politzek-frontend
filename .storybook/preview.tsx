@@ -1,13 +1,13 @@
 import { ThemeProvider } from '@emotion/react';
 import type { Preview } from '@storybook/react';
 
-import { theme } from '../theming/theme';
+import { theme } from '../src/theming/theme';
 
 const defaultTheme = theme;
 
 const withThemeProvider = (Story, context) => {
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={{ ...defaultTheme, cssVariables: true }}>
       <Story {...context} />
     </ThemeProvider>
   );

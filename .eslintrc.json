@@ -1,0 +1,61 @@
+{
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "ignorePatterns": ["src/**/generated.*"],
+  "plugins": ["perfectionist", "react-refresh"],
+  "rules": {
+    "perfectionist/sort-imports": "error",
+    "perfectionist/sort-objects": [
+      "error",
+      {
+        "groups": ["unknown", "method", "multiline-member"]
+      }
+    ],
+    "perfectionist/sort-interfaces": ["error"],
+    "perfectionist/sort-jsx-props": [
+      "error",
+      {
+        "type": "alphabetical",
+        "order": "asc",
+        "fallbackSort": {
+          "type": "unsorted"
+        },
+        "ignoreCase": true,
+        "specialCharacters": "keep",
+        "partitionByNewLine": false,
+        "newlinesBetween": "ignore",
+        "groups": ["multiline", "unknown", "shorthand"]
+      }
+    ],
+    "perfectionist/sort-intersection-types": [
+      "error",
+      {
+        "type": "alphabetical",
+        "order": "asc",
+        "fallbackSort": {
+          "type": "unsorted"
+        },
+        "ignoreCase": true,
+        "specialCharacters": "keep",
+        "partitionByComment": false,
+        "partitionByNewLine": false,
+        "newlinesBetween": "ignore"
+      }
+    ],
+    "perfectionist/sort-object-types": [
+      "error",
+      {
+        "type": "alphabetical",
+        "order": "asc",
+        "ignoreCase": true,
+        "specialCharacters": "keep",
+        "sortBy": "name",
+        "groups": ["unknown", "method", "multiline-member"]
+      }
+    ],
+    "react-refresh/only-export-components": ["off"]
+  }
+}

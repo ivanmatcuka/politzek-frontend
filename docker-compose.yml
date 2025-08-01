@@ -3,12 +3,13 @@ networks:
     external: true
 
 services:
-  politzek:
-    container_name: politzek
+  politzek-frontend:
+    container_name: politzek-frontend
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 3000:3000
+      - 3000
+    env_file: ".env"
     networks:
       - proxy-network
