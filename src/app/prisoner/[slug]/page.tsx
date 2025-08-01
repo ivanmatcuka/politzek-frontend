@@ -132,7 +132,7 @@ export default async function PrisonerPage({
               <Typography mb={2} variant="h2">
                 {prisoner?.name && prisoner.name.split(' ').slice(1).join(' ')}
               </Typography>
-              <Box alignItems="center" display="flex" gap={2}>
+              <Box alignItems="center" display="flex" flexWrap="wrap" gap={2}>
                 {prisoner?.status && prisoner?.gender && (
                   <Status
                     gender={prisoner.gender as Gender}
