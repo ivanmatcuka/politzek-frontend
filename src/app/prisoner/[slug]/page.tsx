@@ -88,6 +88,7 @@ export default async function PrisonerPage({
     <Page>
       <PageWithHeader>
         <Box
+          boxSizing="border-box"
           padding={{ lg: 10.75, sm: 2, xs: 1 }}
           pt={{ lg: 0, sm: 0, xs: 0 }}
           width="100%"
