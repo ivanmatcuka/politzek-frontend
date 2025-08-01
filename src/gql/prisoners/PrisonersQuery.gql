@@ -1,6 +1,7 @@
 fragment PrisonerItem on airtable_data_edge {
   id
   created_time
+  case_categories
   name
   description
   formatted_description
