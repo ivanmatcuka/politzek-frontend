@@ -1,3 +1,17 @@
+$has-photo-gradient: linear-gradient(
+    0deg,
+    rgba(7, 71, 59, 0.3) 0%,
+    rgba(7, 71, 59, 0.3) 100%
+  ),
+  linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
+
+$no-photo-gradient: linear-gradient(
+    0deg,
+    rgba(7, 71, 59, 0.5) 0%,
+    rgba(7, 71, 59, 0.5) 100%
+  ),
+  linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
+
 .person-card {
   display: flex;
   position: relative;
@@ -48,20 +62,10 @@
 }
 
 .person-card--has-photo {
-  background: linear-gradient(
-      0deg,
-      rgba(7, 71, 59, 0.3) 0%,
-      rgba(7, 71, 59, 0.3) 100%
-    ),
-    linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
+  background: $has-photo-gradient;
   background-color: transparent;
 
   &:hover {
-    background: linear-gradient(
-        0deg,
-        rgba(7, 71, 59, 0.5) 0%,
-        rgba(7, 71, 59, 0.5) 100%
-      ),
-      linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
+    background: $no-photo-gradient;
   }
 }
