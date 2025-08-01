@@ -1,25 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: {
-    dirs: ['pages', 'components', 'app'],
-  },
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'staging.politzek.org',
-        port: '',
-      },
-    ],
-  },
-  compiler: {
-    styledComponents: true,
-  },
   experimental: { scrollRestoration: true },
   output: 'standalone',
-  env: {
-    nodeEnv: process.env.NODE_ENV,
-  },
   async headers() {
     return [
       {
@@ -39,6 +21,29 @@ const nextConfig = {
         ],
       },
     ];
+  },
+  compiler: {
+    styledComponents: true,
+  },
+  env: {
+    nodeEnv: process.env.NODE_ENV,
+  },
+  eslint: {
+    dirs: ['pages', 'components', 'app'],
+  },
+  images: {
+    remotePatterns: [
+      {
+        hostname: '**',
+        pathname: '**',
+        protocol: 'https',
+      },
+      {
+        hostname: '**',
+        pathname: '**',
+        protocol: 'http',
+      },
+    ],
   },
 };
 

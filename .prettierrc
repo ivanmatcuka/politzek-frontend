@@ -3,5 +3,7 @@
   "tabWidth": 2,
   "trailingComma": "all",
   "singleQuote": true,
-  "semi": true
+  "semi": true,
+  "plugins": ["prettier-plugin-css-order"],
+  "cssDeclarationSorter": "alphabetical"
 }

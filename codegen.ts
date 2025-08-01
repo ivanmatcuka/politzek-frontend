@@ -1,26 +1,31 @@
 import type { CodegenConfig } from '@graphql-codegen/cli';
 
+import dotenv from 'dotenv';
+
+dotenv.config({ path: '.env.local' });
+
 const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_KEY = process.env.SUPABASE_KEY;
 
 const config: CodegenConfig = {
+  documents: 'src/gql/**/*.gql',
   overwrite: true,
-  schema: {
-    [`${SUPABASE_URL}/graphql/v1`]: {
-      headers: {
-        apikey: process.env.SUPABASE_KEY ?? '',
-      },
-    },
-  },
-  documents: 'gql/**/*.gql',
   generates: {
-    'apollo/generated.ts': {
+    'src/apollo/generated.ts': {
+      config: {
+        withHooks: true,
+      },
       plugins: [
         'typescript',
         'typescript-operations',
         'typescript-react-apollo',
       ],
-      config: {
-        withHooks: true,
+    },
+  },
+  schema: {
+    [`${SUPABASE_URL}/graphql/v1`]: {
+      headers: {
+        authorization: `Bearer ${SUPABASE_KEY}`,
       },
     },
   },
