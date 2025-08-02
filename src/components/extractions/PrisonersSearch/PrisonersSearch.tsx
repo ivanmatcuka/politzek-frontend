@@ -15,6 +15,7 @@ import { useSearch } from '~/hooks/useSearch';
 
 import { PrisonersList } from '../PrisonersList';
 import { interests } from './interests';
+import st from './PrisonersSearch.module.scss';
 
 const DEFAULT_OFFSET = 300;
 const DEFAULT_PAGINATION = 9;
@@ -56,10 +57,14 @@ export const PrisonersSearch: FC<PrisonersSearchProps> = ({
         преследуемых
       </Typography>
 
-      <Box display="flex" flexWrap="wrap" width="100%">
-        <Box flexBasis={{ lg: 500, xs: 'auto' }}>
-          <Image alt="photos" height={320} src="/photos.png" width={500} />
-        </Box>
+      <Box display="flex" flexWrap="wrap" gap={{ lg: 0, xs: 1.5 }}>
+        <Image
+          alt="photos"
+          className={st['photos-image']}
+          height={320}
+          src="/photos.png"
+          width={500}
+        />
         <Box flexBasis={{ lg: 'calc(100% - 500px)', xs: 'auto' }}>
           <Typography color="brand.black" component="p" variant="subtitle1">
             В этом списке собраны истории тех, кого российское государство
