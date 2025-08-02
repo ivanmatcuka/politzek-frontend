@@ -17,7 +17,7 @@ import { PrisonersSearch } from '~/components/extractions/PrisonersSearch/Prison
 import { PersonCard } from '~/components/organisms/PersonCard/PersonCard';
 import { Typography } from '~/components/typography/Typography/Typography';
 import { getPrisonerPicture } from '~/helpers/getPrisonerPicture';
-import { makeClient } from '~/helpers/makeClient';
+import { makeClient } from '~/utils/makeClient';
 
 import {
   PrisonersDocument,

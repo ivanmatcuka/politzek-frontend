@@ -19,7 +19,7 @@ import { ShareSnackbar } from '~/components/extractions/ShareSnackbar';
 import { Gender, Status } from '~/components/extractions/Status';
 import { Typography } from '~/components/typography/Typography/Typography';
 import { getPrisonerPicture } from '~/helpers/getPrisonerPicture';
-import { makeClient } from '~/helpers/makeClient';
+import { makeClient } from '~/utils/makeClient';
 
 import { PrisonerArticles } from './PrisonerArticles';
 import {
