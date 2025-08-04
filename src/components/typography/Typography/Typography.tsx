@@ -24,6 +24,8 @@ export type TypographyProps = {
   | 'mt'
   | 'my'
   | 'sx'
+  | 'dangerouslySetInnerHTML'
+  | 'className'
 >;
 export const Typography: FC<PropsWithChildren<TypographyProps>> = ({
   children,

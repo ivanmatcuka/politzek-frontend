@@ -8,12 +8,12 @@ moment.locale('ru_RU');
 import { Button } from '~/components/atoms/Button/Button';
 import { Cards } from '~/components/extractions/Cards';
 import { Carousel } from '~/components/extractions/Carousel';
-import { CarouselImage } from '~/components/extractions/CarouselImage';
 import Dashboard from '~/components/extractions/Dashboard';
 import { DrawingFrame } from '~/components/extractions/DrawingFrame';
 import { Page } from '~/components/extractions/Page';
 import { PageWithHeader } from '~/components/extractions/PageWithHeader';
 import { PrisonersSearch } from '~/components/extractions/PrisonersSearch/PrisonersSearch';
+import { ProfileImage } from '~/components/extractions/ProfileImage/ProfileImage';
 import { Typography } from '~/components/typography/Typography/Typography';
 import { getPrisonerPicture } from '~/helpers/getPrisonerPicture';
 import { makeClient } from '~/utils/makeClient';
@@ -206,7 +206,7 @@ export default async function Home() {
                         href={`/prisoner/${prisoner.slug}`}
                         key={prisoner.id}
                       >
-                        <CarouselImage
+                        <ProfileImage
                           src={getPrisonerPicture(
                             prisoner.photo,
                             prisoner.gender,
@@ -380,17 +380,16 @@ export default async function Home() {
           </Grid>
 
           {/* Whom section */}
-          <Grid
+          <Box
             className={styles.whom}
             id="whom"
             padding={{ lg: 10.75, sm: 2, xs: 1 }}
             paddingTop={{ lg: 'auto', xs: 6 }}
             position="relative"
             width="100%"
-            item
           >
             <UpcomingDates />
-          </Grid>
+          </Box>
 
           {/* List section */}
           <Grid container>
