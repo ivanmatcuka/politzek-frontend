@@ -1,5 +1,5 @@
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
-import { Inter } from 'next/font/google';
+import { Nunito_Sans } from 'next/font/google';
 import { PropsWithChildren } from 'react';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -12,7 +12,10 @@ import ThemeRegistry from '~/theming/ThemeRegistry';
 
 import Maintainance from './maintainance/page';
 
-const inter = Inter({ subsets: ['latin'] });
+const nunitoSans = Nunito_Sans({
+  subsets: ['latin'],
+  weight: ['200', '300', '400', '500', '600', '700', '800', '900'],
+});
 
 export async function generateMetadata() {
   const title = 'politzek.org - площадка помощи политзаключенным в России';
@@ -39,7 +42,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
           rel="stylesheet"
         />
       </head>
-      <body className={inter.className}>
+      <body className={nunitoSans.className}>
         <ApolloWrapper>
           <AppRouterCacheProvider options={{ key: 'css' }}>
             <ThemeRegistry>
