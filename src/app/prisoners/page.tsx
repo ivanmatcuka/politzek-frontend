@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Box } from '@mui/material';
 import moment from 'moment';
 import 'moment/locale/ru';
 
@@ -26,26 +26,16 @@ export default function Prisoners() {
   return (
     <Page>
       <PageWithHeader>
-        <Grid container>
-          <Grid
-            padding={{ lg: 10.75, sm: 2, xs: 1 }}
-            pt={{ lg: 0, sm: 0, xs: 0 }}
-            width="100%"
-            item
-          >
-            <Grid
-              flexDirection="column"
-              margin="auto"
-              maxWidth={{ lg: '1200px', xs: '100%' }}
-              mb={8}
-              mt={4}
-              position="relative"
-              container
-            >
-              <PrisonersSearch paginationStep={27} />
-            </Grid>
-          </Grid>
-        </Grid>
+        <Box
+          flexDirection="column"
+          margin="auto"
+          maxWidth={{ lg: '1200px', xs: '100%' }}
+          mb={8}
+          mt={4}
+          position="relative"
+        >
+          <PrisonersSearch paginationStep={27} />
+        </Box>
       </PageWithHeader>
     </Page>
   );
