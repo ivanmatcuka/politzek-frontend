@@ -16,7 +16,8 @@ const inter = Inter({ subsets: ['latin'] });
 
 export async function generateMetadata() {
   const title = 'politzek.org - площадка помощи политзаключенным в России';
-  const description = 'Площадка помощи политзаключенным в России';
+  const description =
+    'Площадка помощи политзаключенным в России. Команда politzek.org собирает самую обширную базу данных политических преследований за всю историю современной России.';
 
   return {
     description,
