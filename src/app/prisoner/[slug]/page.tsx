@@ -1,11 +1,13 @@
 export const revalidate = 0;
 
-import { Box, Grid } from '@mui/material';
+import { Box } from '@mui/material';
 import moment from 'moment';
 import 'moment/locale/ru';
 import { Metadata } from 'next';
 import Link from 'next/link';
 moment.locale('ru_RU');
+
+import Image from 'next/image';
 
 import { PrisonersDocument, PrisonersQueryResult } from '~/apollo/generated';
 import { Prisoner } from '~/apollo/hooks/usePrisoners';
@@ -19,16 +21,13 @@ import { ShareSnackbar } from '~/components/extractions/ShareSnackbar';
 import { Gender, Status } from '~/components/extractions/Status';
 import { Typography } from '~/components/typography/Typography/Typography';
 import { getPrisonerPicture } from '~/helpers/getPrisonerPicture';
+import { getRosfinStrings } from '~/helpers/getRosfinString';
+import { parseCardDate } from '~/helpers/parseCardDate';
 import { makeClient } from '~/utils/makeClient';
 
+import { ProfileImage } from '../../../components/extractions/ProfileImage/ProfileImage';
+import st from './page.module.scss';
 import { PrisonerArticles } from './PrisonerArticles';
-import {
-  DescriptionLayout,
-  EmptyProfileImage,
-  EmptyProfileImageContainer,
-  ProfileImage,
-  ProfileImageContainer,
-} from './ui';
 
 type Props = { slug: string };
 
@@ -61,28 +60,27 @@ export default async function PrisonerPage({
 }) {
   const prisoner = await getPrisoner(params.slug);
 
-  const birthday = prisoner?.date_of_birth
-    ? moment(prisoner.date_of_birth)
-    : null;
-  const birthdayString = `День рождения: ${
-    birthday
-      ? `${birthday.format('DD MMMM YYYY')} (${parseInt(birthday.fromNow())})`
-      : '–'
-  }`;
-
-  const arrested = prisoner?.date_of_arrest
-    ? moment(prisoner.date_of_arrest)
-    : null;
-  const arrestedString = `Дата задержания: ${
-    arrested ? arrested.format('DD MMMM YYYY') : '–'
-  }`;
-
-  const freed = prisoner?.release_date ? moment(prisoner?.release_date) : null;
-  const freedString = `Освобождается: ${
-    freed ? freed.format('DD MMMM YYYY') : '–'
-  }`;
+  const birthdayString = parseCardDate(
+    prisoner?.date_of_birth,
+    'День рождения',
+  );
+  const arrestedString = parseCardDate(
+    prisoner?.date_of_arrest,
+    'День задержания',
+  );
+  const freedString = parseCardDate(
+    prisoner?.release_date,
+    'Освобождается',
+    true,
+  );
 
   const pictureUrl = prisoner?.photo;
+
+  const [rosfinStart, rosfinEnd] = getRosfinStrings(
+    prisoner?.gender as Gender | null,
+    prisoner?.rosfin_start,
+    prisoner?.rosfin_end,
+  );
 
   return (
     <Page>
@@ -93,39 +91,36 @@ export default async function PrisonerPage({
           pt={{ lg: 0, sm: 0, xs: 0 }}
           width="100%"
         >
-          <Grid
+          <Box
             flexDirection="column"
             margin="auto"
             maxWidth={{ lg: '1200px', xs: '100%' }}
             mb={8}
             mt={4}
             position="relative"
-            container
           >
             {pictureUrl ? (
-              <ProfileImageContainer>
+              <div className={st['profile-image']}>
                 <ProfileImage
                   alt={prisoner?.name ?? 'profile'}
+                  className={st['profile-image__image']}
                   height={306}
                   src={pictureUrl}
                   width={297}
                 />
-              </ProfileImageContainer>
+              </div>
             ) : (
-              <EmptyProfileImageContainer>
-                <EmptyProfileImage
-                  alt="profile'"
+              <div className={st['profile-image--empty']}>
+                <ProfileImage
+                  alt="profile"
+                  className={st['profile-image__image']}
                   height={306}
-                  src={getPrisonerPicture(pictureUrl, prisoner?.gender)}
+                  src={getPrisonerPicture(null, prisoner?.gender)}
                   width={297}
                 />
-              </EmptyProfileImageContainer>
+              </div>
             )}
-            <Grid
-              minHeight={{ lg: 128, xs: 'auto' }}
-              ml={{ lg: 40, xs: 0 }}
-              item
-            >
+            <Box minHeight={{ lg: 128, xs: 'auto' }} ml={{ lg: 40, xs: 0 }}>
               <Typography variant="h1">
                 {prisoner?.name && prisoner.name.split(' ')[0]}
               </Typography>
@@ -143,9 +138,10 @@ export default async function PrisonerPage({
                   <PrisonerArticles articles={prisoner.case_categories} />
                 )}
               </Box>
-            </Grid>
+            </Box>
             <DrawingFrame
               alignSelf="center"
+              component={Box}
               mb={3}
               mt={2}
               px={{ lg: 4, xs: 2 }}
@@ -153,43 +149,64 @@ export default async function PrisonerPage({
               width="100%"
               item
             >
-              <Grid flexDirection="column" container>
-                <Grid mb={2} ml={{ lg: 36, xs: 0 }} item>
-                  {Array.isArray(prisoner?.articles) && (
-                    <PrisonerArticles articles={prisoner.articles} />
+              <Box display="flex" flexDirection="column">
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  pl={{ lg: 36, xs: 0 }}
+                >
+                  <Box mb={2}>
+                    {Array.isArray(prisoner?.articles) && (
+                      <PrisonerArticles articles={prisoner.articles} />
+                    )}
+                  </Box>
+                  {prisoner?.rosfin && (
+                    <Box display="flex" mb={2}>
+                      <Image
+                        alt="rosfin-logo"
+                        height={64}
+                        src="/images/rosfin.svg"
+                        width={64}
+                      />
+                      <Box
+                        display="flex"
+                        flexDirection="column"
+                        justifyContent="center"
+                        maxWidth={!rosfinEnd ? '50%' : undefined}
+                        pl={2}
+                      >
+                        <Typography variant="mi">+ {rosfinStart}</Typography>
+                        {rosfinEnd && (
+                          <Typography variant="mi">+ {rosfinEnd}</Typography>
+                        )}
+                      </Box>
+                    </Box>
                   )}
-                </Grid>
-                <Grid ml={{ lg: 36, xs: 0 }} item>
                   <Typography variant="p3">{birthdayString}</Typography>
-                </Grid>
-                <Grid ml={{ lg: 36, xs: 0 }} item>
                   <Typography variant="p3">{arrestedString}</Typography>
-                </Grid>
-                <Grid ml={{ lg: 36, xs: 0 }} item>
                   <Typography variant="p3">{freedString}</Typography>
-                </Grid>
-                <Grid my={4} item>
-                  <DescriptionLayout
+                </Box>
+
+                <Box my={4}>
+                  <Typography
                     dangerouslySetInnerHTML={{
                       __html: prisoner?.formatted_description ?? '',
                     }}
+                    className={st['profile-description']}
                     variant="p2"
                   />
-                </Grid>
+                </Box>
                 {!!prisoner?.interests && (
-                  <Grid item>
-                    <Typography color="gray" variant="p2">
-                      Интересы: {prisoner?.interests.join(', ')}
-                    </Typography>
-                  </Grid>
+                  <Typography color="gray" variant="p2">
+                    Интересы: {prisoner?.interests.join(', ')}
+                  </Typography>
                 )}
-                <Grid
+                <Box
                   alignItems="flex-start"
                   display="flex"
                   flexDirection={{ md: 'row', xs: 'column' }}
                   gap={2}
                   mt={10}
-                  item
                 >
                   {prisoner?.can_write && <LetterDialog prisoner={prisoner} />}
                   <Link href="https://t.me/avtozakinfo_bot" target="_blank">
@@ -197,13 +214,13 @@ export default async function PrisonerPage({
                   </Link>
 
                   {prisoner?.slug && <ShareSnackbar slug={prisoner.slug} />}
-                </Grid>
-              </Grid>
+                </Box>
+              </Box>
             </DrawingFrame>
-            <Grid mt={2} width="100%" item>
+            <Box mt={2} width="100%">
               <Cards />
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
         </Box>
       </PageWithHeader>
     </Page>

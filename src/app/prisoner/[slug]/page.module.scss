@@ -1,0 +1,38 @@
+.profile-image,
+.profile-image--empty {
+  position: absolute;
+  z-index: 100;
+  filter: drop-shadow(4px 4px 0px #000000);
+
+  @media (max-width: 1200px) {
+    position: static;
+  }
+
+  .profile-image__image {
+    clip-path: polygon(98% 0, 100% 74%, 96% 100%, 0 97%, 4% 0);
+
+    @media (max-width: 1200px) {
+      width: 188px;
+      height: 184px;
+    }
+  }
+}
+
+.profile-image--empty {
+  filter: none;
+
+  .profile-image__image {
+    clip-path: none;
+  }
+}
+
+.profile-description {
+  p {
+    &:first-of-type {
+      margin-top: 0;
+    }
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+}
