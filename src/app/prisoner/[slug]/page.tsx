@@ -7,8 +7,6 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 moment.locale('ru_RU');
 
-import Image from 'next/image';
-
 import { PrisonersDocument, PrisonersQueryResult } from '~/apollo/generated';
 import { Prisoner } from '~/apollo/hooks/usePrisoners';
 import { Button } from '~/components/atoms/Button/Button';
@@ -21,13 +19,13 @@ import { ShareSnackbar } from '~/components/extractions/ShareSnackbar';
 import { Gender, Status } from '~/components/extractions/Status';
 import { Typography } from '~/components/typography/Typography/Typography';
 import { getPrisonerPicture } from '~/helpers/getPrisonerPicture';
-import { getRosfinStrings } from '~/helpers/getRosfinString';
 import { parseCardDate } from '~/helpers/parseCardDate';
 import { makeClient } from '~/utils/makeClient';
 
 import { ProfileImage } from '../../../components/extractions/ProfileImage/ProfileImage';
 import st from './page.module.scss';
 import { PrisonerArticles } from './PrisonerArticles';
+import { Rosfin } from './Rosfin';
 
 type Props = { slug: string };
 
@@ -75,12 +73,6 @@ export default async function PrisonerPage({
   );
 
   const pictureUrl = prisoner?.photo;
-
-  const [rosfinStart, rosfinEnd] = getRosfinStrings(
-    prisoner?.gender as Gender | null,
-    prisoner?.rosfin_start,
-    prisoner?.rosfin_end,
-  );
 
   return (
     <Page>
@@ -161,26 +153,11 @@ export default async function PrisonerPage({
                     )}
                   </Box>
                   {prisoner?.rosfin && (
-                    <Box display="flex" mb={2}>
-                      <Image
-                        alt="rosfin-logo"
-                        height={64}
-                        src="/images/rosfin.svg"
-                        width={64}
-                      />
-                      <Box
-                        display="flex"
-                        flexDirection="column"
-                        justifyContent="center"
-                        maxWidth={!rosfinEnd ? '50%' : undefined}
-                        pl={2}
-                      >
-                        <Typography variant="mi">+ {rosfinStart}</Typography>
-                        {rosfinEnd && (
-                          <Typography variant="mi">+ {rosfinEnd}</Typography>
-                        )}
-                      </Box>
-                    </Box>
+                    <Rosfin
+                      gender={prisoner.gender as Gender}
+                      rosfinEndDate={prisoner.rosfin_end}
+                      rosfinStartDate={prisoner.rosfin_start}
+                    />
                   )}
                   <Typography variant="p3">{birthdayString}</Typography>
                   <Typography variant="p3">{arrestedString}</Typography>
