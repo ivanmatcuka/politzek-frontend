@@ -380,16 +380,17 @@ export default async function Home() {
           </Grid>
 
           {/* Whom section */}
-          <Box
+          <Grid
             className={styles.whom}
             id="whom"
             padding={{ lg: 10.75, sm: 2, xs: 1 }}
             paddingTop={{ lg: 'auto', xs: 6 }}
             position="relative"
             width="100%"
+            item
           >
             <UpcomingDates />
-          </Box>
+          </Grid>
 
           {/* List section */}
           <Grid container>
