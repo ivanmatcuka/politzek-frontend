@@ -66,7 +66,7 @@ export default async function PrisonerPage({
     prisoner?.date_of_arrest,
     'День задержания',
   );
-  const freedString = parseCardDate(
+  const releaseString = parseCardDate(
     prisoner?.release_date,
     'Освобождается',
     true,
@@ -161,7 +161,10 @@ export default async function PrisonerPage({
                   )}
                   <Typography variant="p3">{birthdayString}</Typography>
                   <Typography variant="p3">{arrestedString}</Typography>
-                  <Typography variant="p3">{freedString}</Typography>
+                  <Typography variant="p3">
+                    Приговор: {prisoner?.sentence}
+                  </Typography>
+                  <Typography variant="p3">{releaseString}</Typography>
                 </Box>
 
                 <Box my={4}>
