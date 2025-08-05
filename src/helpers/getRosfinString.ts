@@ -14,7 +14,7 @@ export const getRosfinStrings = (
 
   const startString = `${startDate} включен${ending} в список террористов и экстремистов Росфинмониторинга`;
   const endString = endDate
-    ? `${endDate} исключен${ending} в список террористов и экстремистов Росфинмониторинга`
+    ? `${endDate} исключен${ending} из списка террористов и экстремистов Росфинмониторинга`
     : null;
 
   return [startString, endString] as const;
