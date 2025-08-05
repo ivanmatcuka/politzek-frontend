@@ -161,10 +161,14 @@ export default async function PrisonerPage({
                   )}
                   <Typography variant="p3">{birthdayString}</Typography>
                   <Typography variant="p3">{arrestedString}</Typography>
-                  <Typography variant="p3">
-                    Приговор: {prisoner?.sentence}
-                  </Typography>
-                  <Typography variant="p3">{releaseString}</Typography>
+                  {prisoner?.sentence && (
+                    <Typography variant="p3">
+                      Приговор: {prisoner.sentence}
+                    </Typography>
+                  )}
+                  {prisoner?.release_date && (
+                    <Typography variant="p3">{releaseString}</Typography>
+                  )}
                 </Box>
 
                 <Box my={4}>
