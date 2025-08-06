@@ -6,6 +6,7 @@ import { FC } from 'react';
 import { Prisoner } from '~/apollo/hooks/usePrisoners';
 import { Button } from '~/components/atoms/Button/Button';
 import { Typography } from '~/components/typography/Typography/Typography';
+import { parseCardDate } from '~/helpers/parseCardDate';
 
 import { DrawingFrame } from './DrawingFrame';
 
@@ -22,13 +23,10 @@ export const MessageDialog: FC<MessageDialogProps> = ({
   prisoner,
 }) => {
   const handleClose = () => onClose?.('');
-
-  const birthday = prisoner?.date_of_birth
-    ? moment(prisoner.date_of_birth)
-    : null;
-  const birthdayString = `День рождения: ${
-    birthday ? `${birthday.format('DD MMMM YYYY')}` : '–'
-  }`;
+  const birthdayString = parseCardDate(
+    prisoner?.date_of_birth,
+    'День рождения',
+  );
 
   return (
     <Dialog
@@ -61,7 +59,9 @@ export const MessageDialog: FC<MessageDialogProps> = ({
           <Typography variant="p3">
             {prisoner.institution_short_name}
           </Typography>
-          <Typography variant="p3">{birthdayString}</Typography>
+          {birthdayString && (
+            <Typography variant="p3">{birthdayString}</Typography>
+          )}
         </Box>
         <Box flex={1} mt={8}>
           <Button onClick={handleClose} variant="outline">
