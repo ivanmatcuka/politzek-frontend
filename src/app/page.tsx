@@ -8,29 +8,25 @@ moment.locale('ru_RU');
 import { Button } from '~/components/atoms/Button/Button';
 import { Cards } from '~/components/extractions/Cards';
 import { Carousel } from '~/components/extractions/Carousel';
-import { CarouselImage } from '~/components/extractions/CarouselImage';
 import Dashboard from '~/components/extractions/Dashboard';
 import { DrawingFrame } from '~/components/extractions/DrawingFrame';
 import { Page } from '~/components/extractions/Page';
 import { PageWithHeader } from '~/components/extractions/PageWithHeader';
 import { PrisonersSearch } from '~/components/extractions/PrisonersSearch/PrisonersSearch';
-import { PersonCard } from '~/components/organisms/PersonCard/PersonCard';
+import { ProfileImage } from '~/components/extractions/ProfileImage/ProfileImage';
 import { Typography } from '~/components/typography/Typography/Typography';
 import { getPrisonerPicture } from '~/helpers/getPrisonerPicture';
-import { makeClient } from '~/helpers/makeClient';
+import { makeClient } from '~/utils/makeClient';
 
 import {
   PrisonersDocument,
   PrisonersQueryResult,
 } from '../apollo/hooks/usePrisoners';
 import styles from './page.module.css';
-import { getBirthDays } from './services';
+import UpcomingDates from './UpcomingDates';
 
 export default async function Home() {
-  const today = moment().format('YYYY-MM-DD');
-
   const prisoners = await getPrisoners();
-  const birthdays = await getBirthDays(today);
 
   return (
     <Page>
@@ -210,7 +206,7 @@ export default async function Home() {
                         href={`/prisoner/${prisoner.slug}`}
                         key={prisoner.id}
                       >
-                        <CarouselImage
+                        <ProfileImage
                           src={getPrisonerPicture(
                             prisoner.photo,
                             prisoner.gender,
@@ -393,87 +389,7 @@ export default async function Home() {
             width="100%"
             item
           >
-            <Grid
-              alignItems="start"
-              flexDirection="column"
-              gap={7.25}
-              margin="auto"
-              maxWidth={1100}
-              container
-            >
-              <Grid textAlign="left" zIndex={200} item>
-                <Typography color="brand.yellow" variant="h1">
-                  Кому можно помочь
-                  <br />
-                  прямо сейчас?
-                </Typography>
-              </Grid>
-
-              {!!birthdays.length && (
-                <>
-                  <Grid mb={-2.75} width="100%" item>
-                    <Typography color="brand.white" variant="subtitle1">
-                      Скоро день рождения: можно поздравить
-                    </Typography>
-                  </Grid>
-                  <Grid height={335} width="100%" item>
-                    <Carousel
-                      settings={{
-                        autoplay: false,
-                        dots: true,
-                        infinite: false,
-                      }}
-                    >
-                      {birthdays.map((birthday, index) => (
-                        <PersonCard
-                          subtitle={moment(birthday.date_of_birth).format(
-                            'D MMMM',
-                          )}
-                          id={birthday.slug}
-                          imageUrl={birthday.photo}
-                          key={index}
-                          name={birthday.name}
-                          size="m"
-                        />
-                      ))}
-                    </Carousel>
-                  </Grid>
-                </>
-              )}
-              {/* <Grid item>
-            <Grid container gap={1.5} rowGap={4.5}>
-              {!!releases.length && (
-                <>
-                  <Grid item width="100%">
-                    <Typography variant="subtitle1" color="brand.white">
-                      Скоро освобождаются: можно встретить
-                    </Typography>
-                  </Grid>
-                  <Grid item>
-                    <Grid container gap={1.5} rowGap={4.5} flexWrap="nowrap">
-                      {releases.map(({ node: prisoner }) => (
-                        <Grid item key={prisoner.id}>
-                          <PersonCard
-                            id={prisoner.id}
-                            size="m"
-                            photoUrl={getPrisonerPicture(
-                              prisoner.featuredImage?.node.mediaItemUrl,
-                              prisoner.prisonerData?.sex,
-                            )}
-                            name={prisoner.prisonerData?.name ?? ''}
-                            subtitle={moment(
-                              prisoner.prisonerData?.freedomdate ?? '',
-                            ).format('DD MMMM')}
-                          />
-                        </Grid>
-                      ))}
-                    </Grid>
-                  </Grid>
-                </>
-              )}
-            </Grid>
-          </Grid> */}
-            </Grid>
+            <UpcomingDates />
           </Grid>
 
           {/* List section */}

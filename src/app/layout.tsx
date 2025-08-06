@@ -1,5 +1,4 @@
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
-import { Inter } from 'next/font/google';
 import { PropsWithChildren } from 'react';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -12,11 +11,10 @@ import ThemeRegistry from '~/theming/ThemeRegistry';
 
 import Maintainance from './maintainance/page';
 
-const inter = Inter({ subsets: ['latin'] });
-
 export async function generateMetadata() {
   const title = 'politzek.org - площадка помощи политзаключенным в России';
-  const description = 'Площадка помощи политзаключенным в России';
+  const description =
+    'Площадка помощи политзаключенным в России. Команда politzek.org собирает самую обширную базу данных политических преследований за всю историю современной России.';
 
   return {
     description,
@@ -38,7 +36,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
           rel="stylesheet"
         />
       </head>
-      <body className={inter.className}>
+      <body>
         <ApolloWrapper>
           <AppRouterCacheProvider options={{ key: 'css' }}>
             <ThemeRegistry>

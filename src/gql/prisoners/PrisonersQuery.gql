@@ -1,6 +1,7 @@
 fragment PrisonerItem on airtable_data_edge {
   id
   created_time
+  case_categories
   name
   description
   formatted_description
@@ -22,11 +23,11 @@ fragment PrisonerItem on airtable_data_edge {
   slug
   last_sync
   release_date
-  # featuredImage {
-  #   node {
-  #     mediaItemUrl
-  #   }
-  # }
+  rosfin
+  rosfin_start
+  rosfin_end
+  sentence
+  updated_at
 }
 
 query prisoners($offset: Int, $filter: airtable_data_edgeFilter) {

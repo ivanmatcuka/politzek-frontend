@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { BirthdaysResponse } from '~/app/services';
+import { ReleasesResponse } from '~/app/services';
 import { API, DEFAULT_OPTIONS_RESPONSE, res } from '~/utils/api';
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
@@ -23,8 +23,8 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const response = await API.get<BirthdaysResponse>(
-      `${SUPABASE_URL}/functions/v1/get-upcoming-birthdays?date=${encodeURIComponent(
+    const response = await API.get<ReleasesResponse>(
+      `${SUPABASE_URL}/functions/v1/get-upcoming-releases?date=${encodeURIComponent(
         date,
       )}`,
       {},
@@ -34,7 +34,7 @@ export async function GET(req: NextRequest) {
     );
 
     if (!response) {
-      return res({ error: 'No upcoming birthdays' }, 404);
+      return res({ error: 'No upcoming releases' }, 404);
     }
 
     return res(response, 200);

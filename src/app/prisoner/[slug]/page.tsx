@@ -1,6 +1,6 @@
 export const revalidate = 0;
 
-import { Box, Grid } from '@mui/material';
+import { Box } from '@mui/material';
 import moment from 'moment';
 import 'moment/locale/ru';
 import { Metadata } from 'next';
@@ -19,16 +19,13 @@ import { ShareSnackbar } from '~/components/extractions/ShareSnackbar';
 import { Gender, Status } from '~/components/extractions/Status';
 import { Typography } from '~/components/typography/Typography/Typography';
 import { getPrisonerPicture } from '~/helpers/getPrisonerPicture';
-import { makeClient } from '~/helpers/makeClient';
+import { parseCardDate } from '~/helpers/parseCardDate';
+import { makeClient } from '~/utils/makeClient';
 
+import { ProfileImage } from '../../../components/extractions/ProfileImage/ProfileImage';
+import st from './page.module.scss';
 import { PrisonerArticles } from './PrisonerArticles';
-import {
-  DescriptionLayout,
-  EmptyProfileImage,
-  EmptyProfileImageContainer,
-  ProfileImage,
-  ProfileImageContainer,
-} from './ui';
+import { Rosfin } from './Rosfin';
 
 type Props = { slug: string };
 
@@ -41,7 +38,8 @@ export async function generateMetadata({
   const title = `${prisoner?.name ?? 'Страница заключенного'} — politzek.org`;
 
   const picture = prisoner?.photo;
-  const description = 'Платформа для помощи политзаключенным в России';
+  const description =
+    prisoner?.description || 'Платформа для помощи политзаключенным в России';
 
   return {
     description,
@@ -61,26 +59,19 @@ export default async function PrisonerPage({
 }) {
   const prisoner = await getPrisoner(params.slug);
 
-  const birthday = prisoner?.date_of_birth
-    ? moment(prisoner.date_of_birth)
-    : null;
-  const birthdayString = `День рождения: ${
-    birthday
-      ? `${birthday.format('DD MMMM YYYY')} (${parseInt(birthday.fromNow())})`
-      : '–'
-  }`;
-
-  const arrested = prisoner?.date_of_arrest
-    ? moment(prisoner.date_of_arrest)
-    : null;
-  const arrestedString = `Дата задержания: ${
-    arrested ? arrested.format('DD MMMM YYYY') : '–'
-  }`;
-
-  const freed = prisoner?.release_date ? moment(prisoner?.release_date) : null;
-  const freedString = `Освобождается: ${
-    freed ? freed.format('DD MMMM YYYY') : '–'
-  }`;
+  const birthdayString = parseCardDate(
+    prisoner?.date_of_birth,
+    'День рождения',
+  );
+  const arrestedString = parseCardDate(
+    prisoner?.date_of_arrest,
+    'День задержания',
+  );
+  const releaseString = parseCardDate(
+    prisoner?.release_date,
+    'Освобождается',
+    true,
+  );
 
   const pictureUrl = prisoner?.photo;
 
@@ -88,120 +79,134 @@ export default async function PrisonerPage({
     <Page>
       <PageWithHeader>
         <Box
-          boxSizing="border-box"
+          flexDirection="column"
+          margin="auto"
+          maxWidth={{ lg: '1200px', xs: '100%' }}
+          mb={8}
+          mt={4}
           padding={{ lg: 10.75, sm: 2, xs: 1 }}
+          position="relative"
           pt={{ lg: 0, sm: 0, xs: 0 }}
-          width="100%"
         >
-          <Grid
-            flexDirection="column"
-            margin="auto"
-            maxWidth={{ lg: '1200px', xs: '100%' }}
-            mb={8}
-            mt={4}
-            position="relative"
-            container
-          >
-            {pictureUrl ? (
-              <ProfileImageContainer>
-                <ProfileImage
-                  alt={prisoner?.name ?? 'profile'}
-                  height={306}
-                  src={pictureUrl}
-                  width={297}
-                />
-              </ProfileImageContainer>
-            ) : (
-              <EmptyProfileImageContainer>
-                <EmptyProfileImage
-                  alt="profile'"
-                  height={306}
-                  src={getPrisonerPicture(pictureUrl, prisoner?.gender)}
-                  width={297}
-                />
-              </EmptyProfileImageContainer>
-            )}
-            <Grid
-              minHeight={{ lg: 128, xs: 'auto' }}
-              ml={{ lg: 40, xs: 0 }}
-              item
-            >
-              <Typography variant="h1">
-                {prisoner?.name && prisoner.name.split(' ')[0]}
-              </Typography>
-              <Typography mb={2} variant="h2">
-                {prisoner?.name && prisoner.name.split(' ').slice(1).join(' ')}
-              </Typography>
+          {pictureUrl ? (
+            <div className={st['profile-image']}>
+              <ProfileImage
+                alt={prisoner?.name ?? 'profile'}
+                className={st['profile-image__image']}
+                height={306}
+                src={pictureUrl}
+                width={297}
+              />
+            </div>
+          ) : (
+            <div className={st['profile-image--empty']}>
+              <ProfileImage
+                alt="profile"
+                className={st['profile-image__image']}
+                height={306}
+                src={getPrisonerPicture(null, prisoner?.gender)}
+                width={297}
+              />
+            </div>
+          )}
+          <Box minHeight={{ lg: 128, xs: 'auto' }} ml={{ lg: 40, xs: 0 }}>
+            <Typography variant="h1">
+              {prisoner?.name && prisoner.name.split(' ')[0]}
+            </Typography>
+            <Typography mb={2} variant="h2">
+              {prisoner?.name && prisoner.name.split(' ').slice(1).join(' ')}
+            </Typography>
+            <Box alignItems="center" display="flex" flexWrap="wrap" gap={2}>
               {prisoner?.status && prisoner?.gender && (
                 <Status
                   gender={prisoner.gender as Gender}
                   status={prisoner.status as Status}
                 />
               )}
-            </Grid>
-            <DrawingFrame
-              alignSelf="center"
-              mb={3}
-              mt={2}
-              px={{ lg: 4, xs: 2 }}
-              py={4}
-              width="100%"
-              item
-            >
-              <Grid flexDirection="column" container>
-                <Grid ml={{ lg: 36, xs: 0 }} item>
-                  {Array.isArray(prisoner?.articles) && (
-                    <PrisonerArticles articles={prisoner.articles} />
-                  )}
-                </Grid>
-                <Grid ml={{ lg: 36, xs: 0 }} item>
-                  <Typography variant="p3">{birthdayString}</Typography>
-                </Grid>
-                <Grid ml={{ lg: 36, xs: 0 }} item>
-                  <Typography variant="p3">{arrestedString}</Typography>
-                </Grid>
-                <Grid ml={{ lg: 36, xs: 0 }} item>
-                  <Typography variant="p3">{freedString}</Typography>
-                </Grid>
-                <Grid ml={{ lg: 36, xs: 0 }} item>
-                  <Typography variant="p3">Следующий суд: –</Typography>
-                </Grid>
-                <Grid my={4} item>
-                  <DescriptionLayout
-                    dangerouslySetInnerHTML={{
-                      __html: prisoner?.formatted_description ?? '',
-                    }}
-                    variant="p2"
-                  />
-                </Grid>
-                {!!prisoner?.interests && (
-                  <Grid item>
-                    <Typography color="gray" variant="p2">
-                      Интересы: {prisoner?.interests.join(', ')}
-                    </Typography>
-                  </Grid>
+              {Array.isArray(prisoner?.case_categories) && (
+                <PrisonerArticles articles={prisoner.case_categories} />
+              )}
+            </Box>
+          </Box>
+          <DrawingFrame
+            alignSelf="center"
+            component={Box}
+            mb={3}
+            mt={2}
+            position="relative"
+            px={{ lg: 4, xs: 2 }}
+            py={4}
+            width="100%"
+          >
+            <Box display="flex" flexDirection="column" pl={{ lg: 36, xs: 0 }}>
+              <Box mb={2}>
+                {Array.isArray(prisoner?.articles) && (
+                  <PrisonerArticles articles={prisoner.articles} />
                 )}
-                <Grid
-                  alignItems="flex-start"
-                  display="flex"
-                  flexDirection={{ md: 'row', xs: 'column' }}
-                  gap={2}
-                  mt={10}
-                  item
-                >
-                  {prisoner?.can_write && <LetterDialog prisoner={prisoner} />}
-                  <Link href="https://t.me/avtozakinfo_bot" target="_blank">
-                    <Button variant="outline">Сообщить о неточности</Button>
-                  </Link>
+              </Box>
+              {prisoner?.rosfin && (
+                <Rosfin
+                  gender={prisoner.gender as Gender}
+                  rosfinEndDate={prisoner.rosfin_end}
+                  rosfinStartDate={prisoner.rosfin_start}
+                />
+              )}
+              {birthdayString && (
+                <Typography variant="p3">{birthdayString}</Typography>
+              )}
+              {arrestedString && (
+                <Typography variant="p3">{arrestedString}</Typography>
+              )}
+              {prisoner?.sentence && (
+                <Typography variant="p3">
+                  Приговор: {prisoner.sentence}
+                </Typography>
+              )}
+              {prisoner?.release_date && (
+                <Typography variant="p3">{releaseString}</Typography>
+              )}
+            </Box>
 
-                  {prisoner?.slug && <ShareSnackbar slug={prisoner.slug} />}
-                </Grid>
-              </Grid>
-            </DrawingFrame>
-            <Grid mt={2} width="100%" item>
-              <Cards />
-            </Grid>
-          </Grid>
+            <Box my={4}>
+              <Typography
+                dangerouslySetInnerHTML={{
+                  __html: prisoner?.formatted_description ?? '',
+                }}
+                className={st['profile-description']}
+                variant="p2"
+              />
+            </Box>
+            {!!prisoner?.interests && (
+              <Typography color="gray" variant="p2">
+                Интересы: {prisoner?.interests.join(', ')}
+              </Typography>
+            )}
+            {prisoner?.updated_at && (
+              <Box bgcolor="white" mt={4}>
+                <Typography color="brand.grey" variant="p3">
+                  Обновлено:{' '}
+                  {moment(prisoner.updated_at).format('DD MMMM YYYY')}
+                </Typography>
+              </Box>
+            )}
+            <Box
+              alignItems="flex-start"
+              display="flex"
+              flexDirection={{ md: 'row', xs: 'column' }}
+              gap={2}
+              mt={10}
+            >
+              {prisoner?.can_write && <LetterDialog prisoner={prisoner} />}
+              <Link href="https://t.me/avtozakinfo_bot" target="_blank">
+                <Button variant="outline">Сообщить о неточности</Button>
+              </Link>
+
+              {prisoner?.slug && <ShareSnackbar slug={prisoner.slug} />}
+            </Box>
+          </DrawingFrame>
+          <Box mt={2} width="100%">
+            <Cards />
+          </Box>
         </Box>
       </PageWithHeader>
     </Page>
