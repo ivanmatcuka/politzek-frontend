@@ -172,18 +172,18 @@ export default async function PrisonerPage({
                 variant="p2"
               />
             </Box>
+            {!!prisoner?.interests && (
+              <Typography color="gray" variant="p2">
+                Интересы: {prisoner?.interests.join(', ')}
+              </Typography>
+            )}
             {prisoner?.updated_at && (
-              <Box bgcolor="white" my={4}>
+              <Box bgcolor="white" mt={4}>
                 <Typography color="brand.grey" variant="p3">
                   Обновлено:{' '}
                   {moment(prisoner.updated_at).format('DD MMMM YYYY')}
                 </Typography>
               </Box>
-            )}
-            {!!prisoner?.interests && (
-              <Typography color="gray" variant="p2">
-                Интересы: {prisoner?.interests.join(', ')}
-              </Typography>
             )}
             <Box
               alignItems="flex-start"
