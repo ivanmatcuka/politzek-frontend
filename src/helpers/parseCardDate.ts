@@ -9,6 +9,6 @@ export const parseCardDate = (
   const fromNowString = fromNow && date ? ` (${date.fromNow()})` : ' ';
 
   return `${copy ?? 'Date'}: ${
-    date ? `${date.format('DD MMMM YYYY')}${fromNowString}` : '–'
+    date ? `${date.format('DD MMMM YYYY')}${fromNowString}` : null
   }`;
 };
