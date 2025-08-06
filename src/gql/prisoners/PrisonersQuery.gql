@@ -27,6 +27,7 @@ fragment PrisonerItem on airtable_data_edge {
   rosfin_start
   rosfin_end
   sentence
+  updated_at
 }
 
 query prisoners($offset: Int, $filter: airtable_data_edgeFilter) {

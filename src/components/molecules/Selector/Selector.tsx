@@ -1,43 +1,13 @@
 'use client';
 
-import { styled } from '@mui/material';
 import Box from '@mui/material/Box';
 import MUITabs from '@mui/material/Tabs';
-import React, { FC, ReactNode } from 'react';
+import { FC, ReactNode, SyntheticEvent, useState } from 'react';
 
-import { SelectorItem } from '../../atoms/SelectorItem/SelectorItem';
+import { SelectorItem } from '~/components/atoms/SelectorItem/SelectorItem';
 
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
-
-const CustomTabPanel = (props: TabPanelProps) => {
-  const { children, index, value, ...rest } = props;
-
-  return (
-    <div
-      aria-labelledby={`simple-tab-${index}`}
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      role="tabpanel"
-      {...rest}
-    >
-      {value === index && <Box>{children}</Box>}
-    </div>
-  );
-};
-
-const StyledMUITabs = styled(MUITabs)(() => ({
-  '.MuiTabs-flexContainer': {
-    '@media (max-width: 1200px)': {
-      alignItems: 'flex-start',
-
-      flexDirection: 'column',
-    },
-  },
-}));
+import { CustomTabPanel } from './CustomTabPanel';
+import st from './Selector.module.scss';
 
 const a11yProps = (index: number) => {
   return {
@@ -55,18 +25,19 @@ type TabsProps = {
   items: TabsItem[];
 };
 export const Selector: FC<TabsProps> = ({ items }) => {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (_: SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
   return (
     <Box>
-      <StyledMUITabs
+      <MUITabs
         TabIndicatorProps={{
           style: { display: 'none' },
         }}
+        className={st.tabs}
         onChange={handleChange}
         value={value}
       >
@@ -78,7 +49,7 @@ export const Selector: FC<TabsProps> = ({ items }) => {
             {...a11yProps(index)}
           />
         ))}
-      </StyledMUITabs>
+      </MUITabs>
       {items.map((item, index) => (
         <CustomTabPanel index={index} key={index + 1} value={value}>
           {item.element}

@@ -38,7 +38,8 @@ export async function generateMetadata({
   const title = `${prisoner?.name ?? 'Страница заключенного'} — politzek.org`;
 
   const picture = prisoner?.photo;
-  const description = 'Платформа для помощи политзаключенным в России';
+  const description =
+    prisoner?.description || 'Платформа для помощи политзаключенным в России';
 
   return {
     description,
@@ -78,132 +79,129 @@ export default async function PrisonerPage({
     <Page>
       <PageWithHeader>
         <Box
-          boxSizing="border-box"
+          flexDirection="column"
+          margin="auto"
+          maxWidth={{ lg: '1200px', xs: '100%' }}
+          mb={8}
+          mt={4}
           padding={{ lg: 10.75, sm: 2, xs: 1 }}
+          position="relative"
           pt={{ lg: 0, sm: 0, xs: 0 }}
-          width="100%"
         >
-          <Box
-            flexDirection="column"
-            margin="auto"
-            maxWidth={{ lg: '1200px', xs: '100%' }}
-            mb={8}
-            mt={4}
+          {pictureUrl ? (
+            <div className={st['profile-image']}>
+              <ProfileImage
+                alt={prisoner?.name ?? 'profile'}
+                className={st['profile-image__image']}
+                height={306}
+                src={pictureUrl}
+                width={297}
+              />
+            </div>
+          ) : (
+            <div className={st['profile-image--empty']}>
+              <ProfileImage
+                alt="profile"
+                className={st['profile-image__image']}
+                height={306}
+                src={getPrisonerPicture(null, prisoner?.gender)}
+                width={297}
+              />
+            </div>
+          )}
+          <Box minHeight={{ lg: 128, xs: 'auto' }} ml={{ lg: 40, xs: 0 }}>
+            <Typography variant="h1">
+              {prisoner?.name && prisoner.name.split(' ')[0]}
+            </Typography>
+            <Typography mb={2} variant="h2">
+              {prisoner?.name && prisoner.name.split(' ').slice(1).join(' ')}
+            </Typography>
+            <Box alignItems="center" display="flex" flexWrap="wrap" gap={2}>
+              {prisoner?.status && prisoner?.gender && (
+                <Status
+                  gender={prisoner.gender as Gender}
+                  status={prisoner.status as Status}
+                />
+              )}
+              {Array.isArray(prisoner?.case_categories) && (
+                <PrisonerArticles articles={prisoner.case_categories} />
+              )}
+            </Box>
+          </Box>
+          <DrawingFrame
+            alignSelf="center"
+            component={Box}
+            mb={3}
+            mt={2}
             position="relative"
+            px={{ lg: 4, xs: 2 }}
+            py={4}
+            width="100%"
           >
-            {pictureUrl ? (
-              <div className={st['profile-image']}>
-                <ProfileImage
-                  alt={prisoner?.name ?? 'profile'}
-                  className={st['profile-image__image']}
-                  height={306}
-                  src={pictureUrl}
-                  width={297}
+            <Box display="flex" flexDirection="column" pl={{ lg: 36, xs: 0 }}>
+              <Box mb={2}>
+                {Array.isArray(prisoner?.articles) && (
+                  <PrisonerArticles articles={prisoner.articles} />
+                )}
+              </Box>
+              {prisoner?.rosfin && (
+                <Rosfin
+                  gender={prisoner.gender as Gender}
+                  rosfinEndDate={prisoner.rosfin_end}
+                  rosfinStartDate={prisoner.rosfin_start}
                 />
-              </div>
-            ) : (
-              <div className={st['profile-image--empty']}>
-                <ProfileImage
-                  alt="profile"
-                  className={st['profile-image__image']}
-                  height={306}
-                  src={getPrisonerPicture(null, prisoner?.gender)}
-                  width={297}
-                />
-              </div>
+              )}
+              <Typography variant="p3">{birthdayString}</Typography>
+              <Typography variant="p3">{arrestedString}</Typography>
+              {prisoner?.sentence && (
+                <Typography variant="p3">
+                  Приговор: {prisoner.sentence}
+                </Typography>
+              )}
+              {prisoner?.release_date && (
+                <Typography variant="p3">{releaseString}</Typography>
+              )}
+            </Box>
+
+            <Box my={4}>
+              <Typography
+                dangerouslySetInnerHTML={{
+                  __html: prisoner?.formatted_description ?? '',
+                }}
+                className={st['profile-description']}
+                variant="p2"
+              />
+            </Box>
+            {prisoner?.updated_at && (
+              <Box bgcolor="white" my={4}>
+                <Typography color="brand.grey" variant="p3">
+                  Обновлено:{' '}
+                  {moment(prisoner.updated_at).format('DD MMMM YYYY')}
+                </Typography>
+              </Box>
             )}
-            <Box minHeight={{ lg: 128, xs: 'auto' }} ml={{ lg: 40, xs: 0 }}>
-              <Typography variant="h1">
-                {prisoner?.name && prisoner.name.split(' ')[0]}
+            {!!prisoner?.interests && (
+              <Typography color="gray" variant="p2">
+                Интересы: {prisoner?.interests.join(', ')}
               </Typography>
-              <Typography mb={2} variant="h2">
-                {prisoner?.name && prisoner.name.split(' ').slice(1).join(' ')}
-              </Typography>
-              <Box alignItems="center" display="flex" flexWrap="wrap" gap={2}>
-                {prisoner?.status && prisoner?.gender && (
-                  <Status
-                    gender={prisoner.gender as Gender}
-                    status={prisoner.status as Status}
-                  />
-                )}
-                {Array.isArray(prisoner?.case_categories) && (
-                  <PrisonerArticles articles={prisoner.case_categories} />
-                )}
-              </Box>
-            </Box>
-            <DrawingFrame
-              alignSelf="center"
-              component={Box}
-              mb={3}
-              mt={2}
-              px={{ lg: 4, xs: 2 }}
-              py={4}
-              width="100%"
-              item
+            )}
+            <Box
+              alignItems="flex-start"
+              display="flex"
+              flexDirection={{ md: 'row', xs: 'column' }}
+              gap={2}
+              mt={10}
             >
-              <Box display="flex" flexDirection="column">
-                <Box
-                  display="flex"
-                  flexDirection="column"
-                  pl={{ lg: 36, xs: 0 }}
-                >
-                  <Box mb={2}>
-                    {Array.isArray(prisoner?.articles) && (
-                      <PrisonerArticles articles={prisoner.articles} />
-                    )}
-                  </Box>
-                  {prisoner?.rosfin && (
-                    <Rosfin
-                      gender={prisoner.gender as Gender}
-                      rosfinEndDate={prisoner.rosfin_end}
-                      rosfinStartDate={prisoner.rosfin_start}
-                    />
-                  )}
-                  <Typography variant="p3">{birthdayString}</Typography>
-                  <Typography variant="p3">{arrestedString}</Typography>
-                  {prisoner?.sentence && (
-                    <Typography variant="p3">
-                      Приговор: {prisoner.sentence}
-                    </Typography>
-                  )}
-                  {prisoner?.release_date && (
-                    <Typography variant="p3">{releaseString}</Typography>
-                  )}
-                </Box>
+              {prisoner?.can_write && <LetterDialog prisoner={prisoner} />}
+              <Link href="https://t.me/avtozakinfo_bot" target="_blank">
+                <Button variant="outline">Сообщить о неточности</Button>
+              </Link>
 
-                <Box my={4}>
-                  <Typography
-                    dangerouslySetInnerHTML={{
-                      __html: prisoner?.formatted_description ?? '',
-                    }}
-                    className={st['profile-description']}
-                    variant="p2"
-                  />
-                </Box>
-                {!!prisoner?.interests && (
-                  <Typography color="gray" variant="p2">
-                    Интересы: {prisoner?.interests.join(', ')}
-                  </Typography>
-                )}
-                <Box
-                  alignItems="flex-start"
-                  display="flex"
-                  flexDirection={{ md: 'row', xs: 'column' }}
-                  gap={2}
-                  mt={10}
-                >
-                  {prisoner?.can_write && <LetterDialog prisoner={prisoner} />}
-                  <Link href="https://t.me/avtozakinfo_bot" target="_blank">
-                    <Button variant="outline">Сообщить о неточности</Button>
-                  </Link>
-
-                  {prisoner?.slug && <ShareSnackbar slug={prisoner.slug} />}
-                </Box>
-              </Box>
-            </DrawingFrame>
-            <Box mt={2} width="100%">
-              <Cards />
+              {prisoner?.slug && <ShareSnackbar slug={prisoner.slug} />}
             </Box>
+          </DrawingFrame>
+          <Box mt={2} width="100%">
+            <Cards />
           </Box>
         </Box>
       </PageWithHeader>

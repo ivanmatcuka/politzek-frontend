@@ -31,32 +31,24 @@ export const Rosfin: FC<Props> = async ({
 
   return (
     <Box display="flex" flexDirection="column" gap={0.5} mb={2}>
-      <Box
-        alignItems={{ lg: 'center', xs: 'flex-start' }}
-        display="flex"
-        gap={1}
-      >
+      <Box alignItems="flex-start" display="flex" gap={1}>
         <Image
           alt="rosfin-logo"
-          height={16}
+          height={24}
           src="/images/rosfin.svg"
-          width={16}
+          width={24}
         />
-        <Typography variant="mi">{rosfinStart}</Typography>
+        <Typography variant="p3">{rosfinStart}</Typography>
       </Box>
       {rosfinEnd && (
-        <Box
-          alignItems={{ lg: 'center', xs: 'flex-start' }}
-          display="flex"
-          gap={1}
-        >
+        <Box alignItems="flex-start" display="flex" gap={1}>
           <Image
             alt="rosfin-logo"
-            height={16}
+            height={24}
             src="/images/rosfin.svg"
-            width={16}
+            width={24}
           />
-          <Typography variant="mi">{rosfinEnd}</Typography>
+          <Typography variant="p3">{rosfinEnd}</Typography>
         </Box>
       )}
     </Box>
