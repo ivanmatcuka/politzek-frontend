@@ -151,8 +151,12 @@ export default async function PrisonerPage({
                   rosfinStartDate={prisoner.rosfin_start}
                 />
               )}
-              <Typography variant="p3">{birthdayString}</Typography>
-              <Typography variant="p3">{arrestedString}</Typography>
+              {birthdayString && (
+                <Typography variant="p3">{birthdayString}</Typography>
+              )}
+              {arrestedString && (
+                <Typography variant="p3">{arrestedString}</Typography>
+              )}
               {prisoner?.sentence && (
                 <Typography variant="p3">
                   Приговор: {prisoner.sentence}
