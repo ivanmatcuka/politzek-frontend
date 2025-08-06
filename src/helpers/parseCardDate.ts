@@ -5,7 +5,9 @@ export const parseCardDate = (
   copy?: string,
   fromNow: boolean = false,
 ) => {
-  const date = dateString ? moment(dateString) : null;
+  if (!dateString) return null;
+
+  const date = moment(dateString);
   const fromNowString = fromNow && date ? ` (${date.fromNow()})` : ' ';
 
   return `${copy ?? 'Date'}: ${
