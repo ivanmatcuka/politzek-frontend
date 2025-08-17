@@ -1,4 +1,7 @@
+'use client';
+
 import { Grid } from '@mui/material';
+import { LoginButton } from '@telegram-auth/react';
 import Link from 'next/link';
 
 import { Logo } from '~/components/atoms/Logo/Logo';
