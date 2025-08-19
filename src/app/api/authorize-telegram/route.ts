@@ -10,31 +10,28 @@ export async function OPTIONS() {
   return NextResponse.json({}, DEFAULT_OPTIONS_RESPONSE);
 }
 
-export async function GET(req: NextRequest) {
+export async function POST(req: NextRequest) {
   if (!SUPABASE_URL || !SUPABASE_KEY) {
     return res({ error: 'Missing Supabase config' }, 500);
   }
 
-  const { searchParams } = new URL(req.url);
-  const date = searchParams.get('date');
+  const body = await req.json();
 
-  if (!date) {
-    return res({ error: 'Missing or invalid date parameter' }, 400);
+  if (!body) {
+    return res({ error: 'Missing or invalid body' }, 400);
   }
 
   try {
-    const response = await API.get<BirthdaysResponse>(
-      `${SUPABASE_URL}/functions/v1/get-upcoming-birthdays?date=${encodeURIComponent(
-        date,
-      )}`,
-      {},
+    const response = await API.post<BirthdaysResponse>(
+      `${SUPABASE_URL}/functions/v1/authorize-telegram`,
+      body,
       {
         authorization: `Bearer ${SUPABASE_KEY}`,
       },
     );
 
     if (!response) {
-      return res({ error: 'No upcoming birthdays' }, 404);
+      return res({ error: 'Failed to authorize Telegram' }, 404);
     }
 
     return res(response, 200);

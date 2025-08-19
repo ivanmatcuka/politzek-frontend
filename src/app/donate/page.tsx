@@ -7,7 +7,7 @@ import { Typography } from '~/components/typography/Typography/Typography';
 
 export default function Donate() {
   return (
-    <PageWithHeader>
+    <PageWithHeader hideUserbar>
       <Box
         boxSizing="border-box"
         pt={{ lg: 0, sm: 0, xs: 0 }}
@@ -59,7 +59,6 @@ export default function Donate() {
             gap={10}
             justifyContent="center"
             lg={6}
-            mt={{ lg: '-130px', xs: 0 }}
             position="relative"
             py={10}
             xs={12}

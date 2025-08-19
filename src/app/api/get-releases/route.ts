@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { ReleasesResponse } from '~/app/services';
+import { ReleasesResponse } from '~/services/services';
 import { API, DEFAULT_OPTIONS_RESPONSE, res } from '~/utils/api';
 
 const SUPABASE_URL = process.env.SUPABASE_URL;

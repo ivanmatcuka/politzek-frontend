@@ -135,7 +135,7 @@ export default async function Home() {
               display={{ lg: 'flex', xs: 'none' }}
               justifyContent="center"
               lg={5}
-              mt="-130px"
+              // mt="-130px"
               position="relative"
               item
             >

@@ -50,4 +50,26 @@ export const API = {
       return null;
     }
   },
+
+  async post<T = unknown>(
+    uri: string,
+    body: Record<string, unknown>,
+    headers: HeadersInit = {},
+  ): Promise<T | null> {
+    const response = await fetch(uri, {
+      body: JSON.stringify(body),
+      method: 'POST',
+      headers: {
+        ...DEFAULT_HEADERS,
+        ...headers,
+      },
+    });
+
+    if (!response.ok) {
+      console.error(`Failed to post to ${uri}:`, response.statusText);
+      throw new Error(await response.json());
+    }
+
+    return await response.json();
+  },
 };

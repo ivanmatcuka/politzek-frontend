@@ -7,7 +7,7 @@ import { Carousel } from '~/components/extractions/Carousel';
 import { PersonCard } from '~/components/organisms/PersonCard/PersonCard';
 import { Typography } from '~/components/typography/Typography/Typography';
 
-import { getBirthDays, getReleases } from './services';
+import { getBirthDays, getReleases } from '../services/services';
 
 export default async function UpcomingDates() {
   const today = moment().format('YYYY-MM-DD');

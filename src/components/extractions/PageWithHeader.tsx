@@ -2,9 +2,16 @@ import { FC, PropsWithChildren } from 'react';
 
 import { Header } from './Header';
 
-export const PageWithHeader: FC<PropsWithChildren> = ({ children }) => (
+type PageWithHeaderProps = {
+  hideUserbar?: boolean;
+};
+
+export const PageWithHeader: FC<PropsWithChildren<PageWithHeaderProps>> = ({
+  children,
+  hideUserbar = false,
+}) => (
   <>
-    <Header />
+    <Header hideUserbar={hideUserbar} />
     {children}
   </>
 );

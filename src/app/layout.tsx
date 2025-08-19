@@ -7,6 +7,7 @@ import 'slick-carousel/slick/slick.css';
 import './globals.css';
 
 import { ApolloWrapper } from '~/apollo/ApolloWrapper';
+import { UserProvider } from '~/context/UserProvider';
 import ThemeRegistry from '~/theming/ThemeRegistry';
 
 import Maintainance from './maintainance/page';
@@ -37,17 +38,19 @@ export default function RootLayout({ children }: PropsWithChildren) {
         />
       </head>
       <body>
-        <ApolloWrapper>
-          <AppRouterCacheProvider options={{ key: 'css' }}>
-            <ThemeRegistry>
-              {process.env.MAINTAINANCE !== 'true' ? (
-                children
-              ) : (
-                <Maintainance />
-              )}
-            </ThemeRegistry>
-          </AppRouterCacheProvider>
-        </ApolloWrapper>
+        <UserProvider>
+          <ApolloWrapper>
+            <AppRouterCacheProvider options={{ key: 'css' }}>
+              <ThemeRegistry>
+                {process.env.MAINTAINANCE !== 'true' ? (
+                  children
+                ) : (
+                  <Maintainance />
+                )}
+              </ThemeRegistry>
+            </AppRouterCacheProvider>
+          </ApolloWrapper>
+        </UserProvider>
         {process.env.NODE_ENV === 'production' && (
           <script src="/ym.js" type="text/javascript" async />
         )}

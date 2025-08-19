@@ -1,58 +1,73 @@
-'use client';
-
-import { Grid } from '@mui/material';
-import { LoginButton } from '@telegram-auth/react';
+import { Box } from '@mui/material';
 import Link from 'next/link';
+import { FC } from 'react';
 
 import { Logo } from '~/components/atoms/Logo/Logo';
 import { Menu } from '~/components/molecules/Menu/Menu';
 
-export const Header = () => (
-  <Grid className="header" overflow="hidden" container>
-    <Grid
-      padding={{ lg: 10.75, sm: 2, xs: 1 }}
-      pb={{ lg: 0, sm: 0, xs: 0 }}
-      width="100%"
-      item
+import { Userbar } from './Userbar';
+
+const MENU_DEFINITION = [
+  {
+    href: '/#what',
+    label: 'КАК ПОМОЧЬ',
+  },
+  {
+    href: '/prisoners',
+    label: 'СПИСОК ПРЕСЛЕДУЕМЫХ',
+  },
+  {
+    href: '/donate',
+    label: 'ПОЖЕРТВОВАТЬ ПРОЕКТУ',
+  },
+  {
+    href: 'https://t.me/enbv_avtozaklive',
+    label: 'БЫТЬ НА СВЯЗИ',
+    target: '_blank',
+  },
+];
+
+const MENU_ITEMS = MENU_DEFINITION.map(({ href, label, target }) => ({
+  element: (
+    <Link href={href} target={target}>
+      {label}
+    </Link>
+  ),
+}));
+
+type HeaderProps = {
+  hideUserbar: boolean;
+};
+
+export const Header: FC<HeaderProps> = ({ hideUserbar }) => {
+  return (
+    <Box
+      alignItems="center"
+      display="flex"
+      justifyContent={{ lg: 'space-between', xs: 'center' }}
+      margin="auto"
+      maxWidth={1200}
+      overflow="hidden"
+      p={{ lg: 10.75, sm: 2, xs: 1 }}
+      pb={0}
     >
-      <Grid
-        justifyContent={{ lg: 'space-between', xs: 'center' }}
-        margin="auto"
-        maxWidth={1200}
-        container
+      <Box
+        alignItems="center"
+        display="flex"
+        flex={1}
+        flexDirection={{ lg: 'row', xs: 'column' }}
+        gap={2}
+        justifyContent="space-between"
       >
-        <Grid flex={1} lg={6} xs={12} item>
-          <Grid container>
-            <Grid flexBasis="191px" mr={1.5} item>
-              <Link href="/">
-                <Logo />
-              </Link>
-            </Grid>
-            <Grid flexBasis="calc(100% - 203px)" item>
-              <Menu
-                items={[
-                  {
-                    element: <Link href="/#what">КАК ПОМОЧЬ</Link>,
-                  },
-                  {
-                    element: <Link href="/prisoners">СПИСОК ПРЕСЛЕДУЕМЫХ</Link>,
-                  },
-                  {
-                    element: <Link href="/donate">ПОЖЕРТВОВАТЬ ПРОЕКТУ</Link>,
-                  },
-                  {
-                    element: (
-                      <a href="https://t.me/enbv_avtozaklive" target="_blank">
-                        БЫТЬ НА СВЯЗИ
-                      </a>
-                    ),
-                  },
-                ]}
-              />
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
-    </Grid>
-  </Grid>
-);
+        <Box alignItems="center" display="flex" mt={2}>
+          <Link href="/">
+            <Logo />
+          </Link>
+          <Menu items={MENU_ITEMS} />
+        </Box>
+
+        {!hideUserbar && <Userbar />}
+      </Box>
+    </Box>
+  );
+};

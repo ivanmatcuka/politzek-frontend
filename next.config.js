@@ -26,6 +26,7 @@ const nextConfig = {
     styledComponents: true,
   },
   env: {
+    baseUrl: process.env.NEXT_SITE_URL,
     nodeEnv: process.env.NODE_ENV,
   },
   eslint: {

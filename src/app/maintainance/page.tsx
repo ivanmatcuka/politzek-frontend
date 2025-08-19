@@ -8,7 +8,7 @@ import styles from './page.module.css';
 
 export default function Maintainance() {
   return (
-    <PageWithHeader>
+    <PageWithHeader hideUserbar>
       <Grid container>
         <Grid
           className={styles.header}

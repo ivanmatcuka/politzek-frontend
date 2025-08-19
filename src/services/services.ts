@@ -1,4 +1,8 @@
+import { TelegramAuthData } from '@telegram-auth/react';
+
 import { API } from '~/utils/api';
+
+const BASE_URL = process.env.baseUrl;
 
 export type BirthdaysResponse = {
   targetDate: string;
@@ -28,9 +32,7 @@ export const getBirthDays = async (
 ): Promise<BirthdaysResponse['data']> => {
   try {
     const response = await API.get<BirthdaysResponse>(
-      `${process.env.SITE_URL}/api/get-birthdays?date=${encodeURIComponent(
-        formattedDate,
-      )}`,
+      `${BASE_URL}/api/get-birthdays?date=${encodeURIComponent(formattedDate)}`,
     );
 
     return response?.data ?? [];
@@ -44,9 +46,7 @@ export const getReleases = async (
 ): Promise<ReleasesResponse['data']> => {
   try {
     const response = await fetch(
-      `${process.env.SITE_URL}/api/get-releases?date=${encodeURIComponent(
-        formattedDate,
-      )}`,
+      `${BASE_URL}/api/get-releases?date=${encodeURIComponent(formattedDate)}`,
       {
         method: 'GET',
         headers: {
@@ -64,5 +64,33 @@ export const getReleases = async (
     return data;
   } catch (error) {
     return [];
+  }
+};
+
+export const authenticateTelegram = async (data: TelegramAuthData) => {
+  try {
+    const response = await API.post<TelegramAuthData>(
+      `${BASE_URL}/api/authenticate-telegram`,
+      data as Record<keyof TelegramAuthData, unknown>,
+    );
+
+    return { data: response };
+  } catch (error) {
+    console.error('Error authenticating Telegram:', error);
+    return { error: 'Failed to authenticate Telegram' };
+  }
+};
+
+export const authorizeTelegram = async (data: TelegramAuthData) => {
+  try {
+    const response = await API.post<boolean>(
+      `${BASE_URL}/api/authorize-telegram`,
+      data as Record<keyof TelegramAuthData, unknown>,
+    );
+
+    return { data: response };
+  } catch (error) {
+    console.error('Error authorizing Telegram:', error);
+    return { error: 'Failed to authorize Telegram' };
   }
 };
