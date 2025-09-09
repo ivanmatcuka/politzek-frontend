@@ -12,7 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly',
       lastModified: new Date(),
       priority: 0.5,
-      url: `${SITE_URL}/prisoner/${edge?.node?.id}`,
+      url: `${SITE_URL}/prisoner/${edge?.node?.slug}`,
     })) ?? [];
 
   return [
