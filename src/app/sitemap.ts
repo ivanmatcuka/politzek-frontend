@@ -5,16 +5,16 @@ const SITE_URL = process.env.SITE_URL || 'example.com';
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      changeFrequency: 'yearly',
+      changeFrequency: 'daily',
       lastModified: new Date(),
       priority: 1,
-      url: `${SITE_URL}/donate`,
+      url: `${SITE_URL}`,
     },
     {
       changeFrequency: 'yearly',
       lastModified: new Date(),
-      priority: 1,
-      url: `${SITE_URL}/maintainance`,
+      priority: 0.9,
+      url: `${SITE_URL}/donate`,
     },
     {
       changeFrequency: 'weekly',
