@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 
-const SITE_URL = process.env.NEXT_SITE_URL || 'example.com';
+const SITE_URL = process.env.SITE_URL || 'example.com';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
