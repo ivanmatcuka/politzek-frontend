@@ -58,7 +58,7 @@ p {
   }
 
   .footer::before {
-    top: -16px;
+    top: -24px;
     left: -161px;
   }
 }

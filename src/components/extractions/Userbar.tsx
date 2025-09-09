@@ -21,8 +21,6 @@ export const Userbar: FC = () => {
     [setUser],
   );
 
-  console.log(user);
-
   if (user) {
     return (
       <Link href="/profile">

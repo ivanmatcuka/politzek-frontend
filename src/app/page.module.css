@@ -34,7 +34,7 @@
 
 .numbers::before {
   position: absolute;
-  bottom: -190px;
+  bottom: -160px;
   left: 50%;
   transform: rotate(1deg);
   z-index: 100;
@@ -53,7 +53,7 @@
 
 .why::before {
   position: absolute;
-  top: 12px;
+  top: -16px;
   right: -2px;
   left: -2px;
   transform: rotate(1deg);

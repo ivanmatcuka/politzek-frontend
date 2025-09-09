@@ -60,16 +60,16 @@ export default async function PrisonerPage({
   const prisoner = await getPrisoner(params.slug);
 
   const birthdayString = parseCardDate(
-    prisoner?.date_of_birth,
     'День рождения',
+    prisoner?.date_of_birth,
   );
   const arrestedString = parseCardDate(
-    prisoner?.date_of_arrest,
     'День задержания',
+    prisoner?.date_of_arrest,
   );
   const releaseString = parseCardDate(
-    prisoner?.release_date,
     'Освобождается',
+    prisoner?.release_date,
     true,
   );
 
@@ -84,9 +84,9 @@ export default async function PrisonerPage({
           maxWidth={{ lg: '1200px', xs: '100%' }}
           mb={8}
           mt={4}
-          padding={{ lg: 10.75, sm: 2, xs: 1 }}
           position="relative"
           pt={{ lg: 0, sm: 0, xs: 0 }}
+          px={2}
         >
           {pictureUrl ? (
             <div className={st['profile-image']}>
@@ -151,20 +151,12 @@ export default async function PrisonerPage({
                   rosfinStartDate={prisoner.rosfin_start}
                 />
               )}
-              {birthdayString && (
-                <Typography variant="p3">{birthdayString}</Typography>
-              )}
-              {arrestedString && (
-                <Typography variant="p3">{arrestedString}</Typography>
-              )}
-              {prisoner?.sentence && (
-                <Typography variant="p3">
-                  Приговор: {prisoner.sentence}
-                </Typography>
-              )}
-              {prisoner?.release_date && (
-                <Typography variant="p3">{releaseString}</Typography>
-              )}
+              <Typography variant="p3">{birthdayString}</Typography>
+              <Typography variant="p3">{arrestedString}</Typography>
+              <Typography variant="p3">
+                Приговор: {prisoner?.sentence ?? '-'}
+              </Typography>
+              <Typography variant="p3">{releaseString}</Typography>
             </Box>
 
             <Box my={4}>

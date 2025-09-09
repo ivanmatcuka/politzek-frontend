@@ -56,7 +56,7 @@ export const Header: FC<HeaderProps> = ({ hideUserbar }) => {
         display="flex"
         flex={1}
         flexDirection={{ lg: 'row', xs: 'column' }}
-        gap={2}
+        gap={4}
         justifyContent="space-between"
       >
         <Box alignItems="center" display="flex" mt={2}>

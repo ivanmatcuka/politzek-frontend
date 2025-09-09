@@ -45,8 +45,9 @@ export default function Dashboard() {
         alignItems="baseline"
         display="flex"
         flexDirection="column"
-        height={{ lg: 575, xs: 443 }}
-        justifyContent="space-between"
+        gap={{ lg: 0, xs: 8 }}
+        height={{ lg: 575, xs: 'auto' }}
+        justifyContent={{ lg: 'space-between', xs: 'flex-start' }}
         width={392}
       >
         <Counter label="Всего фигурантов уголовных дел">

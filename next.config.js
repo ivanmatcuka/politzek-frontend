@@ -30,7 +30,7 @@ const nextConfig = {
     nodeEnv: process.env.NODE_ENV,
   },
   eslint: {
-    dirs: ['pages', 'components', 'app'],
+    dirs: ['src'],
   },
   images: {
     remotePatterns: [

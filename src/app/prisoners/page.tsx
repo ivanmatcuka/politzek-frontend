@@ -33,6 +33,7 @@ export default function Prisoners() {
           mb={8}
           mt={4}
           position="relative"
+          px={2}
         >
           <PrisonersSearch paginationStep={27} />
         </Box>

@@ -22,7 +22,7 @@ export default async function UpcomingDates() {
       flexDirection="column"
       gap={7.25}
       margin="auto"
-      maxWidth={1100}
+      maxWidth={1200}
     >
       <Box textAlign="left" zIndex={200}>
         <Typography color="brand.yellow" variant="h1">

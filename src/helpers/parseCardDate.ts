@@ -1,16 +1,15 @@
 import moment from 'moment';
 
 export const parseCardDate = (
+  copy: string,
   dateString?: string | null,
-  copy?: string,
   fromNow: boolean = false,
 ) => {
-  if (!dateString) return null;
+  const date = moment(dateString).isValid() ? moment(dateString) : null;
+  const fromNowString = fromNow && date ? ` (${date.fromNow()})` : '';
+  const formattedDate = date
+    ? `${date.format('DD MMMM YYYY')}${fromNowString}`
+    : '-';
 
-  const date = moment(dateString);
-  const fromNowString = fromNow && date ? ` (${date.fromNow()})` : ' ';
-
-  return `${copy ?? 'Date'}: ${
-    date ? `${date.format('DD MMMM YYYY')}${fromNowString}` : null
-  }`;
+  return `${copy}: ${formattedDate}`;
 };
