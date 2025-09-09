@@ -16,12 +16,8 @@ import { PrisonersSearch } from '~/components/extractions/PrisonersSearch/Prison
 import { ProfileImage } from '~/components/extractions/ProfileImage/ProfileImage';
 import { Typography } from '~/components/typography/Typography/Typography';
 import { getPrisonerPicture } from '~/helpers/getPrisonerPicture';
-import { makeClient } from '~/utils/makeClient';
 
-import {
-  PrisonersDocument,
-  PrisonersQueryResult,
-} from '../apollo/hooks/usePrisoners';
+import { getPrisoners } from './actions/getPrisoners';
 import styles from './page.module.css';
 import UpcomingDates from './UpcomingDates';
 
@@ -416,25 +412,3 @@ export default async function Home() {
     </Page>
   );
 }
-
-const getPrisoners = async (): Promise<
-  NonNullable<PrisonersQueryResult['data']>['airtable_data_edgeCollection']
-> => {
-  try {
-    const client = makeClient();
-
-    if (!client) {
-      return { edges: [] };
-    }
-
-    const res: Partial<PrisonersQueryResult> = await client.query({
-      errorPolicy: 'all',
-      query: PrisonersDocument,
-    });
-
-    return res.data?.airtable_data_edgeCollection;
-  } catch (error) {
-    console.error('Error fetching prisoners:', error);
-    return { edges: [] };
-  }
-};

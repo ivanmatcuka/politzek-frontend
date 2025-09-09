@@ -1,8 +1,20 @@
 import type { MetadataRoute } from 'next';
 
+import { getPrisoners } from './actions/getPrisoners';
+
 const SITE_URL = process.env.SITE_URL || 'example.com';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const prisoners = await getPrisoners();
+
+  const prisonerUrls: MetadataRoute.Sitemap =
+    prisoners?.edges.map((edge) => ({
+      changeFrequency: 'monthly',
+      lastModified: new Date(),
+      priority: 0.5,
+      url: `${SITE_URL}/prisoner/${edge?.node?.id}`,
+    })) ?? [];
+
   return [
     {
       changeFrequency: 'daily',
@@ -22,11 +34,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
       url: `${SITE_URL}/prisoners`,
     },
-    {
-      changeFrequency: 'monthly',
-      lastModified: new Date(),
-      priority: 0.5,
-      url: `${SITE_URL}/prisoner`,
-    },
+    ...prisonerUrls,
   ];
 }
