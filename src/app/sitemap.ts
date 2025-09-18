@@ -1,18 +1,18 @@
 import type { MetadataRoute } from 'next';
 
-import { getPrisoners } from './actions/getPrisoners';
+import { getAllPrisoners } from './actions/getAllPrisoners';
 
 const SITE_URL = process.env.SITE_URL || 'example.com';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const prisoners = await getPrisoners();
+  const prisoners = await getAllPrisoners();
 
   const prisonerUrls: MetadataRoute.Sitemap =
-    prisoners?.edges.map((edge) => ({
+    prisoners.map((prisoner) => ({
       changeFrequency: 'monthly',
       lastModified: new Date(),
       priority: 0.5,
-      url: `${SITE_URL}/prisoner/${edge?.node?.slug}`,
+      url: `${SITE_URL}/prisoner/${prisoner.slug}`,
     })) ?? [];
 
   return [
