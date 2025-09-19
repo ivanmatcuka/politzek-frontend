@@ -60,18 +60,22 @@ export default async function PrisonerPage({
   const prisoner = await getPrisoner(params.slug);
 
   const birthdayString = parseCardDate(
-    prisoner?.date_of_birth,
     'День рождения',
+    prisoner?.date_of_birth,
   );
+
   const arrestedString = parseCardDate(
-    prisoner?.date_of_arrest,
     'День задержания',
+    prisoner?.date_of_arrest,
   );
+
   const releaseString = parseCardDate(
-    prisoner?.release_date,
     'Освобождается',
+    prisoner?.release_date,
     true,
   );
+
+  const sentenceString = parseCardDate('Приговор', prisoner?.sentence);
 
   const pictureUrl = prisoner?.photo;
 
@@ -151,20 +155,10 @@ export default async function PrisonerPage({
                   rosfinStartDate={prisoner.rosfin_start}
                 />
               )}
-              {birthdayString && (
-                <Typography variant="p3">{birthdayString}</Typography>
-              )}
-              {arrestedString && (
-                <Typography variant="p3">{arrestedString}</Typography>
-              )}
-              {prisoner?.sentence && (
-                <Typography variant="p3">
-                  Приговор: {prisoner.sentence}
-                </Typography>
-              )}
-              {prisoner?.release_date && (
-                <Typography variant="p3">{releaseString}</Typography>
-              )}
+              <Typography variant="p3">{birthdayString}</Typography>
+              <Typography variant="p3">{arrestedString}</Typography>
+              <Typography variant="p3">{sentenceString}</Typography>
+              <Typography variant="p3">{releaseString}</Typography>
             </Box>
 
             <Box my={4}>
