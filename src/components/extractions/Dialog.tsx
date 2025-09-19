@@ -24,8 +24,8 @@ export const MessageDialog: FC<MessageDialogProps> = ({
 }) => {
   const handleClose = () => onClose?.('');
   const birthdayString = parseCardDate(
-    prisoner?.date_of_birth,
     'День рождения',
+    prisoner?.date_of_birth,
   );
 
   return (
