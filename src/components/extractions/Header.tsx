@@ -1,7 +1,6 @@
 'use client';
 
 import { Grid } from '@mui/material';
-import { LoginButton } from '@telegram-auth/react';
 import Link from 'next/link';
 
 import { Logo } from '~/components/atoms/Logo/Logo';
@@ -42,7 +41,7 @@ export const Header = () => (
                   },
                   {
                     element: (
-                      <a href="https://t.me/enbv_avtozaklive" target="_blank">
+                      <a href="https://t.me/politzek_org" target="_blank">
                         БЫТЬ НА СВЯЗИ
                       </a>
                     ),
