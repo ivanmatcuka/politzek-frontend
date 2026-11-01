@@ -1,15 +1,26 @@
-networks:
-  proxy-network:
-    external: true
 
 services:
-  politzek-frontend:
-    container_name: politzek-frontend
+  zk-frontend-dev:
+    image: ivanmatcuka/zk-frontend-dev
+    container_name: zk-frontend-dev
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - 3000
-    env_file: ".env"
+    
+    env_file: .env
+
     networks:
-      - proxy-network
+      - zk-network-dev
+
+  zk-tunnel-dev:
+    image: ivanmatcuka/matcuka_tunnel
+    
+    env_file:
+      - .env
+
+    restart: unless-stopped
+    networks:
+      - zk-network-dev
+
+networks:
+  zk-network-dev:
