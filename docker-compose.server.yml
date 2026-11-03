@@ -4,7 +4,7 @@ services:
     container_name: zk-strapi-dev
 
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production # needed for host exposure
 
     restart: unless-stopped
     networks:
