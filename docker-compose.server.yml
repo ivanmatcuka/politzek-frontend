@@ -1,10 +1,7 @@
 services:
   zk-strapi-dev:
-    image: ivanmatcuka/zk-strapi-dev
+    image: naskio/strapi
     container_name: zk-strapi-dev
-    build:
-      context: .
-      dockerfile: Dockerfile.server
 
     environment:
       - NODE_ENV=development
