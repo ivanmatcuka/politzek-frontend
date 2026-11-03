@@ -18,6 +18,13 @@ services:
 
     env_file:
       - .env
+    environment:
+      - TUNNEL_SUBDOMAIN=${TUNNEL_SUBDOMAIN_API}
+      - TUNNEL_LOCAL_HOST=${TUNNEL_LOCAL_HOST_API}
+      - TUNNEL_PORT=${TUNNEL_PORT_API}
+
+    ports:
+      - 1337
 
     restart: unless-stopped
     networks:
