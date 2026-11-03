@@ -3,6 +3,7 @@ services:
   zk-frontend-dev:
     image: ivanmatcuka/zk-frontend-dev
     container_name: zk-frontend-dev
+    
     build:
       context: .
       dockerfile: Dockerfile
@@ -14,7 +15,7 @@ services:
 
   zk-frontend-tunnel-dev:
     image: ivanmatcuka/matcuka_tunnel
-    container_name: zk-tunnel-dev
+    container_name: zk-frontend-tunnel-dev
     
     env_file:
       - .env

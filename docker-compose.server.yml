@@ -5,7 +5,7 @@ services:
 
     environment:
       - NODE_ENV=development
-      - HOST=${NEXT_PUBLIC_API_URL}
+      - HOST=0.0.0.0
 
     restart: unless-stopped
     networks:
