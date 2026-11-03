@@ -3,6 +3,8 @@ services:
     image: netronaut/strapi
     container_name: zk-strapi-dev
 
+    env_file:
+      - .env
     environment:
       - NODE_ENV=development
       - HOST=${NEXT_PUBLIC_API_URL}
