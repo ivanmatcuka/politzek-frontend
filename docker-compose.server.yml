@@ -1,6 +1,6 @@
 services:
   zk-strapi-dev:
-    image: naskio/strapi:4.25.11-alpine
+    image: naskio/strapi:4.14.5-alpine
     container_name: zk-strapi-dev
 
     environment:

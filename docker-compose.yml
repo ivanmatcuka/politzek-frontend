@@ -12,7 +12,7 @@ services:
     networks:
       - zk-network-dev
 
-  zk-tunnel-dev:
+  zk-frontend-tunnel-dev:
     image: ivanmatcuka/matcuka_tunnel
     container_name: zk-tunnel-dev
     
