@@ -1,0 +1,33 @@
+services:
+  zk-strapi-dev:
+    image: ivanmatcuka/zk-strapi-dev
+    container_name: zk-strapi-dev
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+
+    environment:
+      - NODE_ENV=development
+
+    restart: unless-stopped
+    networks:
+      - zk-strapi-network-dev
+    volumes:
+      - zk-db-dev:/opt/app/.tmp
+
+  zk-strapi-tunnel-dev:
+    image: ivanmatcuka/matcuka_tunnel
+    container_name: zk-strapi-tunnel-dev
+
+    env_file:
+      - .env
+
+    restart: unless-stopped
+    networks:
+      - zk-strapi-network-dev
+
+networks:
+  zk-strapi-network-dev:
+
+volumes:
+  zk-db-dev:
