@@ -12,6 +12,7 @@ services:
       - zk-strapi-network-dev
     volumes:
       - zk-db-dev:/opt/app/.tmp
+    command: "./generate-api-keys.js > .env"
 
   zk-strapi-tunnel-dev:
     image: ivanmatcuka/matcuka_tunnel

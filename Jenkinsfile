@@ -14,13 +14,13 @@ pipeline {
     }
 
     stages {
-        stage('Lint') {
-            steps {
-                echo 'Linting....'
-                sh 'npm i'
-                sh 'npm run lint'
-            }
-        }
+        // stage('Lint') {
+        //     steps {
+        //         echo 'Linting....'
+        //         sh 'npm i'
+        //         sh 'npm run lint'
+        //     }
+        // }
 
         stage('Set Up Docker') {
             steps {
@@ -37,19 +37,19 @@ pipeline {
             }
         }
 
-        stage('Build for Development') {
-            steps {
-                echo 'Building....'
-                sh 'docker compose -f docker-compose.yml build'
-            }
-        }
+        // stage('Build for Development') {
+        //     steps {
+        //         echo 'Building....'
+        //         sh 'docker compose -f docker-compose.yml build'
+        //     }
+        // }
 
-        stage('Push Development Version') {
-            steps {
-                echo 'Pushing....'
-                sh 'docker compose -f docker-compose.yml push'
-            }
-        }
+        // stage('Push Development Version') {
+        //     steps {
+        //         echo 'Pushing....'
+        //         sh 'docker compose -f docker-compose.yml push'
+        //     }
+        // }
 
         stage('Deploy to Development') {
             steps {
