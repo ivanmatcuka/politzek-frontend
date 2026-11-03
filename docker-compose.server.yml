@@ -1,6 +1,6 @@
 services:
   zk-strapi-dev:
-    image: naskio/strapi:5.23.4-alpine
+    image: naskio/strapi:4.25.11-alpine
     container_name: zk-strapi-dev
 
     environment:
@@ -23,8 +23,8 @@ services:
       - TUNNEL_LOCAL_HOST=${TUNNEL_LOCAL_HOST_API}
       - TUNNEL_PORT=${TUNNEL_PORT_API}
 
-    ports:
-      - 1337
+    depends_on:
+      - zk-strapi-dev
 
     restart: unless-stopped
     networks:
