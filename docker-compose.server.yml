@@ -1,6 +1,6 @@
 services:
   zk-strapi-dev:
-    image: strapi/strapi
+    image: netronaut/strapi
     container_name: zk-strapi-dev
 
     environment:
