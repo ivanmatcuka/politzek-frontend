@@ -48,7 +48,7 @@ pipeline {
 
             steps {
                 echo 'Building....'
-                sh 'docker compose -f docker-compose.yml build --no-cache'
+                sh 'docker compose -f docker-compose.dev.yml build --no-cache'
             }
         }
 
@@ -59,7 +59,7 @@ pipeline {
 
             steps {
                 echo 'Pushing....'
-                sh 'docker compose -f docker-compose.yml push'
+                sh 'docker compose -f docker-compose.dev.yml push'
             }
         }
 
