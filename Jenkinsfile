@@ -28,7 +28,11 @@ pipeline {
             }
         }
 
-        stage('Set Up .env') {
+        stage('Set Up Development .env') {
+            when {
+                branch 'development'
+            }
+
             steps {
                 withCredentials([file(credentialsId: 'env-development', variable: 'secretFile')]) {
                     sh 'touch .env'
@@ -38,13 +42,21 @@ pipeline {
         }
 
         stage('Build for Development') {
+            when {
+                branch 'development'
+            }
+
             steps {
                 echo 'Building....'
-                sh 'docker compose -f docker-compose.yml build'
+                sh 'docker compose -f docker-compose.yml build --no-cache'
             }
         }
 
         stage('Push Development Version') {
+            when {
+                branch 'development'
+            }
+
             steps {
                 echo 'Pushing....'
                 sh 'docker compose -f docker-compose.yml push'
@@ -52,11 +64,15 @@ pipeline {
         }
 
         stage('Deploy to Development') {
+            when {
+                branch 'development'
+            }
+
             steps {
                 echo 'Deploying....'
 
-                sh '''DOCKER_HOST=ssh://${DEPLOY_USER}@${DEPLOY_HOST} docker compose -f docker-compose.yml down'''
-                sh '''DOCKER_HOST=ssh://${DEPLOY_USER}@${DEPLOY_HOST} docker compose -f docker-compose.yml up -d'''
+                sh '''DOCKER_HOST=ssh://${DEPLOY_USER}@${DEPLOY_HOST} docker compose -f docker-compose.dev.yml down --rmi all'''
+                sh '''DOCKER_HOST=ssh://${DEPLOY_USER}@${DEPLOY_HOST} docker compose -f docker-compose.dev.yml up -d'''
             }
         }
     }
